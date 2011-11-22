@@ -1,0 +1,32 @@
+[user]
+	name = Joel Friedman
+	email = asher.friedman@gmail.com
+[color]
+  branch = auto
+  diff = auto
+  grep = auto
+  interactive = auto
+  status = auto
+  ui = auto
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  df = diff
+  di = diff
+  lg = log -p
+  last = log -1 HEAD
+  grep = grep --color
+  diff = diff --color
+[branch]
+  autosetupmerge = always
+[core]
+  excludesfile = /Users/jfriedman/.gitignore
+  safecrlf = true
+[push]
+  default = tracking
+[apply]
+  ignorewhitespace = true
+[github]
+	user = joelash
