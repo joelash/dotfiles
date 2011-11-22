@@ -1,0 +1,7 @@
+*.swp
+*.swo
+tags
+TAGS
+.bundle/
+
+personal_tasks/

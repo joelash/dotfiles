@@ -1,0 +1,26 @@
+# Bind F11 and F12 (NOT F1 and F2) to previous and next screen window
+bindkey -k F1 prev
+bindkey -k F2 next
+
+shell -${SHELL}  # dash (-) is for login shells
+shelltitle ''
+vbell on
+autodetach on
+startup_message off
+defencoding UTF-8
+#set scrollback buffer
+defscrollback 8192
+
+# If a window goes unresponsive, don't block the whole session waiting for it.
+nonblock on
+
+# Window list at the bottom.
+hardstatus alwayslastline
+#hardstatus string "%-w%{= BW}%50>%n %t%{-}%+w%<"
+#hardstatus string "%{=b kw}[ %{W}${USER}@%H %{=b kw}][%= %{= kw}%?%-Lw%?%{=b kR}(%{W}%n %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{=b kw}]%{=b kw}[ %d %M %c ]%{W}"
+hardstatus string "%{= kw}[ %H ][%= %{= kw}%?%-Lw%?%{=b kR}(%{W}%n %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= ]%{= kw}[ %D %d %M %c:%s ]"
+
+screen -t bash 0 bash
+screen -t bash 1 bash
+screen -t vim 2 vim -c NERDTree
+
