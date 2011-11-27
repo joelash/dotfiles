@@ -1,0 +1,37 @@
+source ~/.bash/functions
+source ~/.bash/aliases
+source ~/.bash/git-completion.bash
+
+# some of these settings are required for MacPorts
+export BREW_HOME=/usr/local/bin
+export PATH=$BREW_HOME:$PATH
+
+#export EDITOR=/opt/local/bin/vim
+export EDITOR=/usr/bin/vim
+
+alias realias='$EDITOR ~/.bash/aliases; source ~/.bash/aliases'
+
+# set default mode to vi!!! this is awesome
+set -o vi
+bind -m vi-command -r 'v'
+
+# Propmt
+#\[\033[0;32m\]
+export YELLOW='\[\033[0;33m\]'
+export WHITE='\[\033[1;37m\]'
+export CYAN='\[\033[1;36m\]' # CYAN
+export TEXT_RESET='\[\033[00m\]'
+
+#export YELLOW='\e[0;33m'
+#export WHITE='\e[1;37m'
+
+#export PS1="\u \w$YELLOW\$(parse_git_branch)$WHITE$ "
+export PS1="$TEXT_RESET$WHITE\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(parse_rvm_gemset)$TEXT_RESET -> "
+
+# make bash autocomplete with up arrow
+#bind '"\020":history-search-backward'
+#bind '"\016":history-search-forward'
+
+if [[ -s /Users/joelash/.rvm/scripts/rvm ]] ; then source /Users/joelash/.rvm/scripts/rvm ; fi
+
+rvm use ruby-1.9.2

@@ -1,12 +1,18 @@
+#terminal name
+
+function tName {
+  unset PROMPT_COMMAND
+  echo -ne "\033]0;$1\007"
+}
 # ruby functions
- 
+
 function switch_jruby {
   if [ -d /site/apps/jruby-1.4.0 ]; then
     export JRUBY_HOME=/site/apps/jruby-1.4.0
     export PATH=$JRUBY_HOME/bin:$PATH
   fi
 }
- 
+
 function switch_ruby {
   export PATH=/usr/bin:$PATH
 }
@@ -19,8 +25,13 @@ function st {
   fi
 }
 
-function parse_git_branch_old {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+function parse_git_branch_old() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+function parse_git_branch2 {
+  ref=$(git-symbolic-ref HEAD 2> /dev/null) || return
+  "("${ref#refs/heads/}")"
 }
 
 function parse_git_dirty {
@@ -29,8 +40,10 @@ function parse_git_dirty {
 # display
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
-} 
+}
 
 function parse_rvm_gemset {
   echo $GEM_HOME | sed 's/.*\///'
 }
+
+

@@ -1,26 +1,19 @@
-# BASH
+# Bash
 alias ls='ls -p'
 alias la='ls -a'
 alias ll='ls -al'
-
-# Vim
-alias nerd='vim -c NERDTree'
-alias mnerd='mvim -c NERDTree'
+alias rbash='source ~/.bash_profile'
+alias edit_bashrc='$EDITOR ~/.bashrc; source ~/.bashrc'
 
 alias grep='grep --color -n'
 
-# Bashrc
-alias rbash='source ~/.bash_profile'
-alias edit_bashrc='$EDITOR ~/.bashrc;source ~/.bash_profile'
+# Screen
+alias screen='TERM=screen screen'
 
-# Phil
-alias cls='clear'
+# VIM
+alias mnerd='mvim -c NERDTree'
+alias nerd='vim -c NERDTree'
 
-# random
-alias where='type -a'
-alias re_cd='cd .. ; cd -'
-
-# Git
-alias gitrm='git st | awk '\''/deleted/ {print $3}'\'' | xargs git rm'
-alias git-rm=gitrm
-alias grm=gitrm
+# fun git commands
+alias glo='git log --oneline'
+alias glg='git log --pretty=online'
