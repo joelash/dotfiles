@@ -5,6 +5,7 @@
 :sources: 
   - http://gems.rubyforge.org
   - http://gems.us.drwholdings.com/
+  - http://gems-mirror.us.drwholdings.com:8808/
 :update_sources: true
 :verbose: true
 install: --env-shebang
