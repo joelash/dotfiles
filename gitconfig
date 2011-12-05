@@ -17,12 +17,15 @@
   di = diff
   lg = log -p
   last = log -1 HEAD
+  who = shortlog -s --
   grep = grep --color
   diff = diff --color
+  dic = diff --cached
+  grep = grep -n --color
 [branch]
   autosetupmerge = always
 [core]
-  excludesfile = /Users/jfriedman/.gitignore
+  excludesfile = ~/.gitignore
   safecrlf = true
 [push]
   default = tracking
