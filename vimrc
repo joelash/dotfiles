@@ -104,6 +104,10 @@ endif
 
 let mapleader = ","
 
+" map capital W and Q to lowecase
+nmap :W :w
+nmap :Q :q
+
 " pathogen
 "call pathogen#runtime_append_all_bundles()
 
