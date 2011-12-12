@@ -5,7 +5,7 @@ alias ll='ls -al'
 alias rbash='source ~/.bash_profile'
 alias edit_bashrc='$EDITOR ~/.bashrc; source ~/.bashrc'
 
-alias grep='grep --color -n'
+alias grep='grep --color'
 
 # Screen
 alias screen='TERM=screen screen'

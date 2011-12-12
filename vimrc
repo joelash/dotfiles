@@ -74,12 +74,13 @@ map <leader>e :FufBuffer<CR>
 " renew finder cache shortcut
 map <leader>r :FufRenewCache<CR>
 
-let mapleader=","
-
 " NERDTree
 
 " Make F2 open NERDTree
 nmap <silent> <F2> :NERDTreeToggle<CR>
+
+" Locate current file in NERDTree
+nmap <silent> <leader>l :NERDTreeFind<CR>
 
 " TAGS
 " rebuild ctags
@@ -92,14 +93,17 @@ let clj_paren_rainbow = 1
 let vimclojure#NailgunClient = "/opt/local/vimclojure/ng"
 let clj_want_gorilla = 1
 
+
+let mapleader=","
+
 " Tabularize
 if exists(":Tabularize")
-  nmap <LocalLeader>a= :Tabularize /=<CR>
-  vmap <LocalLeader>a= :Tabularize /=<CR>
-  nmap <LocalLeader>a. :Tabularize /=><CR>
-  vmap <LocalLeader>a. :Tabularize /=><CR>
-  nmap <LocalLeader>a: :Tabularize /:\zs<CR>
-  vmap <LocalLeader>a: :Tabularize /:\zs<CR>
+  nmap <leader>a= :Tabularize /=<CR>
+  vmap <leader>a= :Tabularize /=<CR>
+  nmap <leader>a. :Tabularize /=><CR>
+  vmap <leader>a. :Tabularize /=><CR>
+  nmap <leader>a: :Tabularize /:\zs<CR>
+  vmap <leader>a: :Tabularize /:\zs<CR>
 endif
 
 let mapleader = ","
