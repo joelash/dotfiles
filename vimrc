@@ -94,16 +94,14 @@ let vimclojure#NailgunClient = "/opt/local/vimclojure/ng"
 let clj_want_gorilla = 1
 
 
-let mapleader=","
-
 " Tabularize
 if exists(":Tabularize")
-  nmap <leader>a= :Tabularize /=<CR>
-  vmap <leader>a= :Tabularize /=<CR>
-  nmap <leader>a. :Tabularize /=><CR>
-  vmap <leader>a. :Tabularize /=><CR>
-  nmap <leader>a: :Tabularize /:\zs<CR>
-  vmap <leader>a: :Tabularize /:\zs<CR>
+  nmap <silent> <LocalLeader>a= :Tabularize /=<CR>
+  vmap <silent> <LocalLeader>a= :Tabularize /=<CR>
+  nmap <silent> <LocalLeader>a. :Tabularize /=><CR>
+  vmap <silent> <LocalLeader>a. :Tabularize /=><CR>
+  nmap <silent> <LocalLeader>a: :Tabularize /:\zs<CR>
+  vmap <silent> <LocalLeader>a: :Tabularize /:\zs<CR>
 endif
 
 let mapleader = ","
