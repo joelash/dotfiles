@@ -82,4 +82,5 @@
       (require 'color-theme-solarized)
       (color-theme-solarized-light))) )
 
-
+(add-to-list 'default-frame-alist '(height . 53))
+(add-to-list 'default-frame-alist '(width . 50))
