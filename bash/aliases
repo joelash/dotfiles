@@ -17,3 +17,7 @@ alias nerd='vim -c NERDTree'
 # fun git commands
 alias glo='git log --oneline'
 alias glg='git log --pretty=online'
+
+# postgres
+alias start-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias stop-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres stop -s -m fast'

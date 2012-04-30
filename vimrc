@@ -94,18 +94,6 @@ let vimclojure#NailgunClient = "/opt/local/vimclojure/ng"
 let clj_want_gorilla = 1
 
 
-" Tabularize
-if exists(":Tabularize")
-  nmap <silent> <LocalLeader>a= :Tabularize /=<CR>
-  vmap <silent> <LocalLeader>a= :Tabularize /=<CR>
-  nmap <silent> <LocalLeader>a. :Tabularize /=><CR>
-  vmap <silent> <LocalLeader>a. :Tabularize /=><CR>
-  nmap <silent> <LocalLeader>a: :Tabularize /:\zs<CR>
-  vmap <silent> <LocalLeader>a: :Tabularize /:\zs<CR>
-endif
-
-let mapleader = ","
-
 " map capital W and Q to lowecase
 nmap :W :w
 nmap :Q :q
@@ -113,7 +101,41 @@ nmap :Q :q
 " pathogen
 "call pathogen#runtime_append_all_bundles()
 
+" ruby stuff
+augroup myfiletypes
+    " Clear old autocmds in group
+    autocmd!
+    " autoindent with two spaces, always expand tabs
+    autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
+augroup END
+
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 filetype plugin indent on
+
+let mapleader=','
+
+" Tabularize
+nmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
+vmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
+nmap <silent> <Leader>a. :Tabularize /=><CR>
+vmap <silent> <Leader>a. :Tabularize /=><CR>
+nmap <silent> <Leader>a: :Tabularize /:\zs<CR>
+vmap <silent> <Leader>a: :Tabularize /:\zs<CR>
+nmap <silent> <Leader>a{ :Tabularize /{<CR>
+vmap <silent> <Leader>a{ :Tabularize /{<CR>
+nmap <silent> <Leader>a} :Tabularize /}<CR>
+vmap <silent> <Leader>a} :Tabularize /}<CR>
+
+nmap <Leader>a:: :Tabularize /:\zs<CR>
+vmap <Leader>a:: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+
+"nmap <Leader>a= :Tabularize /=<CR>
+"vmap <Leader>a= :Tabularize /=<CR>
+"nmap <Leader>a: :Tabularize /:<CR>
+"vmap <Leader>a: :Tabularize /:<CR>

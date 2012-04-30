@@ -53,5 +53,4 @@ if [[ -s /Users/jfriedman/.rvm/scripts/rvm ]] ; then source /Users/jfriedman/.rv
 
 rvm use ruby-1.9.1
 
-# LAUNCHER (bash completion)
-if [[ -s /Users/jfriedman/.launcher/launcher_completion.bash ]] ; then source /Users/jfriedman/.launcher/launcher_completion.bash ; fi
+if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi

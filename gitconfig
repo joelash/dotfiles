@@ -30,6 +30,6 @@
 [push]
   default = tracking
 [apply]
-  ignorewhitespace = true
+  ignore-whitespace = nowarn
 [github]
 	user = joelash
