@@ -1,1 +1,8 @@
+# ~/.vim/
 https://github.com/tpope/vim-pathogen.git
+
+# ~/.vim/git
+https://github.com/altercation/vim-colors-solarized.git
+https://github.com/ihacklog/tabular.git
+https://github.com/kchmck/vim-coffee-script.git
+git clone https://github.com/scrooloose/nerdtree.git
