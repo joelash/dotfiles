@@ -1,12 +1,7 @@
 " leader
 let mapleader = ","
 
-colorscheme desert
-
-" solarized color
-"syntax enable
-"set background=dark
-"colorscheme solarized
+"colorscheme desert
 
 " vim setting
 set expandtab
@@ -114,6 +109,11 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 filetype plugin indent on
 
+" solarized color
+syntax enable
+set background=dark
+colorscheme solarized
+
 let mapleader=','
 
 " Tabularize
@@ -121,8 +121,8 @@ nmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
 vmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
 nmap <silent> <Leader>a. :Tabularize /=><CR>
 vmap <silent> <Leader>a. :Tabularize /=><CR>
-nmap <silent> <Leader>a: :Tabularize /:\zs<CR>
-vmap <silent> <Leader>a: :Tabularize /:\zs<CR>
+nmap <silent> <Leader>a: :Tabularize /:<CR>
+vmap <silent> <Leader>a: :Tabularize /:<CR>
 nmap <silent> <Leader>a{ :Tabularize /{<CR>
 vmap <silent> <Leader>a{ :Tabularize /{<CR>
 nmap <silent> <Leader>a} :Tabularize /}<CR>
@@ -139,3 +139,6 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 "vmap <Leader>a= :Tabularize /=<CR>
 "nmap <Leader>a: :Tabularize /:<CR>
 "vmap <Leader>a: :Tabularize /:<CR>
+
+
+command Ctw %s/\s\+$//g
