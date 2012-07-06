@@ -3,16 +3,6 @@ source ~/.bash/aliases
 
 source ~/bin/git-completion.bash
 
-# Need to DO THIS
-#export PATH=/usr/local/jruby/bin:/opt/local/bin:/opt/local/sbin:$PATH
-export PATH=/site/apps/jruby-1.4.0/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-export DYLD_LIBRARY_PATH=/opt/local/29West/LBM_3.6.2/Darwin-9.8.0-x86_64/lib
-
-export NODE_PATH=/usr/local/lib/node
-
-
 # MacPorts Installer addition on 2009-06-24_at_13:26:05: adding an appropriate MANPATH variable for use with MacPorts.
 export MANPATH=/opt/local/share/man:$MANPATH
 # Finished adapting your MANPATH environment variable for use with MacPorts.
@@ -48,9 +38,8 @@ do
   CLASSPATH=${CLASSPATH}:${i}
 done
 
-# RVM (ruby version management)
-if [[ -s /Users/jfriedman/.rvm/scripts/rvm ]] ; then source /Users/jfriedman/.rvm/scripts/rvm ; fi
-
 rvm use ruby-1.9.1
 
 if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
