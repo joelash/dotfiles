@@ -8,6 +8,7 @@ set expandtab
 set softtabstop=2
 set tabstop=2
 set shiftwidth=2
+set list
 
 " set default font
 set gfn=Inconsolata:h16
@@ -15,6 +16,9 @@ set gfn=Inconsolata:h16
 set incsearch
 set hlsearch
 set ignorecase
+
+" allow changing buffers without saving
+set hidden
 
 set nowrap
 set number
@@ -79,7 +83,7 @@ nmap <silent> <leader>l :NERDTreeFind<CR>
 
 " TAGS
 " rebuild ctags
-map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>
+map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>
 
 "yay for vim vlojure
 let clj_highlight_builtins = 1

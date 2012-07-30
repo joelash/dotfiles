@@ -21,8 +21,8 @@ export PS1="$TEXT_RESET$WHITE\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(p
 #export PS1="\u \W$ "
  
 # set default mode to vi!!! this is awesome
-set -o vi
-bind -m vi-command -r 'v'
+#set -o vi
+#bind -m vi-command -r 'v'
 
 # Alias to create 'realias' that does half the work for me
 alias realias='$EDITOR ~/.bash/aliases; source ~/.bash/aliases'
@@ -33,10 +33,13 @@ alias realias='$EDITOR ~/.bash/aliases; source ~/.bash/aliases'
 # Build Classpath interactively for earlier versions of Java.
 # Assumed JAR file location is /opt/jars directory - change appropriately for yourself
 # Make sure to use backquotes (`) on the first line
-for i in `ls /opt/jars/*.jar`
-do
-  CLASSPATH=${CLASSPATH}:${i}
-done
+#for i in `ls /opt/jars/*.jar`
+#do
+  #CLASSPATH=${CLASSPATH}:${i}
+#done
+
+# RVM (ruby version management)
+if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
 rvm use ruby-1.9.1
 

@@ -2,7 +2,7 @@
 alias ls='ls -p'
 alias la='ls -a'
 alias ll='ls -al'
-alias rbash='source ~/.bash_profile'
+alias rbash='. ~/.bash_profile'
 alias edit_bashrc='$EDITOR ~/.bashrc; source ~/.bashrc'
 
 alias grep='grep --color'
@@ -22,5 +22,23 @@ alias glg='git log --pretty=online'
 alias start-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias stop-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
+# mongo
+alias start-mongo='mongod run --config /usr/local/etc/mongod.conf --fork --pidfilepath=/usr/local/var/mongo/mongo.pid --logpath=/usr/local/var/mongo/mongo.log'
+alias stop-mongo='cat /usr/local/var/mongo/mongo.pid | xargs kill -9 && rm /usr/local/var/mongo/mongo.pid'
+
+# redis
+alias start-redis='redis-server /usr/local/etc/redis.conf'
+
+# solr
+alias start-solr='rake sunspot:solr:start'
+alias stop-solr='rake sunspot:solr:stop'
+
 # projects
-alias giggity='cd /src/assembla/gigfunder'
+alias giggity='cd /src/bitbucket/gigfunder'
+
+alias tc='cd /src/trunkclub; ll'
+alias dia='cd /src/trunkclub/diablo'
+alias fut='cd /src/trunkclub/futura'
+alias her='cd /src/trunkclub/hermes'
+alias start-tc='start-mongo ; start-pg ; start-solr ; start-redis'
+alias stop-tc='stop-solr ; stop-mongo ; stop-pg'
