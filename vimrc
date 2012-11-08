@@ -113,6 +113,9 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 filetype plugin indent on
 
+" vim-powerline
+let g:Powerline_symbols = 'fancy'
+
 " solarized color
 syntax enable
 set background=dark
