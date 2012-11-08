@@ -22,5 +22,5 @@ hardstatus string "%{= kw}[ %H ][%= %{= kw}%?%-Lw%?%{=b kR}(%{W}%n %t%?(%u)%?%{=
 
 screen -t bash 0 bash
 screen -t bash 1 bash
-screen -t vim 2 vim -c NERDTree
+#screen -t vim 2 vim -c NERDTree
 

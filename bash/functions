@@ -21,16 +21,6 @@ function any() {
 }
 
 # git
-
-function parse_git_branch_old() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
-function parse_git_branch2 {
-  ref=$(git-symbolic-ref HEAD 2> /dev/null) || return
-  "("${ref#refs/heads/}")"
-}
-
 function parse_git_dirty {
   [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
 }
@@ -39,8 +29,32 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
 }
 
+function __parse_git_branch__ {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
+}
+
+function __current_git_branch_easy__ {
+  git name-rev --name-only HEAD
+}
+
+function __branch_current_is_tracking__ {
+  local current_branch=$(__current_git_branch_easy__)
+  git config branch.$current_branch.merge | cut -d'/' -f3
+}
+
 function parse_rvm_gemset {
   echo $GEM_HOME | sed 's/.*\///'
 }
 
-
+function submit-review {
+  local branch=$(__current_git_branch_easy__)
+  #local tracking_branch=$(__branch_current_is_tracking__)
+  local tracking_branch='develop'
+  local extra=""
+  if [ $# -gt 0 ]; then
+    extra=" -r $1"
+  fi
+  local review_cmd="post-review --parent=$tracking_branch --branch=$branch --tracking-branch=origin/$tracking_branch --target-groups=Tech -o$extra"
+  echo "$review_cmd"
+  $review_cmd
+}

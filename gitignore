@@ -5,3 +5,8 @@ TAGS
 .bundle/
 
 personal_tasks/
+
+.env
+
+.#*
+#*#

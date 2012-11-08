@@ -7,6 +7,9 @@ alias edit_bashrc='$EDITOR ~/.bashrc; source ~/.bashrc'
 
 alias grep='grep --color'
 
+# Random
+alias tname='tName'
+
 # Screen
 alias screen='TERM=screen screen'
 
@@ -16,7 +19,7 @@ alias nerd='vim -c NERDTree'
 
 # fun git commands
 alias glo='git log --oneline'
-alias glg='git log --pretty=online'
+alias glg='git log --pretty=oneline'
 
 # postgres
 alias start-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
@@ -34,11 +37,16 @@ alias start-solr='rake sunspot:solr:start'
 alias stop-solr='rake sunspot:solr:stop'
 
 # projects
-alias giggity='cd /src/bitbucket/gigfunder'
+alias giggity='cd /src/bitbucket/gigfunder && tname gigfunder'
 
 alias tc='cd /src/trunkclub; ll'
-alias dia='cd /src/trunkclub/diablo'
-alias fut='cd /src/trunkclub/futura'
-alias her='cd /src/trunkclub/hermes'
+alias tc-dia='cd /src/trunkclub/diablo && tname diablo'
+alias tc-fut='cd /src/trunkclub/futura && tname futura'
+alias tc-her='cd /src/trunkclub/hermes && tname hermes'
+alias tc-bob='cd /src/trunkclub/bobby_flay && tname bobby_flay'
+alias tc-min='cd /src/trunkclub/minotaur && tname mintoaur'
+alias tc-con='cd /src/trunkclub/continuity && tname continuity'
+alias tc-gram='cd /src/trunkclub/gramophone && tname gramophone'
+alias tc-pink='cd /src/trunkclub/pinky && tname pinky'
 alias start-tc='start-mongo ; start-pg ; start-solr ; start-redis'
 alias stop-tc='stop-solr ; stop-mongo ; stop-pg'
