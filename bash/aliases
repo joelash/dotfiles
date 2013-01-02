@@ -45,8 +45,13 @@ alias tc-fut='cd /src/trunkclub/futura && tname futura'
 alias tc-her='cd /src/trunkclub/hermes && tname hermes'
 alias tc-bob='cd /src/trunkclub/bobby_flay && tname bobby_flay'
 alias tc-min='cd /src/trunkclub/minotaur && tname mintoaur'
+alias tc-clo='cd /src/trunkclub/closet && tname closet'
+alias tc-moby='cd /src/trunkclub/moby && tname moby'
 alias tc-con='cd /src/trunkclub/continuity && tname continuity'
 alias tc-gram='cd /src/trunkclub/gramophone && tname gramophone'
 alias tc-pink='cd /src/trunkclub/pinky && tname pinky'
 alias start-tc='start-mongo ; start-pg ; start-solr ; start-redis'
 alias stop-tc='stop-solr ; stop-mongo ; stop-pg'
+
+# Start Chrome allowing for Cross Domain Requests
+alias dev-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security'

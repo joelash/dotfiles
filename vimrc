@@ -11,7 +11,7 @@ set shiftwidth=2
 set list
 
 " set default font
-set gfn=Inconsolata:h16
+set gfn=Inconsolata-dz\ for\ Powerline
 
 set incsearch
 set hlsearch
@@ -115,6 +115,12 @@ filetype plugin indent on
 
 " vim-powerline
 let g:Powerline_symbols = 'fancy'
+" call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+
+" statusline stuffs
+set nocompatible   " Disable vi-compatibility
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
 
 " solarized color
 syntax enable
@@ -135,8 +141,8 @@ vmap <silent> <Leader>a{ :Tabularize /{<CR>
 nmap <silent> <Leader>a} :Tabularize /}<CR>
 vmap <silent> <Leader>a} :Tabularize /}<CR>
 
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
+nmap <Leader>a; :Tabularize /:\zs<CR>
+vmap <Leader>a; :Tabularize /:\zs<CR>
 nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
@@ -148,4 +154,4 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 "vmap <Leader>a: :Tabularize /:<CR>
 
 
-command Ctw %s/\s\+$//g
+command! Ctw %s/\s\+$//g
