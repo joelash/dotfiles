@@ -9,7 +9,7 @@ export BREW_HOME=/usr/local/bin
 export PATH=$BREW_HOME:$PATH
 # Finished adapting your MANPATH environment variable for use with MacPorts.
 
-export EDITOR=/usr/bin/vim
+export EDITOR=vim
 export SVN_EDITOR=/usr/bin/vim
 
 # prompt
@@ -18,6 +18,10 @@ export WHITE='\[\033[1;37m\]' # White
 export CYAN='\[\033[1;36m\]' # CYAN
 export TEXT_RESET='\[\033[00m\]'
 export BLACK='\[\033[1;30m\]' # White
+
+# deliver
+export DELIVER_PATH=/src/github/deliver
+export PATH=$DELIVER_PATH/bin:$PATH
 
 #export PS1="\u \W$YELLOW \$(parse_git_branch)$WHITE$ "
 #export PS1="\u \W$ "

@@ -14,12 +14,16 @@ alias tname='tName'
 alias screen='TERM=screen screen'
 
 # VIM
+alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 alias mnerd='mvim -c NERDTree'
 alias nerd='vim -c NERDTree'
 
 # fun git commands
 alias glo='git log --oneline'
 alias glg='git log --pretty=oneline'
+
+alias gst='git st'
+alias gb='git branch'
 
 # postgres
 alias start-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
@@ -50,6 +54,7 @@ alias tc-moby='cd /src/trunkclub/moby && tname moby'
 alias tc-con='cd /src/trunkclub/continuity && tname continuity'
 alias tc-gram='cd /src/trunkclub/gramophone && tname gramophone'
 alias tc-pink='cd /src/trunkclub/pinky && tname pinky'
+alias tc-gem='cd /src/trunkclub/gemini && tname gemini'
 alias start-tc='start-mongo ; start-pg ; start-solr ; start-redis'
 alias stop-tc='stop-solr ; stop-mongo ; stop-pg'
 

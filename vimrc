@@ -1,14 +1,24 @@
+" bundles
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'Valloric/YouCompleteMe'
+
 " leader
 let mapleader = ","
 
 "colorscheme desert
 
 " vim setting
-set expandtab
 set softtabstop=2
 set tabstop=2
 set shiftwidth=2
+set expandtab
 set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 " set default font
 set gfn=Inconsolata-dz\ for\ Powerline
@@ -46,8 +56,12 @@ set showmatch
 set matchtime=1
 
 " Remap ctrl+j ctrl+k to insert blank lines without going to insert mode
-nnoremap <silent> <C-S-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <silent> <C-S-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <silent> <C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent> <C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+" move lines
+nnoremap <silent> <S-Down> :set paste<CR>dd]p :set nopaste<CR>
+nnoremap <silent> <S-Up> :set paste<CR>ddk]P :set nopaste<CR>
 
 " split editing settings
 set wmh=0
@@ -63,6 +77,7 @@ let mapleader="\\"
 " fuzzy finder mapping
 " file
 map <leader>n :FufFile **/<CR>
+
 
 " tag
 map <leader>t :FufTag<CR>
@@ -155,3 +170,4 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 
 command! Ctw %s/\s\+$//g
+command! Ftabs %s/<C-I>/  /g
