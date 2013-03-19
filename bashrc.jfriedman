@@ -63,3 +63,4 @@ rvm use ruby-1.9.1
 if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:/usr/local/share/npm/bin # Add node to path
