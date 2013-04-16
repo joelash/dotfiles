@@ -168,6 +168,5 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 "nmap <Leader>a: :Tabularize /:<CR>
 "vmap <Leader>a: :Tabularize /:<CR>
 
-
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
