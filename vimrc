@@ -112,9 +112,6 @@ let clj_want_gorilla = 1
 nmap :W :w
 nmap :Q :q
 
-" pathogen
-"call pathogen#runtime_append_all_bundles()
-
 " ruby stuff
 augroup myfiletypes
     " Clear old autocmds in group
@@ -124,7 +121,7 @@ augroup myfiletypes
 augroup END
 
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#incubate()
 call pathogen#helptags()
 filetype plugin indent on
 
@@ -141,6 +138,9 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 syntax enable
 set background=dark
 colorscheme solarized
+
+" ctrlp.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 let mapleader=','
 
