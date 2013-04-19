@@ -72,21 +72,19 @@ map ,v :tabedit ~/.vimrc<CR>
 
 " Fuzzy Finder
 
-let mapleader="\\"
-
 " fuzzy finder mapping
 " file
-map <leader>n :FufFile **/<CR>
+map <LocalLeader>n :FufFile **/<CR>
 
 
 " tag
-map <leader>t :FufTag<CR>
+map <LocalLeader>t :FufTag<CR>
 
 " buffer
-map <leader>e :FufBuffer<CR>
+map <LocalLeader>e :FufBuffer<CR>
 
 " renew finder cache shortcut
-map <leader>r :FufRenewCache<CR>
+map <LocalLeader>r :FufRenewCache<CR>
 
 " NERDTree
 
@@ -94,19 +92,11 @@ map <leader>r :FufRenewCache<CR>
 nmap <silent> <F2> :NERDTreeToggle<CR>
 
 " Locate current file in NERDTree
-nmap <silent> <leader>l :NERDTreeFind<CR>
+nmap <silent> <LocalLeader>l :NERDTreeFind<CR>
 
 " TAGS
 " rebuild ctags
 map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>
-
-"yay for vim vlojure
-let clj_highlight_builtins = 1
-let clj_highlight_contrib = 1
-let clj_paren_rainbow = 1
-let vimclojure#NailgunClient = "/opt/local/vimclojure/ng"
-let clj_want_gorilla = 1
-
 
 " map capital W and Q to lowecase
 nmap :W :w
@@ -141,8 +131,7 @@ colorscheme solarized
 
 " ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-
-let mapleader=','
+nmap <silent> <Leader><space> :CtrlP<CR>
 
 " Tabularize
 nmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
@@ -162,11 +151,6 @@ nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-
-"nmap <Leader>a= :Tabularize /=<CR>
-"vmap <Leader>a= :Tabularize /=<CR>
-"nmap <Leader>a: :Tabularize /:<CR>
-"vmap <Leader>a: :Tabularize /:<CR>
 
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
