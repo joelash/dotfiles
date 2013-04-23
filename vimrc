@@ -7,8 +7,11 @@ call vundle#rc()
 
 Bundle 'Valloric/YouCompleteMe'
 
-" leader
-let mapleader = ","
+call pathogen#incubate()
+call pathogen#helptags()
+filetype plugin indent on
+
+let mapleader = ","                                  " leader
 
 "colorscheme desert
 
@@ -20,40 +23,47 @@ set expandtab
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
-" set default font
-set gfn=Inconsolata-dz\ for\ Powerline
+set gfn=Inconsolata-dz\ for\ Powerline              " set default font
+set incsearch                                       " show search as typing
+set hlsearch                                        " highlight search results
+set ignorecase                                      " case insensitive search
+set smartcase                                       " ...unless there is a capital letter
 
-set incsearch
-set hlsearch
-set ignorecase
-
-" allow changing buffers without saving
-set hidden
-
-set nowrap
-set number
-
+set hidden                                          " allow changing buffers without saving
+set nowrap                                          " do not wrap a long line onto line below
+set number                                          " show line numbers
 set lazyredraw
-set ruler
-set autoread " auto read updates to file from outside vim
+set ruler                                           " show cursor position in status bar
+set autoread                                        " auto read updates to file from outside vim
+set pastetoggle=<F3>                                " pastetoggle
+set cursorline                                      " highlight the current line
+set backspace=2                                     " make backspace act normal (can be issue in some versions)
+set showmatch                                       " show matching {} {} etc
+set matchtime=1
 
-" pastetoggle
-set pastetoggle=<F5>
+set wildmode=list:longest                           " list completions, complete longest common
+set wildmenu                                        " better command completion
+set showcmd                                         " show commands as they are types
+set visualbell                                      " turn off auditory bell
+set autowrite                                       " auto-save current buffer when switching
+set splitright                                      " split to the right, not left
+set splitbelow                                      " split to bottom, not top
 
-" highlight the current line
-set cursorline
+set grepprg=git\ grep\ -n\ $*
 
-" make backspace act normal (can be issue in some versions)
-set backspace=2
+set winwidth=84
+set winheight=5
+set winminheight=5
+set winheight=999
+
+autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 
 syntax on
 filetype on
 filetype indent on
 filetype plugin on
 
-" USURE IF I WANT THESE
-set showmatch
-set matchtime=1
+" *** MAPPINGS ***
 
 " Remap ctrl+j ctrl+k to insert blank lines without going to insert mode
 nnoremap <silent> <C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
@@ -71,32 +81,17 @@ map ,s :source ~/.vimrc<CR>
 map ,v :tabedit ~/.vimrc<CR>
 
 " Fuzzy Finder
-
-" fuzzy finder mapping
-" file
-map <LocalLeader>n :FufFile **/<CR>
-
-
-" tag
-map <LocalLeader>t :FufTag<CR>
-
-" buffer
-map <LocalLeader>e :FufBuffer<CR>
-
-" renew finder cache shortcut
-map <LocalLeader>r :FufRenewCache<CR>
+map <LocalLeader>n :FufFile **/<CR>                    " file
+map <LocalLeader>t :FufTag<CR>                         " tag
+map <LocalLeader>e :FufBuffer<CR>                      " buffer
+map <LocalLeader>r :FufRenewCache<CR>                  " renew finder cache shortcut
 
 " NERDTree
-
-" Make F2 open NERDTree
-nmap <silent> <F2> :NERDTreeToggle<CR>
-
-" Locate current file in NERDTree
-nmap <silent> <LocalLeader>l :NERDTreeFind<CR>
+nmap <silent> <F2> :NERDTreeToggle<CR>                 " Make F2 open NERDTree
+nmap <silent> <LocalLeader>l :NERDTreeFind<CR>         " Locate current file in NERDTree
 
 " TAGS
-" rebuild ctags
-map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>
+map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>  " rebuild ctags
 
 " map capital W and Q to lowecase
 nmap :W :w
@@ -109,11 +104,6 @@ augroup myfiletypes
     " autoindent with two spaces, always expand tabs
     autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
 augroup END
-
-filetype off
-call pathogen#incubate()
-call pathogen#helptags()
-filetype plugin indent on
 
 " vim-powerline
 let g:Powerline_symbols = 'fancy'
@@ -131,6 +121,7 @@ colorscheme solarized
 
 " ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|\.bundle)$'
 nmap <silent> <Leader><space> :CtrlP<CR>
 
 " Tabularize
