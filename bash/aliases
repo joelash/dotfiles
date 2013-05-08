@@ -7,6 +7,9 @@ alias edit_bashrc='$EDITOR ~/.bashrc; source ~/.bashrc'
 
 alias grep='grep --color'
 
+# hub/git
+alias git='hub'
+
 # Random
 alias tname='tName'
 
@@ -31,17 +34,18 @@ alias stop-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
 # mongo
 alias start-mongo='mongod run --config /usr/local/etc/mongod.conf --fork --pidfilepath=/usr/local/var/mongo/mongo.pid --logpath=/usr/local/var/mongo/mongo.log'
+alias run-mongo='start-mongo && tname mongo && mongo'
 alias stop-mongo='cat /usr/local/var/mongo/mongo.pid | xargs kill -9 && rm /usr/local/var/mongo/mongo.pid'
 
 # redis
-alias start-redis='redis-server /usr/local/etc/redis.conf'
+alias start-redis='tname redis && redis-server /usr/local/etc/redis.conf'
 
 # solr
 alias start-solr='rake sunspot:solr:start'
 alias stop-solr='rake sunspot:solr:stop'
 
 # elastic search
-alias start-elastic='elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'
+alias start-elastic='tname elasticsearch && elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'
 
 # projects
 alias giggity='cd /src/bitbucket/gigfunder && tname gigfunder'
@@ -58,7 +62,7 @@ alias tc-con='cd /src/trunkclub/continuity && _t'
 alias tc-gram='cd /src/trunkclub/gramophone && _t'
 alias tc-pink='cd /src/trunkclub/pinky && _t'
 alias tc-cat='cd /src/trunkclub/ursa_minor && _t'
-alias tc-gem='cd /src/trunkclub/gemini && t_t'
+alias tc-gem='cd /src/trunkclub/gemini && _t'
 alias tc-tau='cd /src/trunkclub/taurus && _t'
 alias start-tc='start-mongo ; start-pg ; start-solr ; start-redis'
 alias stop-tc='stop-solr ; stop-mongo ; stop-pg'

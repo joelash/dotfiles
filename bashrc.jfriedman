@@ -36,7 +36,7 @@ function __bg_light () {
 }
 
 __bg_dark
- 
+
 # set default mode to vi!!! this is awesome
 #set -o vi
 #bind -m vi-command -r 'v'
@@ -58,9 +58,13 @@ alias realias='$EDITOR ~/.bash/aliases; source ~/.bash/aliases'
 # RVM (ruby version management)
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
+# autojump
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
 rvm use ruby-1.9.1
 
 if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/usr/local/share/npm/bin # Add node to path
+

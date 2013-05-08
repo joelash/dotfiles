@@ -6,6 +6,8 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
 
 call pathogen#incubate()
 call pathogen#helptags()
@@ -32,7 +34,7 @@ set smartcase                                       " ...unless there is a capit
 set hidden                                          " allow changing buffers without saving
 set nowrap                                          " do not wrap a long line onto line below
 set number                                          " show line numbers
-set lazyredraw
+"set lazyredraw
 set ruler                                           " show cursor position in status bar
 set autoread                                        " auto read updates to file from outside vim
 set pastetoggle=<F3>                                " pastetoggle
@@ -46,24 +48,27 @@ set wildmenu                                        " better command completion
 set showcmd                                         " show commands as they are types
 set visualbell                                      " turn off auditory bell
 set autowrite                                       " auto-save current buffer when switching
-set splitright                                      " split to the right, not left
-set splitbelow                                      " split to bottom, not top
+set nosplitright                                    " split to the left, not right
+set nosplitbelow                                    " split to top, not bottom
+
+set smartindent   " try to be smart about indentation
+set autoindent    " ditto
+set smarttab      " smarter tabbing
 
 set grepprg=git\ grep\ -n\ $*
 
-set winwidth=84
+"set winwidth=200
 set winheight=5
 set winminheight=5
 set winheight=999
+"set wmh=0 " split editing settings
 
 autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 
-syntax on
-filetype on
-filetype indent on
-filetype plugin on
-
 " *** MAPPINGS ***
+
+nnoremap <CR> :nohlsearch<CR>
+nnoremap <Leader><Leader> <C-^>
 
 " Remap ctrl+j ctrl+k to insert blank lines without going to insert mode
 nnoremap <silent> <C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
@@ -72,9 +77,6 @@ nnoremap <silent> <C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 " move lines
 nnoremap <silent> <S-Down> :set paste<CR>dd]p :set nopaste<CR>
 nnoremap <silent> <S-Up> :set paste<CR>ddk]P :set nopaste<CR>
-
-" split editing settings
-set wmh=0
 
 " easy to source / edit this file
 map ,s :source ~/.vimrc<CR>
@@ -99,14 +101,14 @@ nmap :Q :q
 
 " ruby stuff
 augroup myfiletypes
-    " Clear old autocmds in group
-    autocmd!
-    " autoindent with two spaces, always expand tabs
-    autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
+  " Clear old autocmds in group
+  autocmd!
+  " autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
 augroup END
 
 " vim-powerline
-let g:Powerline_symbols = 'fancy'
+"let g:Powerline_symbols = 'fancy'
 " call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " statusline stuffs
@@ -122,7 +124,10 @@ colorscheme solarized
 " ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|\.bundle)$'
+let g:ctrlp_show_hidden = 1                                                       " show hidden files
+let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes']
 nmap <silent> <Leader><space> :CtrlP<CR>
+nmap <silent> <c-n> :CtrlP<CR>
 
 " Tabularize
 nmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
@@ -142,6 +147,11 @@ nmap <Leader>a, :Tabularize /,\zs<CR>
 vmap <Leader>a, :Tabularize /,\zs<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+
+" search Dash for word under cursor
+nmap <silent> <leader>d <Plug>DashSearch
+
+nmap <silent><Leader>A :grep <cword><CR>:botright copen<CR>
 
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
