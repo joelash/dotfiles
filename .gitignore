@@ -6,3 +6,4 @@ emacs.d/elpa/*
 
 gem/
 vim/git/*
+bundle/

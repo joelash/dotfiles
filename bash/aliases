@@ -65,3 +65,6 @@ alias stop-tc='stop-solr ; stop-mongo ; stop-pg'
 
 # Start Chrome allowing for Cross Domain Requests
 alias dev-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security'
+
+# git/hub
+alias git='hub'
