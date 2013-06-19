@@ -5,5 +5,7 @@ emacs.d/backups/*
 emacs.d/elpa/*
 
 gem/
-vim/git/*
 bundle/
+
+vim/git/*
+vim/colors/*
