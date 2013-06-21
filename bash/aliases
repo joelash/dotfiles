@@ -58,7 +58,8 @@ alias start-elastic='tname elasticsearch && elasticsearch -f -D es.config=/usr/l
 # projects
 alias giggity='cd /src/bitbucket/gigfunder && tname gigfunder'
 
-alias tc='cd /src/trunkclub; ll'
+alias t='cd /src/trunkclub'
+alias tc='t; ll'
 alias backbone='cd /src/trunkclub/backbone; ll'
 alias apis='cd /src/trunkclub/apis; ll'
 
