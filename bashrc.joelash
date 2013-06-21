@@ -26,12 +26,15 @@ export TEXT_RESET='\[\033[00m\]'
 #export WHITE='\e[1;37m'
 
 #export PS1="\u \w$YELLOW\$(parse_git_branch)$WHITE$ "
-export PS1="$TEXT_RESET$WHITE\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(parse_rvm_gemset)$TEXT_RESET -> "
+#export PS1="$TEXT_RESET$WHITE\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(parse_rvm_gemset)$TEXT_RESET -> "
+export PS1="\W \$(parse_git_branch) \$(parse_rvm_gemset) -> "
 
 # make bash autocomplete with up arrow
 #bind '"\020":history-search-backward'
 #bind '"\016":history-search-forward'
 
-if [[ -s /Users/joelash/.rvm/scripts/rvm ]] ; then source /Users/joelash/.rvm/scripts/rvm ; fi
+if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
 
-rvm use ruby-1.9.2
+#rvm use ruby-1.9.2
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

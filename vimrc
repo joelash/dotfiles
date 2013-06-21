@@ -8,9 +8,13 @@ call vundle#rc()
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
+Bundle 'ihacklog/tabular'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
 
-call pathogen#incubate()
-call pathogen#helptags()
+"call pathogen#incubate()
+"call pathogen#helptags()
 filetype plugin indent on
 
 let mapleader = ","                                  " leader
@@ -65,6 +69,11 @@ set winheight=999
 
 autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 
+syntax on
+filetype on
+filetype indent on
+filetype plugin on
+
 " *** MAPPINGS ***
 
 nnoremap <CR> :nohlsearch<CR>
@@ -118,8 +127,8 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 
 " solarized color
 syntax enable
-set background=dark
-colorscheme solarized
+"set background=dark
+"colorscheme solarized
 
 " ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim

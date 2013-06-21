@@ -32,6 +32,10 @@ alias gb='git branch'
 # python simple server
 alias simple-server='python -m SimpleHTTPServer 8000'
 
+# bundler
+alias b='bundle install --path .bundle'
+alias be='bundle exec'
+
 # postgres
 alias start-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias stop-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres stop -s -m fast'
@@ -55,21 +59,14 @@ alias start-elastic='tname elasticsearch && elasticsearch -f -D es.config=/usr/l
 alias giggity='cd /src/bitbucket/gigfunder && tname gigfunder'
 
 alias tc='cd /src/trunkclub; ll'
-alias tc-dia='cd /src/trunkclub/diablo && _t'
-alias tc-fut='cd /src/trunkclub/futura && _t'
-alias tc-her='cd /src/trunkclub/hermes && _t'
-alias tc-bob='cd /src/trunkclub/bobby_flay && _t'
-alias tc-min='cd /src/trunkclub/minotaur && _t'
-alias tc-clo='cd /src/trunkclub/closet && _t'
-alias tc-moby='cd /src/trunkclub/moby && _t'
-alias tc-con='cd /src/trunkclub/continuity && _t'
-alias tc-gram='cd /src/trunkclub/gramophone && _t'
-alias tc-pink='cd /src/trunkclub/pinky && _t'
-alias tc-cat='cd /src/trunkclub/ursa_minor && _t'
-alias tc-gem='cd /src/trunkclub/gemini && _t'
-alias tc-tau='cd /src/trunkclub/taurus && _t'
+alias backbone='cd /src/trunkclub/backbone; ll'
+alias apis='cd /src/trunkclub/apis; ll'
+
 alias start-tc='start-mongo ; start-pg ; start-solr ; start-redis'
 alias stop-tc='stop-solr ; stop-mongo ; stop-pg'
 
 # Start Chrome allowing for Cross Domain Requests
 alias dev-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security'
+
+# git/hub
+alias git='hub'

@@ -1,16 +1,15 @@
 source ~/.bash/functions
 source ~/.bash/aliases
 
-source ~/bin/git-completion.bash
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
 
-# MacPorts Installer addition on 2009-06-24_at_13:26:05: adding an appropriate MANPATH variable for use with MacPorts.
-export MANPATH=/opt/local/share/man:$MANPATH
 export BREW_HOME=/usr/local/bin
 export BREW_SBIN=/usr/local/sbin
 export PATH=$BREW_SBIN:$BREW_HOME:$PATH
-# Finished adapting your MANPATH environment variable for use with MacPorts.
 
-export EDITOR=vim
+export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 export SVN_EDITOR=/usr/bin/vim
 
 # prompt
@@ -24,10 +23,7 @@ export BLACK='\[\033[1;30m\]' # White
 export DELIVER_PATH=/src/github/deliver
 export PATH=$DELIVER_PATH/bin:$PATH
 
-#export PS1="\u \W$YELLOW \$(parse_git_branch)$WHITE$ "
-#export PS1="\u \W$ "
-
-
+export PS1="\W \$(parse_git_branch) \$(parse_rvm_gemset) -> "
 function __bg_dark () {
   export PS1="$TEXT_RESET$WHITE\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(parse_rvm_gemset)$TEXT_RESET -> "
 }
@@ -36,11 +32,7 @@ function __bg_light () {
   export PS1="$TEXT_RESET$BLACK\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(parse_rvm_gemset)$TEXT_RESET -> "
 }
 
-__bg_dark
-
-# set default mode to vi!!! this is awesome
-#set -o vi
-#bind -m vi-command -r 'v'
+#__bg_dark
 
 # Alias to create 'realias' that does half the work for me
 alias realias='$EDITOR ~/.bash/aliases; source ~/.bash/aliases'
@@ -58,13 +50,11 @@ alias realias='$EDITOR ~/.bash/aliases; source ~/.bash/aliases'
 
 # RVM (ruby version management)
 if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
-
-# autojump
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-
-rvm use ruby-1.9.1
-
 if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
+
+#rvm use ruby-1.9.1
+
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/usr/local/share/npm/bin # Add node to path
