@@ -129,6 +129,10 @@ let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes']
 nmap <silent> <Leader><space> :CtrlP<CR>
 nmap <silent> <c-n> :CtrlP<CR>
 
+" quicklist navigation
+nnoremap [q :cp<CR>
+nnoremap ]q :cn<CR>
+
 " Tabularize
 nmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
 vmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
@@ -153,5 +157,7 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 nmap <silent><Leader>A :grep <cword><CR>:botright copen<CR>
 
+command! -nargs=+ Grep execute 'silent grep! <args>' | botright copen
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
+command! Tig !tig -- %
