@@ -166,7 +166,7 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 nmap <silent><Leader>A :grep <cword><CR>:botright copen<CR>
 
-command! -nargs=+ Grep execute 'silent grep! <args>' | botright copen
+command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
 command! Tig !tig -- %
