@@ -33,8 +33,13 @@ alias gb='git branch'
 alias simple-server='python -m SimpleHTTPServer 8000'
 
 # bundler
+alias bi='bundle install'
 alias b='bundle install --path .bundle'
 alias be='bundle exec'
+
+# mysql
+alias start-mysql='mysql.server start'
+alias stop-mysql='mysql.server stop'
 
 # postgres
 alias start-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'

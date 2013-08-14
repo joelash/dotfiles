@@ -59,3 +59,7 @@ if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/usr/local/share/npm/bin # Add node to path
 
+# Outpace setting
+
+export STARWOOD_HOME=/src/outpace/starwood
+. $STARWOOD_HOME/common_utilities/setup/personalization/common.aliases

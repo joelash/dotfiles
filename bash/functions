@@ -24,7 +24,7 @@ function any() {
   ps -ef | grep -v grep | $grep_command
 }
 
-function g() {
+function gt() {
   local jump_command="j $@"
   $jump_command && _t
 }
