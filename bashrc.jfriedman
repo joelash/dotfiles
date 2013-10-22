@@ -23,17 +23,6 @@ export BLACK='\[\033[1;30m\]' # White
 export DELIVER_PATH=/src/github/deliver
 export PATH=$DELIVER_PATH/bin:$PATH
 
-export PS1="\W \$(parse_git_branch) \$(parse_rvm_gemset) -> "
-function __bg_dark () {
-  export PS1="$TEXT_RESET$WHITE\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(parse_rvm_gemset)$TEXT_RESET -> "
-}
-function __bg_light () {
-  # For Light Background
-  export PS1="$TEXT_RESET$BLACK\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(parse_rvm_gemset)$TEXT_RESET -> "
-}
-
-#__bg_dark
-
 # Alias to create 'realias' that does half the work for me
 alias realias='$EDITOR ~/.bash/aliases; source ~/.bash/aliases'
 
@@ -60,6 +49,17 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/usr/local/share/npm/bin # Add node to path
 
 # Outpace setting
-
-export STARWOOD_HOME=/src/outpace/starwood
+export USE_LOCAL=true
+export STARWOOD_HOME=/src/outpace/starwood/universe
 . $STARWOOD_HOME/common_utilities/setup/personalization/common.aliases
+
+export PS1="\W \$(parse_git_branch) \$(parse_rvm_gemset) -> "
+function __bg_dark () {
+  export PS1="$TEXT_RESET$WHITE\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(parse_rvm_gemset)$TEXT_RESET -> "
+}
+function __bg_light () {
+  # For Light Background
+  export PS1="$TEXT_RESET$BLACK\W$TEXT_RESET $YELLOW\$(parse_git_branch)$CYAN \$(parse_rvm_gemset)$TEXT_RESET -> "
+}
+
+#__bg_dark

@@ -12,6 +12,7 @@ Bundle 'ihacklog/tabular'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
+Bundle 'altercation/vim-colors-solarized'
 
 "call pathogen#incubate()
 "call pathogen#helptags()
@@ -19,7 +20,8 @@ filetype plugin indent on
 
 let mapleader = ","                                  " leader
 
-"colorscheme desert
+set background=dark
+colorscheme solarized
 
 " vim setting
 set softtabstop=2
@@ -36,7 +38,7 @@ set ignorecase                                      " case insensitive search
 set smartcase                                       " ...unless there is a capital letter
 
 set hidden                                          " allow changing buffers without saving
-set nowrap                                          " do not wrap a long line onto line below
+set wrap                                            " do not wrap a long line onto line below
 set number                                          " show line numbers
 "set lazyredraw
 set ruler                                           " show cursor position in status bar
@@ -62,10 +64,10 @@ set smarttab      " smarter tabbing
 set grepprg=git\ grep\ -n\ $*
 
 "set winwidth=200
-set winheight=5
-set winminheight=5
-set winheight=999
-"set wmh=0 " split editing settings
+
+"set winheight=5
+"set winminheight=5
+"set winheight=999
 
 autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 
@@ -75,6 +77,8 @@ filetype indent on
 filetype plugin on
 
 " *** MAPPINGS ***
+nnoremap j gj
+nnoremap k gk
 
 nnoremap <CR> :nohlsearch<CR>
 nnoremap <Leader><Leader> <C-^>
@@ -130,11 +134,16 @@ syntax enable
 "set background=dark
 "colorscheme solarized
 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux wildignore for vim
+
 " ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|\.bundle)$'
 let g:ctrlp_show_hidden = 1                                                       " show hidden files
 let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes']
+"let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
+                        "\ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 nmap <silent> <Leader><space> :CtrlP<CR>
 nmap <silent> <c-n> :CtrlP<CR>
 
@@ -170,3 +179,5 @@ command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
 command! Tig !tig -- %
+command! Ann !git annotate %
+command! Diff !git dt -- %

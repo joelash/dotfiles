@@ -2,7 +2,15 @@
 *.swo
 tags
 TAGS
+
+# iOS
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+
+# this is for bundler
 .bundle/
+.bin/
 
 personal_tasks/
 
@@ -10,3 +18,5 @@ personal_tasks/
 
 .#*
 #*#
+
+.nrepl-port

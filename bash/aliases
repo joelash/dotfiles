@@ -34,7 +34,7 @@ alias simple-server='python -m SimpleHTTPServer 8000'
 
 # bundler
 alias bi='bundle install'
-alias b='bundle install --path .bundle'
+alias b='bundle install --path .bundle --binstubs=./.bin'
 alias be='bundle exec'
 
 # mysql
@@ -53,23 +53,11 @@ alias stop-mongo='cat /usr/local/var/mongo/mongo.pid | xargs kill -9 && rm /usr/
 # redis
 alias start-redis='tname redis && redis-server /usr/local/etc/redis.conf'
 
-# solr
-alias start-solr='rake sunspot:solr:start'
-alias stop-solr='rake sunspot:solr:stop'
-
 # elastic search
 alias start-elastic='tname elasticsearch && elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'
 
 # projects
 alias giggity='cd /src/bitbucket/gigfunder && tname gigfunder'
-
-alias t='cd /src/trunkclub'
-alias tc='t; ll'
-alias backbone='cd /src/trunkclub/backbone; ll'
-alias apis='cd /src/trunkclub/apis; ll'
-
-alias start-tc='start-mongo ; start-pg ; start-solr ; start-redis'
-alias stop-tc='stop-solr ; stop-mongo ; stop-pg'
 
 # Start Chrome allowing for Cross Domain Requests
 alias dev-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security'

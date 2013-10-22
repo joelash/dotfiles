@@ -28,6 +28,7 @@ function gt() {
   local jump_command="j $@"
   $jump_command && _t
 }
+alias t='gt'
 
 # git
 function parse_git_dirty {
