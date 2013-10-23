@@ -143,10 +143,10 @@ S.bnda({
 
   // Nudge Bindings
   // NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
-  "right:ctrl;alt" : S.op("nudge", { "x" : "+5%", "y" : "+0" }),
-  "left:ctrl;alt" : S.op("nudge", { "x" : "-5%", "y" : "+0" }),
-  "up:ctrl;alt" : S.op("nudge", { "x" : "+0", "y" : "-5%" }),
-  "down:ctrl;alt" : S.op("nudge", { "x" : "+0", "y" : "+5%" }),
+  //"right:ctrl;alt" : S.op("nudge", { "x" : "+5%", "y" : "+0" }),
+  //"left:ctrl;alt" : S.op("nudge", { "x" : "-5%", "y" : "+0" }),
+  //"up:ctrl;alt" : S.op("nudge", { "x" : "+0", "y" : "-5%" }),
+  //"down:ctrl;alt" : S.op("nudge", { "x" : "+0", "y" : "+5%" }),
 
   // Throw Bindings
   // NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
