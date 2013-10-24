@@ -8,13 +8,16 @@ alias edit_bashrc='$EDITOR ~/.bashrc; source ~/.bashrc'
 alias grep='grep --color'
 
 # hub/git
-alias git='hub'
+#alias git='hub'
 
 # Random
 alias tname='tName'
 
 # Screen
 alias screen='TERM=screen screen'
+
+# Emacs
+alias emacs='emacs -nw'
 
 # VIM
 alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'

@@ -32,7 +32,7 @@
                       clojurescript-mode
                       markdown-mode
                       highlight-symbol
-                      nrepl
+                      cider
                       ac-nrepl
                       exec-path-from-shell
                       yaml-mode
@@ -150,18 +150,22 @@
 
 
 ;; nrepl
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-(add-hook 'nrepl-mode-hook (lambda ()
-                             (nrepl-turn-on-eldoc-mode)
+(add-hook 'cider-interaction-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-mode-hook (lambda ()
+                             (cider-turn-on-eldoc-mode)
                              (paredit-mode +1)
                              (fix-paredit-repl)))
-(setq nrepl-popup-stacktraces nil)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(setq cider-popup-stacktraces nil)
 
 (require 'ac-nrepl)
-(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-interaction-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
 (eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'nrepl-mode))
+  '(add-to-list 'ac-modes 'cider-mode))
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-repl-mode))
 
 ;; specify the print length to be 100 to stop infinite sequences killing things.
 (defun live-nrepl-set-print-length ()
@@ -215,15 +219,11 @@
             (if (eq window-system 'x)
                 (font-lock-mode 1))))
 
-
-
 ;; tree ml
 (add-to-list 'auto-mode-alist '("\\.tml" . yaml-mode))
 
 ;; erc
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
-
-
 
 ;; markdown
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
@@ -319,6 +319,7 @@ Display the results in a hyperlinked *compilation* buffer."
 ;; git-messenger
 ;; (require 'git-messenger)
 ;; (global-set-key (kbd "C-x v p") 'git-messenger:popup-message)
+
 (defun byte-compile-init-dir ()
   "Byte-compile all your dotfiles."
   (interactive)
