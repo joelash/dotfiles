@@ -13,7 +13,7 @@ Dir.chdir File.dirname(__FILE__) do
     next if IGNORES.include? entry
     target_name = entry == 'bin' ? entry : ".#{entry}"
     target = File.join(home, target_name)
-    File.unlink target if File.symlink? target
+    # File.unlink target if File.symlink? target
     unless File.exist? target
       system %[ln -vsf #{File.join(dotfiles_dir, entry)} #{target}]
     end
