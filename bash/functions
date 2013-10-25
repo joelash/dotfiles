@@ -17,6 +17,10 @@ function st {
   fi
 }
 
+function emacs {
+  open $@ -a Emacs
+}
+
 # random
 
 function any() {

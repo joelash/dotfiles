@@ -17,10 +17,11 @@ alias tname='tName'
 alias screen='TERM=screen screen'
 
 # Emacs
-alias emacs='emacs -nw'
+# alias emacs='emacs -nw'
+
 
 # VIM
-#alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 alias mnerd='mvim -c NERDTree'
 alias nerd='vim -c NERDTree'
 
