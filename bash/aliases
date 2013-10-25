@@ -8,7 +8,7 @@ alias edit_bashrc='$EDITOR ~/.bashrc; source ~/.bashrc'
 alias grep='grep --color'
 
 # hub/git
-#alias git='hub'
+alias git='hub'
 
 # Random
 alias tname='tName'
@@ -20,7 +20,7 @@ alias screen='TERM=screen screen'
 alias emacs='emacs -nw'
 
 # VIM
-alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+#alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 alias mnerd='mvim -c NERDTree'
 alias nerd='vim -c NERDTree'
 
@@ -64,6 +64,3 @@ alias giggity='cd /src/bitbucket/gigfunder && tname gigfunder'
 
 # Start Chrome allowing for Cross Domain Requests
 alias dev-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security'
-
-# git/hub
-alias git='hub'

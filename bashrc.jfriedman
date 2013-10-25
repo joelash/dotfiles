@@ -9,7 +9,8 @@ export BREW_HOME=/usr/local/bin
 export BREW_SBIN=/usr/local/sbin
 export PATH=$BREW_SBIN:$BREW_HOME:$PATH
 
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+#export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+export EDITOR=vim
 export SVN_EDITOR=/usr/bin/vim
 
 # prompt
@@ -43,7 +44,7 @@ if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
 
 #rvm use ruby-1.9.1
 
-#[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/usr/local/share/npm/bin # Add node to path

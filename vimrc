@@ -5,12 +5,13 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'ihacklog/tabular'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 
@@ -21,7 +22,7 @@ filetype plugin indent on
 let mapleader = ","                                  " leader
 
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 
 " vim setting
 set softtabstop=2
@@ -31,7 +32,8 @@ set expandtab
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
-set gfn=Inconsolata-dz\ for\ Powerline              " set default font
+set gfn=Inconsolata                                 " set default font
+"set gfn=Inconsolata-dz\ for\ Powerline              " set default font
 set incsearch                                       " show search as typing
 set hlsearch                                        " highlight search results
 set ignorecase                                      " case insensitive search
