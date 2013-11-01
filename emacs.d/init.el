@@ -51,6 +51,7 @@
 ;;--------------------------------------------------
 
 (when (memq window-system '(mac ns))
+  (x-focus-frame nil)
   (exec-path-from-shell-initialize))
 
 ;; Load system specific/user specific files if around

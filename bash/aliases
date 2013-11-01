@@ -17,7 +17,7 @@ alias tname='tName'
 alias screen='TERM=screen screen'
 
 # Emacs
-# alias emacs='emacs -nw'
+alias e='/Applications/Emacs.app/Contents/MacOS/Emacs'
 
 
 # VIM
@@ -56,6 +56,9 @@ alias stop-mongo='cat /usr/local/var/mongo/mongo.pid | xargs kill -9 && rm /usr/
 
 # redis
 alias start-redis='tname redis && redis-server /usr/local/etc/redis.conf'
+
+# rabbit
+alias start-rabbit='tname rabbit && rabbitmq-server'
 
 # elastic search
 alias start-elastic='tname elasticsearch && elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'

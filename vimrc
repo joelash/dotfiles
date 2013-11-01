@@ -143,7 +143,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux wildignore for vim
 
 " ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_working_path_mode = 'a'
+"let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|\.bundle)$'
 let g:ctrlp_show_hidden = 1                                                       " show hidden files
 let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes']

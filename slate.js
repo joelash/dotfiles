@@ -3,13 +3,18 @@ S.cfga({
   "defaultToCurrentScreen" : true,
   "secondsBetweenRepeat" : 0.1,
   "checkDefaultsOnLoad" : true,
+  "nudgePercentOf" : "screenSize",
+  "resizePercentOf" : "screenSize",
+  "windowHintsSpread" : true,
+  "windowHintsIgnoreHiddenWindows" : false,
+  "windowHintsShowIcons" : true,
   "focusCheckWidthMax" : 3000
 });
 
 // Monitors
 var monLaptop = "1680x1050";
-var monTbolt = "2560x1440";
-//var monHP = "1920x1080";
+var monTbolt1 = 1;
+var monTbolt2 = 2;
 
 // Operations
 var lapMain = S.op("corner", {
@@ -21,8 +26,17 @@ var lapMain = S.op("corner", {
   "height" : "screenSizeY"
 });
 
-var tboltMain = S.op("corner", {
-  "screen" : monTbolt,
+var tbolt1Main = S.op("corner", {
+  "screen" : monTbolt1,
+  "direction" : "top-right",
+  "x" : "screenOriginX",
+  "y" : "screenOriginY",
+  "width" : "screenSizeX",
+  "height" : "screenSizeY"
+});
+
+var tbolt2Main = S.op("corner", {
+  "screen" : monTbolt2,
   "direction" : "top-right",
   "x" : "screenOriginX",
   "y" : "screenOriginY",
@@ -38,7 +52,7 @@ var fullscreen = slate.operation("move", {
 });
 
 var tboltFull = S.op("move", {
-  "screen" : monTbolt,
+  "screen" : monTbolt1,
   "x" : "screenOriginX",
   "y" : "screenOriginY",
   "width" : "screenSizeX",
@@ -46,14 +60,13 @@ var tboltFull = S.op("move", {
 });
 
 var tboltCenter = S.op("move", {
-  "screen" : monTbolt,
+  "screen" : monTbolt1,
   "x" : "(screenSizeX-windowSizeX)/2",
   "y" : "(screenSizeY-windowSizeY)/2",
   "width" : "screenSizeX/2+screenSizeX/6",
   "height" : "screenSizeY/2+screenSizeY/6"
 });
 
-//var tboltFull = tboltMain.dup({});
 var tboltTop = tboltFull.dup({ "height" : "screenSizeY/2" });
 var tboltTopLeft = tboltTop.dup({ "width" : "screenSizeX/2" });
 var tboltTopRight = tboltTopLeft.dup({ "x" : "screenOriginX+screenSizeX/2" });
@@ -74,47 +87,46 @@ var lapMainHash = {
   "repeat" : true
 };
 
-// 1 monitor layout
-var oneMonitorLayout = S.lay("oneMonitor", {
-  "iTerm" : lapMainHash,
-  "Google Chrome" : lapMainHash,
-  "Xcode" : lapMainHash,
-  "Firefox" : lapMainHash,
-  "Safari" : lapMainHash
-});
-
-// Defaults
-S.def([monLaptop], oneMonitorLayout);
-
-// Layout Operations
-var oneMonitor = S.op("layout", { "name" : oneMonitorLayout });
-var universalLayout = function() {
-  // Should probably make sure the resolutions match but w/e
-  S.log("SCREEN COUNT: "+S.screenCount());
-  oneMonitor.run();
-};
 
 // Batch bind everything. Less typing.
 S.bnda({
   // Layout Bindings
-  //"padEnter:ctrl" : universalLayout,
-  //"space:ctrl" : universalLayout,
 
   // Basic Location Bindings
   //"pad0:ctrl" : lapChat,
   "0:ctrl;alt;cmd" : tboltCenter,
   "pad.:ctrl" : lapMain,
   //"]:ctrl" : lapMain,
-  "1:ctrl;alt;cmd" : tboltBottomLeft,
-  "2:ctrl;alt;cmd" : tboltBottomMid,
-  "3:ctrl;alt;cmd" : tboltBottomRight,
-  "4:ctrl;alt;cmd" : tboltLeft,
-  "5:ctrl;alt;cmd" : tboltFull,
-  "6:ctrl;alt;cmd" : tboltRight,
-  "7:ctrl;alt;cmd" : tboltTopLeft,
-  "8:ctrl;alt;cmd" : tboltTop,
-  "9:ctrl;alt;cmd" : tboltTopRight,
-  "=:ctrl;alt;cmd" : tboltTop,
+  "1:1;alt;cmd" : tboltBottomLeft,
+  "1:2;alt;cmd" : tboltBottomLeft.dup({ screen: monTbolt2 }),
+  "1:`;alt;cmd" : tboltBottomLeft.dup({ screen: monLaptop }),
+  "2:1;alt;cmd" : tboltBottomMid,
+  "2:2;alt;cmd" : tboltBottomMid.dup({ screen: monTbolt2 }),
+  "2:`;alt;cmd" : tboltBottomMid.dup({ screen: monLaptop }),
+  "3:1;alt;cmd" : tboltBottomRight,
+  "3:2;alt;cmd" : tboltBottomRight.dup({ screen: monTbolt2 }),
+  "3:`;alt;cmd" : tboltBottomRight.dup({ screen: monLaptop }),
+  "4:1;alt;cmd" : tboltLeft,
+  "4:2;alt;cmd" : tboltLeft.dup({ screen: monTbolt2}),
+  "4:`;alt;cmd" : tboltLeft.dup({ screen: monLaptop}),
+  "5:1;alt;cmd" : tboltFull,
+  "5:2;alt;cmd" : tbolt2Main,
+  "5:`;alt;cmd" : lapMain,
+  "6:1;alt;cmd" : tboltRight,
+  "6:2;alt;cmd" : tboltRight.dup({ screen: monTbolt2 }),
+  "6:`;alt;cmd" : tboltRight.dup({ screen: monLaptop }),
+  "7:1;alt;cmd" : tboltTopLeft,
+  "7:2;alt;cmd" : tboltTopLeft.dup({ screen: monTbolt2 }),
+  "7:`;alt;cmd" : tboltTopLeft.dup({ screen: monLaptop }),
+  "8:1;alt;cmd" : tboltTop,
+  "8:2;alt;cmd" : tboltTop.dup({ screen: monTbolt2 }),
+  "8:`;alt;cmd" : tboltTop.dup({ screen: monLaptop }),
+  "9:1;alt;cmd" : tboltTopRight,
+  "9:2;alt;cmd" : tboltTopRight.dup({ screen: monTbolt2 }),
+  "9:`;alt;cmd" : tboltTopRight.dup({ screen: monLaptop }),
+  "=:1;alt;cmd" : tboltTop,
+  "=:2;alt;cmd" : tboltTop.dup({ screen: monTbolt2 }),
+  "=:`;alt;cmd" : tboltTop.dup({ screen: monLaptop }),
   //"pad/:ctrl" : tboltBottom,
   //"pad*:ctrl" : hpBottomLeft,
   //"pad-:ctrl" : hpTopLeft,
@@ -122,24 +134,27 @@ S.bnda({
 
   // Resize Bindings
   // NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
-  "return:shift;alt;cmd" : lapMain,
-  //"return:ctrl;shift;alt" : tboltMain,
+  // "return:`;alt;cmd" : lapMain,
+  // "return:1;alt;cmd" : tbolt1Main,
+  // "return:2;alt;cmd" : tbolt2Main,
   "f:alt;cmd" : fullscreen,
+  "z:alt;cmd" : S.op("undo"),
+
   "right:ctrl;alt;cmd" : S.op("resize", { "width" : "+5%", "height" : "+0" }),
   "left:ctrl;alt;cmd" : S.op("resize", { "width" : "-5%", "height" : "+0" }),
   "up:ctrl;alt;cmd" : S.op("resize", { "width" : "+0", "height" : "-5%" }),
   "down:ctrl;alt;cmd" : S.op("resize", { "width" : "+0", "height" : "+5%" }),
-  "right:alt;cmd" : S.op("resize", { "width" : "-5%", "height" : "+0", "anchor" : "bottom-right" }),
-  "left:alt;cmd" : S.op("resize", { "width" : "+5%", "height" : "+0", "anchor" : "bottom-right" }),
-  "up:alt;cmd" : S.op("resize", { "width" : "+0", "height" : "+5%", "anchor" : "bottom-right" }),
-  "down:alt;cmd" : S.op("resize", { "width" : "+0", "height" : "-5%", "anchor" : "bottom-right" }),
+  // "right:alt;cmd" : S.op("resize", { "width" : "-5%", "height" : "+0", "anchor" : "bottom-right" }),
+  // "left:alt;cmd" : S.op("resize", { "width" : "+5%", "height" : "+0", "anchor" : "bottom-right" }),
+  // "up:alt;cmd" : S.op("resize", { "width" : "+0", "height" : "+5%", "anchor" : "bottom-right" }),
+  // "down:alt;cmd" : S.op("resize", { "width" : "+0", "height" : "-5%", "anchor" : "bottom-right" }),
 
   // Push Bindings
   // NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
-  "right:ctrl;shift" : S.op("push", { "direction" : "right", "style" : "bar-resize:screenSizeX/3" }),
-  "left:ctrl;shift" : S.op("push", { "direction" : "left", "style" : "bar-resize:screenSizeX/3" }),
-  "up:ctrl;shift" : S.op("push", { "direction" : "up", "style" : "bar-resize:screenSizeY/2" }),
-  "down:ctrl;shift" : S.op("push", { "direction" : "down", "style" : "bar-resize:screenSizeY/2" }),
+  "right:shift;alt;cmd" : S.op("push", { "direction" : "right", "style" : "bar-resize:screenSizeX/3" }),
+  "left:shift;alt;cmd" : S.op("push", { "direction" : "left", "style" : "bar-resize:screenSizeX/3" }),
+  "up:shift;alt;cmd" : S.op("push", { "direction" : "up", "style" : "bar-resize:screenSizeY/2" }),
+  "down:shift;alt;cmd" : S.op("push", { "direction" : "down", "style" : "bar-resize:screenSizeY/2" }),
 
   // Nudge Bindings
   // NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
@@ -157,8 +172,9 @@ S.bnda({
   //"left:ctrl;alt;cmd" : S.op("throw", { "screen" : "left", "width" : "screenSizeX", "height" : "screenSizeY" }),
   //"up:ctrl;alt;cmd" : S.op("throw", { "screen" : "up", "width" : "screenSizeX", "height" : "screenSizeY" }),
   //"down:ctrl;alt;cmd" : S.op("throw", { "screen" : "down", "width" : "screenSizeX", "height" : "screenSizeY" }),
-  "t:ctrl;alt;cmd" : S.op("throw", { "screen" : monTbolt }),
-  "l:ctrl;alt;cmd" : S.op("throw", { "screen" : monLaptop }),
+  "return:`;alt;cmd" : S.op("throw", { "screen" : monLaptop, style: "resize" }),
+  "return:1;alt;cmd" : S.op("throw", { "screen" : monTbolt1, style: "resize" }),
+  "return:2;alt;cmd" : S.op("throw", { "screen" : monTbolt2, style: "resize" }),
 
   // Focus Bindings
   // NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings

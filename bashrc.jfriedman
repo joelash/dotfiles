@@ -64,3 +64,6 @@ function __bg_light () {
 }
 
 #__bg_dark
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
