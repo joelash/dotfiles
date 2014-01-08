@@ -5,6 +5,10 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
+if [ -f ~/.bash/private ]; then
+  . ~/.bash/private
+fi
+
 export BREW_HOME=/usr/local/bin
 export BREW_SBIN=/usr/local/sbin
 export PATH=$BREW_SBIN:$BREW_HOME:$PATH
@@ -51,7 +55,7 @@ PATH=$PATH:/usr/local/share/npm/bin # Add node to path
 
 # Outpace setting
 export USE_LOCAL=true
-export STARWOOD_HOME=/src/outpace/starwood/universe
+export STARWOOD_HOME=/src/outpace/starwood/customer_mvp
 . $STARWOOD_HOME/common_utilities/setup/personalization/common.aliases
 
 export PS1="\W \$(parse_git_branch) \$(parse_rvm_gemset) -> "
@@ -67,3 +71,5 @@ function __bg_light () {
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+_t
