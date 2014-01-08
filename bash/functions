@@ -17,6 +17,25 @@ function st {
   fi
 }
 
+function _nginx {
+  case $1 in
+    outpace)
+      nginx -s stop
+      unlink /usr/local/etc/nginx/nginx.conf
+      ln -s /src/outpace/starwood/customer_mvp/nginx_config/dev.nginx.conf /usr/local/etc/nginx/nginx.conf
+      nginx
+      ;;
+    acl)
+      nginx -s stop
+      unlink /usr/local/etc/nginx/nginx.conf
+      ln -s /src/bitbucket/aclaimant/nginx/dev.nginx.conf /usr/local/etc/nginx/nginx.conf
+      nginx
+      ;;
+    *)
+      ls -l /usr/local/etc/nginx/nginx.conf | cut -d '>' -f2
+  esac
+}
+
 # random
 
 function any() {
