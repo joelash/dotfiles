@@ -1,7 +1,7 @@
 # Bash
 alias ls='ls -p'
-alias la='ls -a'
-alias ll='ls -al'
+alias la='ls -aF'
+alias ll='ls -laFh'
 alias rbash='. ~/.bash_profile'
 alias edit_bashrc='$EDITOR ~/.bashrc; source ~/.bashrc'
 
@@ -51,7 +51,8 @@ alias stop-pg='/usr/local/bin/pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
 # mongo
 alias start-mongo='mongod run --config /usr/local/etc/mongod.conf --fork --pidfilepath=/usr/local/var/mongo/mongo.pid --logpath=/usr/local/var/mongo/mongo.log'
-alias run-mongo='start-mongo && tname mongo && mongo'
+alias mongo='tname mongo && mongo'
+alias run-mongo='start-mongo && mongo'
 alias stop-mongo='cat /usr/local/var/mongo/mongo.pid | xargs kill -9 && rm /usr/local/var/mongo/mongo.pid'
 
 # redis
@@ -68,3 +69,5 @@ alias giggity='cd /src/bitbucket/gigfunder && tname gigfunder'
 
 # Start Chrome allowing for Cross Domain Requests
 alias dev-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security'
+
+alias start_pair='ssh -R1337:localhost:22 ubuntu@pair.joelafriedman.com'

@@ -1,3 +1,6 @@
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
+(require 'joelash-util)
+
 ;; PACKAGES
 ;;--------------------------------------------------
 
@@ -7,45 +10,7 @@
 (setq tmp-dir (file-name-as-directory (concat dotfiles-dir "tmp")))
 (make-directory tmp-dir t)
 
-(package-initialize)
-
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(package-initialize)
-
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
-(defvar my-packages '(
-                      starter-kit
-                      starter-kit-lisp
-                      starter-kit-bindings
-                      starter-kit-ruby
-                      starter-kit-js
-                      starter-kit-eshell
-                      highlight
-                      clojure-mode
-                      clojure-test-mode
-                      clojurescript-mode
-                      markdown-mode
-                      highlight-symbol
-                      cider
-                      ac-nrepl
-                      exec-path-from-shell
-                      yaml-mode
-                      ace-jump-mode
-                      auto-complete
-                      popup
-                      fuzzy
-                      )
-  "A list of packages to ensure are installed at launch.")
-
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
+(require 'joelash-package)
 
 ;; ENVIRONMENT
 ;;--------------------------------------------------
@@ -76,6 +41,10 @@
 ;; smooth-scrolling stops that annoying jump when moving around
 (require 'smooth-scrolling)
 
+;; Smooth scrolling.
+(setq scroll-step 1
+      scroll-conservatively 10000)
+
 ;; makes sexps flash when you eval them!
 (require 'highlight)
 (require 'eval-sexp-fu)
@@ -94,13 +63,8 @@
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
 
-;; color theme
-(add-to-list 'custom-theme-load-path (concat dotfiles-dir "themes"))
-(load-theme 'zenburn t)
-
 ;; KEYBINDINGS
 ;;--------------------------------------------------
-
 
 (global-set-key [f7] 'ns-toggle-fullscreen)
 
@@ -159,6 +123,7 @@
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (setq cider-popup-stacktraces nil)
 
+(package-require 'auto-complete)
 (require 'ac-nrepl)
 (add-hook 'cider-mode-hook 'ac-nrepl-setup)
 (add-hook 'cider-interaction-mode-hook 'ac-nrepl-setup)
@@ -316,7 +281,6 @@ Display the results in a hyperlinked *compilation* buffer."
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
 
-
 ;; git-messenger
 ;; (require 'git-messenger)
 ;; (global-set-key (kbd "C-x v p") 'git-messenger:popup-message)
@@ -329,3 +293,39 @@ Display the results in a hyperlinked *compilation* buffer."
 (defun scratch-buffer ()
   (interactive)
   (switch-to-buffer (make-temp-name "scratch")))
+
+(require 'joelash-evil)
+(require 'joelash-keybindings)
+(require 'joelash-paredit)
+(require 'joelash-clojure)
+(require 'joelash-multi-shell)
+(require 'joelash-themes)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(Linum-format "%7i ")
+ '(ansi-color-names-vector ["#110F13" "#B13120" "#719F34" "#CEAE3E" "#7C9FC9" "#7868B5" "#009090" "#F4EAD5"])
+ '(background-color "#202020")
+ '(background-mode dark)
+ '(cursor-color "#cccccc")
+ '(custom-safe-themes (quote ("9ffeaafbdeb8d440413888b996730c25ca79f591272f40d5a3a02b0b9b3e6c9a" "e80a0a5e1b304eb92c58d0398464cd30ccbc3622425b6ff01eea80e44ea5130e" "0c311fb22e6197daba9123f43da98f273d2bfaeeaeb653007ad1ee77f0003037" "579e9950513524d8739e08eae289419cfcb64ed9b7cc910dd2e66151c77975c4" "52b5da0a421b020e2d3429f1d4929089d18a56e8e43fe7470af2cea5a6c96443" default)))
+ '(fci-rule-character-color "#202020")
+ '(fci-rule-color "#202020")
+ '(foreground-color "#cccccc")
+ '(fringe-mode 4 nil (fringe))
+ '(main-line-color1 "#1E1E1E")
+ '(main-line-color2 "#111111")
+ '(main-line-separator-style (quote chamfer))
+ '(powerline-color1 "#1E1E1E")
+ '(powerline-color2 "#111111")
+ '(vc-annotate-background "#2b2b2b")
+ '(vc-annotate-color-map (quote ((20 . "#bc8383") (40 . "#cc9393") (60 . "#dfaf8f") (80 . "#d0bf8f") (100 . "#e0cf9f") (120 . "#f0dfaf") (140 . "#5f7f5f") (160 . "#7f9f7f") (180 . "#8fb28f") (200 . "#9fc59f") (220 . "#afd8af") (240 . "#bfebbf") (260 . "#93e0e3") (280 . "#6ca0a3") (300 . "#7cb8bb") (320 . "#8cd0d3") (340 . "#94bff3") (360 . "#dc8cc3"))))
+ '(vc-annotate-very-old-color "#dc8cc3"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

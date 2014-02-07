@@ -73,7 +73,7 @@ var tboltTopRight = tboltTopLeft.dup({ "x" : "screenOriginX+screenSizeX/2" });
 var tboltBottom = tboltTop.dup({ "y" : "screenOriginY+screenSizeY/2" });
 var tboltBottomLeft = tboltBottom.dup({ "width" : "screenSizeX/2" });
 var tboltBottomMid = tboltBottomLeft.dup({ "x" : "screenOriginX+screenSizeX/2" });
-var tboltBottomRight = tboltBottomLeft.dup({ "x" : "screenOriginX+2*screenSizeX/2" });
+var tboltBottomRight = tboltBottomLeft.dup({ "x" : "screenOriginX+screenSizeX/2", "y" : "screenOriginY+screenSizeY/2" });
 var tboltLeft = tboltTopLeft.dup({ "height" : "screenSizeY" });
 var tboltRight = tboltTopRight.dup({ "height" : "screenSizeY" });
 //var hpTopLeft = tboltTopLeft.dup({ "screen" : monHP });
@@ -151,8 +151,8 @@ S.bnda({
 
   // Push Bindings
   // NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
-  "right:shift;alt;cmd" : S.op("push", { "direction" : "right", "style" : "bar-resize:screenSizeX/3" }),
-  "left:shift;alt;cmd" : S.op("push", { "direction" : "left", "style" : "bar-resize:screenSizeX/3" }),
+  "right:shift;alt;cmd" : S.op("push", { "direction" : "right", "style" : "bar-resize:screenSizeX/2" }),
+  "left:shift;alt;cmd" : S.op("push", { "direction" : "left", "style" : "bar-resize:screenSizeX/2" }),
   "up:shift;alt;cmd" : S.op("push", { "direction" : "up", "style" : "bar-resize:screenSizeY/2" }),
   "down:shift;alt;cmd" : S.op("push", { "direction" : "down", "style" : "bar-resize:screenSizeY/2" }),
 
@@ -178,13 +178,13 @@ S.bnda({
 
   // Focus Bindings
   // NOTE: some of these may *not* work if you have not removed the expose/spaces/mission control bindings
-  //"l:cmd;alt;w" : S.op("focus", { "direction" : "right" }),
-  //"h:cmd;alt;w" : S.op("focus", { "direction" : "left" }),
-  //"k:cmd;alt;w" : S.op("focus", { "direction" : "up" }),
-  //"j:cmd;alt;w" : S.op("focus", { "direction" : "down" }),
-  //"k:cmd;alt;e" : S.op("focus", { "direction" : "behind" }),
-  //"j:cmd;alt;e" : S.op("focus", { "direction" : "behind" }),
-  //"right:cmd" : S.op("focus", { "direction" : "right" }),
+  "l:w;cmd;alt" : S.op("focus", { "direction" : "right" }),
+  "h:w;cmd;alt" : S.op("focus", { "direction" : "left" }),
+  "k:w;cmd;alt" : S.op("focus", { "direction" : "up" }),
+  "j:w;cmd;alt" : S.op("focus", { "direction" : "down" }),
+  "k:e;cmd;alt" : S.op("focus", { "direction" : "behind" }),
+  "j:e;cmd;alt" : S.op("focus", { "direction" : "behind" }),
+  // "right:cmd" : S.op("focus", { "direction" : "right" }),
   //"left:cmd" : S.op("focus", { "direction" : "left" }),
   //"up:cmd" : S.op("focus", { "direction" : "up" }),
   //"down:cmd" : S.op("focus", { "direction" : "down" }),

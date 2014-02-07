@@ -1,3 +1,4 @@
+source ~/.bash/outpace
 source ~/.bash/functions
 source ~/.bash/aliases
 
@@ -52,11 +53,6 @@ if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/usr/local/share/npm/bin # Add node to path
-
-# Outpace setting
-export USE_LOCAL=true
-export STARWOOD_HOME=/src/outpace/starwood/customer_mvp
-. $STARWOOD_HOME/common_utilities/setup/personalization/common.aliases
 
 export PS1="\W \$(parse_git_branch) \$(parse_rvm_gemset) -> "
 function __bg_dark () {

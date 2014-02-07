@@ -4,7 +4,7 @@
 
 home = ENV['HOME']
 
-IGNORES = ['README', 'install.rb']
+IGNORES = ['README', 'install.rb', 'iterm2_themes']
 
 Dir.chdir File.dirname(__FILE__) do
   dotfiles_dir = Dir.pwd.sub(home + '/', '')
