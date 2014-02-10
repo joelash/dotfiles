@@ -300,6 +300,10 @@ Display the results in a hyperlinked *compilation* buffer."
 (require 'joelash-clojure)
 (require 'joelash-multi-shell)
 (require 'joelash-themes)
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

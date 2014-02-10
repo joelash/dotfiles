@@ -21,3 +21,4 @@ personal_tasks/
 \#*\#
 
 .nrepl-port
+.agignore
