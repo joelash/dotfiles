@@ -1,22 +1,12 @@
 // Configuration for https://github.com/sdegutis/Phoenix
 
-function randomInt (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
 // FUN!
 
 lookOfDisapproval="ಠ_ಠ";
 rageOfDongers="ヽ༼ ಠ益ಠ ༽ﾉ";
 whyLook="ლ(ಠ_ಠლ)";
 
-looks=[lookOfDisapproval, rageOfDongers, whyLook];
-
-function randomLook() {
-  return looks[randomInt(0, looks.length -1)];
-};
-
-// Movement
+// Adjust window size
 
 function toLeft(fillCols, maxCols) {
   var win = Window.focusedWindow();
@@ -40,6 +30,15 @@ function toRight(fillCols, maxCols) {
   win.setFrame(frame);
 }
 
+function fullScreen() {
+  var win = Window.focusedWindow();
+  var screenFrame = Window.focusedWindow().screen().frameWithoutDockOrMenu();
+  win.setFrame(screenFrame);
+}
+
+
+// Move windows between monitors
+
 function moveToScreen(win, screen) {
   if (!screen) {
     return;
@@ -60,54 +59,35 @@ function moveToScreen(win, screen) {
   });
 }
 
-function fullScreen() {
+function circularLookup(array, index) {
+  if (index < 0)
+    return array[array.length + (index % array.length)];
+  return array[index % array.length];
+}
+
+function rotateMonitors(offset) {
   var win = Window.focusedWindow();
-  var screenFrame = Window.focusedWindow().screen().frameWithoutDockOrMenu();
-  win.setFrame(screenFrame);
+  var currentScreen = win.screen();
+  var screens = [currentScreen];
+  for (var x = currentScreen.previousScreen(); x != win.screen(); x = x.previousScreen()) {
+    screens.push(x);
+  }
+
+  screens = _(screens).sortBy(function(s) { return s.frameWithoutDockOrMenu().x; });
+  var currentIndex = _(screens).indexOf(currentScreen);
+  moveToScreen(win, circularLookup(screens, currentIndex + offset));
 }
 
 function leftOneMonitor() {
-  var win = Window.focusedWindow();
-  moveToScreen(win, win.screen().previousScreen());
+  rotateMonitors(-1);
 }
 
 function rightOneMonitor() {
-  var win = Window.focusedWindow();
-  moveToScreen(win, win.screen().nextScreen());
+  rotateMonitors(1);
 }
 
 
-var mash = ['alt', 'cmd', 'ctrl'];
-api.bind('left', mash, leftOneMonitor);
-api.bind('right', mash, rightOneMonitor);
-
-var altCmd = ['alt', 'cmd'];
-api.bind('left', altCmd, function() { toLeft(1, 2);});
-
-api.bind('right', altCmd, function() { toRight(1, 2);});
-
-api.bind('f', altCmd, fullScreen);
-
-
-var cmdCtrl = ['ctrl', 'cmd'];
-
-api.bind('c', cmdCtrl, function() {
-  App.focusIfRunning('iTerm');
-});
-
-api.bind('e', cmdCtrl, function() {
-  App.focusIfRunning('Emacs');
-});
-
-api.bind('b', cmdCtrl , function() {
-  App.focusIfRunning('Google Chrome');
-});
-
-api.bind('m', cmdCtrl , function() {
-  App.focusIfRunning('Slack');
-});
-
-
+// Start/select apps
 App.allWithTitle = function( title ) {
   return _(this.runningApps()).filter( function( app ) {
     if (app.title() === title) {
@@ -117,13 +97,13 @@ App.allWithTitle = function( title ) {
 };
 
 
-App.focusIfRunning = function ( title ) {
+App.focusOrStart = function ( title ) {
   var apps = App.allWithTitle( title );
   if (_.isEmpty(apps)) {
-    api.alert(title + " not running." + randomLook());
+    api.alert(rageOfDongers + " Starting " + title);
+    api.launch(title)
     return;
   }
-
 
   var windows = _.chain(apps)
     .map(function(x) { return x.allWindows(); })
@@ -132,7 +112,7 @@ App.focusIfRunning = function ( title ) {
 
   activeWindows = _(windows).reject(function(win) { return win.isWindowMinimized();});
   if (_.isEmpty(activeWindows)) {
-    api.alert(randomLook() +" All windows minimized for " + title);
+    api.alert(whyLook +" All windows minimized for " + title);
     return;
   }
 
@@ -140,3 +120,26 @@ App.focusIfRunning = function ( title ) {
     win.focusWindow();
   });
 };
+
+
+var mash = ['alt', 'cmd', 'ctrl'];
+api.bind('left', mash, leftOneMonitor);
+api.bind('right', mash, rightOneMonitor);
+
+var altCmd = ['alt', 'cmd'];
+api.bind('left', altCmd, function() { toLeft(1, 2);});
+api.bind('right', altCmd, function() { toRight(1, 2);});
+api.bind('f', altCmd, fullScreen);
+
+
+var cmdCtrl = ['ctrl', 'cmd'];
+api.bind('t', cmdCtrl, function() {App.focusOrStart('iTerm');});
+api.bind('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
+api.bind('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
+api.bind('m', cmdCtrl , function() {App.focusOrStart('Slack');});
+api.bind('r', cmdCtrl , function() {App.focusOrStart('Rdio');});
+api.bind('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
+api.bind('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
+api.bind('a', cmdCtrl , function() {App.focusOrStart('Airmail');});
+api.bind('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});
+
