@@ -112,7 +112,8 @@ App.focusOrStart = function ( title ) {
 
   activeWindows = _(windows).reject(function(win) { return win.isWindowMinimized();});
   if (_.isEmpty(activeWindows)) {
-    api.alert(whyLook +" All windows minimized for " + title);
+    api.alert(whyLook + " All windows minimized for " + title);
+    api.launch(title)
     return;
   }
 
@@ -142,4 +143,5 @@ api.bind('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
 api.bind('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
 api.bind('a', cmdCtrl , function() {App.focusOrStart('Airmail');});
 api.bind('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});
+api.bind('s', cmdCtrl , function() {App.focusOrStart('Sunrise');});
 

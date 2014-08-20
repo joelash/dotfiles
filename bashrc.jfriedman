@@ -18,6 +18,8 @@ export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 #export EDITOR=vim
 export SVN_EDITOR=/usr/bin/vim
 
+export DOCKER_HOST=tcp://localhost:4243
+
 # prompt
 export YELLOW='\[\033[1;33m\]' # Yellow
 export WHITE='\[\033[1;37m\]' # White

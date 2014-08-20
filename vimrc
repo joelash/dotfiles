@@ -18,6 +18,12 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'muz/vim-gemfile'
 
+Bundle 'bling/vim-airline'
+
+" Clojure in Vim
+Bundle 'tpope/vim-fireplace'
+Bundle 'vim-scripts/paredit.vim'
+
 "call pathogen#incubate()
 "call pathogen#helptags()
 filetype plugin indent on
@@ -96,15 +102,18 @@ nnoremap <silent> <C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <S-Down> :set paste<CR>dd]p :set nopaste<CR>
 nnoremap <silent> <S-Up> :set paste<CR>ddk]P :set nopaste<CR>
 
+" split line at cursor without moving cursor
+nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
+
 " easy to source / edit this file
 map ,s :source ~/.vimrc<CR>
 map ,v :tabedit ~/.vimrc<CR>
 
 " Fuzzy Finder
-map <LocalLeader>n :FufFile **/<CR>                    " file
-map <LocalLeader>t :FufTag<CR>                         " tag
-map <LocalLeader>e :FufBuffer<CR>                      " buffer
-map <LocalLeader>r :FufRenewCache<CR>                  " renew finder cache shortcut
+" map <LocalLeader>n :FufFile **/<CR>                    " file
+" map <LocalLeader>t :FufTag<CR>                         " tag
+" map <LocalLeader>e :FufBuffer<CR>                      " buffer
+" map <LocalLeader>r :FufRenewCache<CR>                  " renew finder cache shortcut
 
 " NERDTree
 nmap <silent> <F2> :NERDTreeToggle<CR>                 " Make F2 open NERDTree
