@@ -62,7 +62,7 @@ alias start-redis='tname redis && redis-server /usr/local/etc/redis.conf'
 
 # rabbit
 alias start-rabbit='tname rabbit && rabbitmq-server'
-alias stop-rabbit="any rabbit | cut -d' ' -f4 | xargs kill"
+alias stop-rabbit="any rabbit | cut -d' ' -f5 | xargs kill"
 
 # elastic search
 alias start-elastic='tname elasticsearch && elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'
