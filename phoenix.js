@@ -136,12 +136,14 @@ api.bind('f', altCmd, fullScreen);
 var cmdCtrl = ['ctrl', 'cmd'];
 api.bind('t', cmdCtrl, function() {App.focusOrStart('iTerm');});
 api.bind('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
-api.bind('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
+//api.bind('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
 api.bind('m', cmdCtrl , function() {App.focusOrStart('Slack');});
 api.bind('r', cmdCtrl , function() {App.focusOrStart('Rdio');});
 api.bind('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
 api.bind('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
-api.bind('a', cmdCtrl , function() {App.focusOrStart('Airmail');});
+api.bind('a', cmdCtrl , function() {App.focusOrStart('Airmail Beta');});
 api.bind('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});
-api.bind('s', cmdCtrl , function() {App.focusOrStart('Sunrise');});
+api.bind('c', cmdCtrl , function() {App.focusOrStart('Sunrise');});
+api.bind('b', cmdCtrl , function() {App.focusOrStart('Mailbox (Beta)');});
+api.bind('f', cmdCtrl , function() {App.focusOrStart('Safari');});
 
