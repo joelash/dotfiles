@@ -7,7 +7,6 @@
 (package-require 'clojure-test-mode)
 (package-require 'clojurescript-mode)
 (package-require 'cider)
-(package-require 'ac-nrepl)
 (package-require 'clj-refactor)
 
 (require 'clojure-mode)
@@ -24,6 +23,7 @@
 ;; Stop the error buffer from popping up while working in buffers
 ;; other than the REPL
 (setq cider-popup-stacktraces nil)
+;(setq cider-show-error-buffer nil)
 
 ;(setq cider-popup-stacktraces t)
 (setq cider-repl-popup-stacktraces nil)
