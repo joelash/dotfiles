@@ -6,9 +6,14 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
-Bundle 'Valloric/YouCompleteMe'
+" completion
+Bundle "szw/vim-kompleter"
+" Bundle 'Valloric/YouCompleteMe'
+
+" Other
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
+Bundle 'rizzatti/greper.vim'
 Bundle 'ihacklog/tabular'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
@@ -20,18 +25,40 @@ Bundle 'muz/vim-gemfile'
 
 Bundle 'bling/vim-airline'
 
-" Clojure in Vim
-Bundle 'tpope/vim-fireplace'
-Bundle 'vim-scripts/paredit.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'sjl/gundo.vim'
 
-"call pathogen#incubate()
-"call pathogen#helptags()
+Bundle 'tpope/vim-surround'
+
+" Themes
+Bundle 'chriskempson/base16-vim'
+
+" Tmux Nav
+Bundle 'christoomey/vim-tmux-navigator'
+
+" Clojure in Vim
+Bundle 'guns/vim-clojure-static'
+Bundle 'tpope/vim-fireplace'
+"Bundle 'manicolosi/vim-fireplace'
+"Bundle 'vim-scripts/paredit.vim'
+Bundle 'guns/vim-sexp'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-sexp-mappings-for-regular-people'
+Bundle 'amdt/vim-niji'
+Bundle 'guns/vim-clojure-highlight'
+
 filetype plugin indent on
 
 let mapleader = ","                                  " leader
 
 set background=dark
-"colorscheme solarized
+let base16colorspace=256
+" colorscheme base16-default
+colorscheme base16-chalk
+let g:airline_theme='base16'
+
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 " vim setting
 set softtabstop=2
@@ -42,7 +69,6 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 set gfn=Inconsolata                                 " set default font
-"set gfn=Inconsolata-dz\ for\ Powerline              " set default font
 set incsearch                                       " show search as typing
 set hlsearch                                        " highlight search results
 set ignorecase                                      " case insensitive search
@@ -51,7 +77,6 @@ set smartcase                                       " ...unless there is a capit
 set hidden                                          " allow changing buffers without saving
 set wrap                                            " do not wrap a long line onto line below
 set number                                          " show line numbers
-"set lazyredraw
 set ruler                                           " show cursor position in status bar
 set autoread                                        " auto read updates to file from outside vim
 set pastetoggle=<F3>                                " pastetoggle
@@ -60,8 +85,11 @@ set backspace=2                                     " make backspace act normal 
 set showmatch                                       " show matching {} {} etc
 set matchtime=1
 
-set wildmode=list:longest                           " list completions, complete longest common
 set wildmenu                                        " better command completion
+set wildmode=list:longest                           " list completions, complete longest common
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip            " MacOSX/Linux wildignore for vim
+set wildignore+=*/target/*,*/out/*,.DS_Store
+
 set showcmd                                         " show commands as they are types
 set visualbell                                      " turn off auditory bell
 set autowrite                                       " auto-save current buffer when switching
@@ -73,12 +101,6 @@ set autoindent    " ditto
 set smarttab      " smarter tabbing
 
 set grepprg=git\ grep\ -n\ $*
-
-"set winwidth=200
-
-"set winheight=5
-"set winminheight=5
-"set winheight=999
 
 autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 
@@ -109,18 +131,12 @@ nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 map ,s :source ~/.vimrc<CR>
 map ,v :tabedit ~/.vimrc<CR>
 
-" Fuzzy Finder
-" map <LocalLeader>n :FufFile **/<CR>                    " file
-" map <LocalLeader>t :FufTag<CR>                         " tag
-" map <LocalLeader>e :FufBuffer<CR>                      " buffer
-" map <LocalLeader>r :FufRenewCache<CR>                  " renew finder cache shortcut
-
 " NERDTree
 nmap <silent> <F2> :NERDTreeToggle<CR>                 " Make F2 open NERDTree
 nmap <silent> <LocalLeader>l :NERDTreeFind<CR>         " Locate current file in NERDTree
 
 " TAGS
-map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>  " rebuild ctags
+map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --fields=+l<CR>  " rebuild ctags
 
 " map capital W and Q to lowecase
 nmap :W :w
@@ -138,6 +154,37 @@ augroup END
 "let g:Powerline_symbols = 'fancy'
 " call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
+" Clojure Commands
+let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let']
+let g:ycm_collect_identifiers_from_tags_files = 1
+nnoremap <silent> cq; :Eval<CR>
+nnoremap <silent> cq: cpp<CR>
+nnoremap <silent> cqa :%Eval<CR>
+nnoremap <silent> <leader>E :%Eval<CR>
+nnoremap <silent> <leader>R :%Eval<CR>:Eval (refresh)<CR>
+
+" Slurp right and left
+nmap <Leader>) ml>)==`l
+nmap <Leader>( ml<(==`l
+
+" Barf right and left
+
+nmap <Leader>> ml<)==`l
+nmap <Leader>< ml>(==`l
+
+" Clojure Android Commands
+command! DroidConnect Connect nrepl://localhost:9999
+nnoremap <leader>dc :DroidConnect<CR><CR>
+
+command! FrodoConnect Connect nrepl://localhost:9002
+command! SimpleBrepl Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :port 9001)
+
+" Paredit
+nnoremap <Leader>tp :call PareditToggle()<CR>
+
+" Gundo
+nnoremap <F5> :GundoToggle<CR>
+
 " statusline stuffs
 set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
@@ -148,11 +195,13 @@ syntax enable
 "set background=dark
 "colorscheme solarized
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux wildignore for vim
+" change localleader
+let maplocalleader = ","
 
 " ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 "let g:ctrlp_working_path_mode = 'a'
+let g:ctrlp_working_path_mode=0
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|\.bundle)$'
 let g:ctrlp_show_hidden = 1                                                       " show hidden files
 let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes']
@@ -189,7 +238,7 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 nmap <silent><Leader>A :grep <cword><CR>:botright copen<CR>
 
-command! -nargs=+ Grep :silent grep! <args> | botright copen
+" command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
 command! Tig !tig -- %
