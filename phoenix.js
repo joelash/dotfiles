@@ -135,7 +135,7 @@ api.bind('f', altCmd, fullScreen);
 
 var cmdCtrl = ['ctrl', 'cmd'];
 api.bind('t', cmdCtrl, function() {App.focusOrStart('iTerm');});
-api.bind('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
+//api.bind('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
 //api.bind('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
 api.bind('m', cmdCtrl , function() {App.focusOrStart('Slack');});
 api.bind('r', cmdCtrl , function() {App.focusOrStart('Rdio');});

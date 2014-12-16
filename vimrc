@@ -29,6 +29,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'sjl/gundo.vim'
 
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
 
 " Themes
 Bundle 'chriskempson/base16-vim'
@@ -117,12 +118,12 @@ nnoremap <CR> :nohlsearch<CR>
 nnoremap <Leader><Leader> <C-^>
 
 " Remap ctrl+j ctrl+k to insert blank lines without going to insert mode
-nnoremap <silent> <C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <silent> <C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+"nnoremap <silent> <C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+"nnoremap <silent> <C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " move lines
-nnoremap <silent> <S-Down> :set paste<CR>dd]p :set nopaste<CR>
-nnoremap <silent> <S-Up> :set paste<CR>ddk]P :set nopaste<CR>
+"nnoremap <silent> <S-Down> :set paste<CR>dd]p :set nopaste<CR>
+"nnoremap <silent> <S-Up> :set paste<CR>ddk]P :set nopaste<CR>
 
 " split line at cursor without moving cursor
 nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
@@ -155,7 +156,7 @@ augroup END
 " call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " Clojure Commands
-let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let']
+let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop']
 let g:ycm_collect_identifiers_from_tags_files = 1
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
@@ -211,8 +212,8 @@ nmap <silent> <Leader><space> :CtrlP<CR>
 nmap <silent> <c-n> :CtrlP<CR>
 
 " quicklist navigation
-nnoremap [q :cp<CR>
-nnoremap ]q :cn<CR>
+"nnoremap [q :cp<CR>
+"nnoremap ]q :cn<CR>
 
 " Tabularize
 nmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
@@ -238,7 +239,7 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 nmap <silent><Leader>A :grep <cword><CR>:botright copen<CR>
 
-" command! -nargs=+ Grep :silent grep! <args> | botright copen
+"command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
 command! Tig !tig -- %
