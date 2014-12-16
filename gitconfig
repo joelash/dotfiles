@@ -51,3 +51,5 @@
 	keepBackup = true
 [merge]
 	tool = Kaleidoscope
+[pull]
+	rebase = true
