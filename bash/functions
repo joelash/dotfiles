@@ -22,13 +22,19 @@ function _nginx {
     outpace)
       nginx -s stop
       unlink /usr/local/etc/nginx/nginx.conf
-      ln -s /src/outpace/starwood/customer_mvp/nginx_config/dev.nginx.conf /usr/local/etc/nginx/nginx.conf
+      ln -s ~/src/outpace/starwood/customer_mvp/nginx_config/dev.nginx.conf /usr/local/etc/nginx/nginx.conf
       nginx
       ;;
     acl)
       nginx -s stop
       unlink /usr/local/etc/nginx/nginx.conf
-      ln -s /src/bitbucket/aclaimant/nginx/dev.nginx.conf /usr/local/etc/nginx/nginx.conf
+      ln -s ~/src/bitbucket/aclaimant/nginx/dev.nginx.conf /usr/local/etc/nginx/nginx.conf
+      nginx
+      ;;
+    default)
+      nginx -s stop
+      unlink /usr/local/etc/nginx/nginx.conf
+      ln -s /usr/local/etc/nginx/nginx.conf.base /usr/local/etc/nginx/nginx.conf
       nginx
       ;;
     *)
@@ -55,7 +61,10 @@ function parse_git_dirty {
 }
 # display
 function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
+  local branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/")
+  if [[ -n "${branch}" ]]; then
+    echo " ${branch}"
+  fi
 }
 
 function __parse_git_branch__ {
@@ -75,16 +84,54 @@ function parse_rvm_gemset {
   echo $GEM_HOME | sed 's/.*\///'
 }
 
-function submit-review {
-  local branch=$(__current_git_branch_easy__)
-  #local tracking_branch=$(__branch_current_is_tracking__)
-  local tracking_branch='develop'
-  local extra=""
-  if [ $# -gt 0 ]; then
-    extra=" -r $1"
-  fi
-  local review_cmd="post-review --parent=$tracking_branch --branch=$branch --tracking-branch=origin/$tracking_branch --target-groups=Tech -o$extra"
-  echo "$review_cmd"
-  $review_cmd
+# ok so I want to capture last SHA I saw at night so I can diff them in the morning
+function cd-git-root {
+  cd "$(git rev-parse --show-toplevel)"
 }
 
+function top-commit-sha {
+  echo "$(git log --oneline | head -1 | cut -d ' ' -f 1)"
+}
+
+function pull-with-diff {
+  local last="$(top-commit-sha)"
+  git pull
+  local current="$(top-commit-sha)"
+  echo "Difftool of $last to $current"
+  git difftool $last $current
+}
+# From: http://www.reddit.com/r/zsh/comments/vopro/truncated_path_in_zsh_prompt/c5ecfb3
+function collapse_pwd {
+  echo $(pwd | sed -e "s,^$HOME,~,")
+}
+
+function truncated_pwd() {
+  local n=$1 # n = number of directories to show in full (n = 3, /a/b/c/dee/ee/eff)
+  local path=$(collapse_pwd)
+
+  # split our path on /
+  IFS=/ read -a dirs <<< "$path"
+  local dirs_length=${#dirs[@]}
+
+  local result=""
+  local max=$(($dirs_length - $n))
+  for (( i = 0; i < $dirs_length; i++ )); do
+    step="${dirs[$i]}"
+
+    local intermediate="${step:0:1}"
+    if [[ $i -ge $max ]]; then
+      intermediate="${step}"
+    elif [[ "$intermediate" = "." ]]; then
+      intermediate="${step:0:2}"
+    fi
+
+    if [[ -z "$result" ]] && [[ "$intermediate" = "~" ]]; then
+      result="$intermediate"
+    elif [[ -n "$step" ]]; then
+      result="$result/$intermediate"
+    fi
+
+  done
+
+  echo $result
+}
