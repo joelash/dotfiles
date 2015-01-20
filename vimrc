@@ -166,13 +166,18 @@ nnoremap <silent> <leader>E :%Eval<CR>
 nnoremap <silent> <leader>R :%Eval<CR>:Eval (refresh)<CR>
 
 " Slurp right and left
-nmap <Leader>) ml>)==`l
-nmap <Leader>( ml<(==`l
+nmap <silent> <Plug>SlurpRight ml>)%==`l:call repeat#set("\<Plug>SlurpRight", v:count)<CR>
+nmap <Leader>) <Plug>SlurpRight
+
+nmap <silent> <Plug>SlurpLeft ml<(%==`l:call repeat#set("\<Plug>SlurpLeft", v:count)<CR>
+nmap <Leader>( <Plug>SlurpLeft
 
 " Barf right and left
+nmap <silent> <Plug>BarfRight ml)ma<)`a==`l:call repeat#set("\<Plug>BarfRight", v:count)<CR>
+nmap <Leader>< <Plug>BarfRight
 
-nmap <Leader>> ml<)==`l
-nmap <Leader>< ml>(==`l
+nmap <silent> <Plug>BarfLeft ml>(`l:call repeat#set("\<Plug>BarfLeft", v:count)<CR>
+nmap <Leader>> <Plug>BarfLeft
 
 " Clojure Android Commands
 command! DroidConnect Connect nrepl://localhost:9999
