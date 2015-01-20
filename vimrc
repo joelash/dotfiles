@@ -181,9 +181,6 @@ nnoremap <leader>dc :DroidConnect<CR><CR>
 command! FrodoConnect Connect nrepl://localhost:9002
 command! SimpleBrepl Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :port 9001)
 
-" Paredit
-nnoremap <Leader>tp :call PareditToggle()<CR>
-
 " Gundo
 nnoremap <F5> :GundoToggle<CR>
 
