@@ -22,6 +22,7 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'muz/vim-gemfile'
+Bundle 'tmhedberg/matchit'
 
 Bundle 'bling/vim-airline'
 
