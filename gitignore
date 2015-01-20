@@ -13,7 +13,9 @@ xcuserdata/
 .bundle/
 .bin/
 
+# Random personal shit
 personal_tasks/
+sketch_assets/
 
 .env
 
@@ -24,3 +26,5 @@ personal_tasks/
 .agignore
 
 .slender
+
+.sha-captures
