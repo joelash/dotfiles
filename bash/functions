@@ -17,6 +17,11 @@ function st {
   fi
 }
 
+function tmux {
+  tName $3
+  command tmux $@
+}
+
 function _nginx {
   case $1 in
     outpace)
