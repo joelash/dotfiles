@@ -7,7 +7,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " completion
-Bundle "szw/vim-kompleter"
+" Bundle "szw/vim-kompleter"
 " Bundle 'Valloric/YouCompleteMe'
 
 " Other
@@ -32,6 +32,9 @@ Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 
+" Angular
+Bundle 'burnettk/vim-angular'
+
 " Themes
 Bundle 'chriskempson/base16-vim'
 
@@ -48,6 +51,13 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-sexp-mappings-for-regular-people'
 Bundle 'amdt/vim-niji'
 Bundle 'guns/vim-clojure-highlight'
+
+" vim syntax checker
+Bundle 'scrooloose/syntastic'
+" clojure formatting plugin
+Bundle 'venantius/vim-cljfmt'
+"clojure lint
+"Bundle 'venantius/vim-eastwood'
 
 filetype plugin indent on
 
@@ -88,7 +98,7 @@ set showmatch                                       " show matching {} {} etc
 set matchtime=1
 
 set wildmenu                                        " better command completion
-set wildmode=list:longest                           " list completions, complete longest common
+set wildmode=longest,full                           " list completions, complete longest common
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip            " MacOSX/Linux wildignore for vim
 set wildignore+=*/target/*,*/out/*,.DS_Store
 
@@ -157,7 +167,7 @@ augroup END
 " call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " Clojure Commands
-let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop']
+let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop', '^at-media', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'context']
 let g:ycm_collect_identifiers_from_tags_files = 1
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
@@ -213,6 +223,20 @@ let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes']
                         "\ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 nmap <silent> <Leader><space> :CtrlP<CR>
 nmap <silent> <c-n> :CtrlP<CR>
+
+" Clojure fmt autosave off
+let g:clj_fmt_autosave = 0
+
+" Syntastic Settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 
 " quicklist navigation
 "nnoremap [q :cp<CR>
