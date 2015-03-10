@@ -74,3 +74,6 @@ alias giggity='cd /src/bitbucket/gigfunder && tname gigfunder'
 alias dev-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security'
 
 alias start_pair='ssh -R1337:localhost:22 ubuntu@pair.joelafriedman.com'
+
+# outpace
+alias dauth='derp authenticate && source $(derp envfile)'
