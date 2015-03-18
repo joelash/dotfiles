@@ -139,6 +139,9 @@ nnoremap <Leader><Leader> <C-^>
 " split line at cursor without moving cursor
 nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 
+" magic from @manicolosi
+nnoremap <leader>p ya(%a<CR><esc>p
+
 " easy to source / edit this file
 map ,s :source ~/.vimrc<CR>
 map ,v :tabedit ~/.vimrc<CR>
