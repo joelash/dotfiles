@@ -3,6 +3,7 @@
                   ;[jonase/eastwood "0.2.1"]
                   [lein-exec "0.3.1"]
                   [lein-marginalia "0.7.1"]
+                  [lein-pdo "0.1.1"]
                 ;_[lein-cljfmt "0.1.6"]
                   [org.clojars.weavejester/lein-clojars "0.8.0"]
                 ;_[venantius/ultra "0.1.9"]
