@@ -273,6 +273,13 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 nmap <silent><Leader>A :grep <cword><CR>:botright copen<CR>
 
+function! NReplConnectFn(port)
+  exec "Connect nrepl://localhost:".a:port
+endfunction
+
+command! -nargs=1 NReplConnect call NReplConnectFn(<q-args>)
+command! -nargs=1 ConnectRepl call NReplConnectFn(<q-args>)
+
 "command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
