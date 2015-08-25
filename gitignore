@@ -28,3 +28,6 @@ sketch_assets/
 .slender
 
 .sha-captures
+
+# virtual env folders
+*.virtualenv/
