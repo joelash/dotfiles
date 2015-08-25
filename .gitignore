@@ -20,3 +20,5 @@ ngrok
 lein/credentials.clj
 
 lein/credentials.clj.gpg
+
+lein/repl-history
