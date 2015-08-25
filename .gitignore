@@ -16,3 +16,7 @@ vim/view/*
 bash/private
 bash/outpace
 ngrok
+
+lein/credentials.clj
+
+lein/credentials.clj.gpg
