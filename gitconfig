@@ -26,7 +26,7 @@
   dictool = difftool --cached
   dtc = difftool --cached
   grep = grep -n --color
-  push = push origin HEAD
+  pushh = push origin HEAD
 [branch]
   autosetupmerge = always
 [core]
