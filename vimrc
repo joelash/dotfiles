@@ -6,6 +6,9 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+" syntax files
+Bundle 'sheerun/vim-polyglot'
+
 " completion
 " Bundle "szw/vim-kompleter"
 " Bundle 'Valloric/YouCompleteMe'
