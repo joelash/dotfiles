@@ -59,6 +59,9 @@ Bundle 'venantius/vim-cljfmt'
 "clojure lint
 "Bundle 'venantius/vim-eastwood'
 
+" Show colors
+Bundle "gorodinskiy/vim-coloresque"
+
 filetype plugin indent on
 
 let mapleader = ","                                  " leader
