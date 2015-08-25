@@ -225,7 +225,7 @@ let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes']
 "let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                         "\ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 nmap <silent> <Leader><space> :CtrlP<CR>
-nmap <silent> <c-n> :CtrlP<CR>
+"nmap <silent> <c-n> :CtrlP<CR>
 
 " Clojure fmt autosave off
 let g:clj_fmt_autosave = 0
