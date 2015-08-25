@@ -11,6 +11,7 @@ bundle/
 
 vim/git/*
 vim/colors/*
+vim/view/*
 
 bash/private
 bash/outpace
