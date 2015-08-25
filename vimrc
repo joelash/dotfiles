@@ -170,7 +170,7 @@ augroup END
 " call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " Clojure Commands
-let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop', '^at-media', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'context']
+let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop', '^at-media', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'context', 'match']
 let g:ycm_collect_identifiers_from_tags_files = 1
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
