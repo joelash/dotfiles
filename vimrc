@@ -32,6 +32,11 @@ Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 
+" ReactJs & JSX
+Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
+Bundle 'mtscout6/vim-cjsx'
+
 " Angular
 Bundle 'burnettk/vim-angular'
 
