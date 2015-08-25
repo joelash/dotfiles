@@ -9,6 +9,10 @@ alias touche='touch'
 
 alias grep='grep --color'
 
+# local ip
+alias hostip='ifconfig | grep broadcast | head -1 | cut -d'\'' '\'' -f2'
+
+
 # hub/git
 alias git='hub'
 
@@ -62,7 +66,7 @@ alias start-redis='tname redis && redis-server /usr/local/etc/redis.conf'
 
 # rabbit
 alias start-rabbit='tname rabbit && rabbitmq-server'
-alias stop-rabbit="any rabbit | cut -d' ' -f5 | xargs kill"
+alias stop-rabbit="ps -ef | grep rabbit | grep daemon | awk '{print \$2}' | xargs kill"
 
 # elastic search
 alias start-elastic='tname elasticsearch && elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'
