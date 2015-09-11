@@ -91,7 +91,8 @@ set expandtab
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
-set gfn=Inconsolata                                 " set default font
+"set gfn=Inconsolata                                 " set default font
+set gfn=Hack                                        " set default font
 set incsearch                                       " show search as typing
 set hlsearch                                        " highlight search results
 set ignorecase                                      " case insensitive search
