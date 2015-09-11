@@ -178,8 +178,8 @@ augroup myfiletypes
 augroup END
 
 " save and reload folding
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+"autocmd BufWinLeave *.* mkview
+"autocmd BufWinEnter *.* silent loadview
 
 " vim-powerline
 "let g:Powerline_symbols = 'fancy'
