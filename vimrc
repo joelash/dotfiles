@@ -293,8 +293,13 @@ function! NReplConnectFn(port)
   exec "Connect nrepl://localhost:".a:port
 endfunction
 
+function! DockerReplConnectFn(port)
+  exec "Connect nrepl://docker.dev:".a:port
+endfunction
+
 command! -nargs=1 NReplConnect call NReplConnectFn(<q-args>)
 command! -nargs=1 ConnectRepl call NReplConnectFn(<q-args>)
+command! -nargs=1 DConnect call DockerReplConnectFn(<q-args>)
 
 "command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
