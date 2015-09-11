@@ -51,8 +51,8 @@ Bundle 'christoomey/vim-tmux-navigator'
 
 " Clojure in Vim
 Bundle 'guns/vim-clojure-static'
-Bundle 'tpope/vim-fireplace'
-"Bundle 'manicolosi/vim-fireplace'
+"Bundle 'tpope/vim-fireplace'
+Bundle 'christoph-frick/vim-fireplace'
 "Bundle 'vim-scripts/paredit.vim'
 Bundle 'guns/vim-sexp'
 Bundle 'tpope/vim-repeat'
@@ -78,6 +78,7 @@ set background=dark
 let base16colorspace=256
 " colorscheme base16-default
 colorscheme base16-chalk
+colorscheme base16-monokai
 let g:airline_theme='base16'
 
 let g:airline_left_sep=''
@@ -300,6 +301,7 @@ endfunction
 command! -nargs=1 NReplConnect call NReplConnectFn(<q-args>)
 command! -nargs=1 ConnectRepl call NReplConnectFn(<q-args>)
 command! -nargs=1 DConnect call DockerReplConnectFn(<q-args>)
+command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
 
 "command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
@@ -307,3 +309,4 @@ command! Ftabs %s/<C-I>/  /g
 command! Tig !tig -- %
 command! Ann !git annotate %
 command! Diff !git dt -- %
+command! Pbcopy !cat % | pbcopy
