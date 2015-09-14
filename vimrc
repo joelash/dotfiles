@@ -181,9 +181,6 @@ augroup myfiletypes
   autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
 augroup END
 
-" save and reload folding
-"autocmd BufWinLeave *.* mkview
-"autocmd BufWinEnter *.* silent loadview
 
 " vim-powerline
 "let g:Powerline_symbols = 'fancy'
