@@ -309,6 +309,9 @@ command! -nargs=1 ConnectRepl call NReplConnectFn(<q-args>)
 command! -nargs=1 DConnect call DockerReplConnectFn(<q-args>)
 command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
 
+" connect to boot cljs-repl
+nmap <leader>cb :Piggieback (adzerk.boot-cljs-repl/repl-env)<CR><CR>
+
 "command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
