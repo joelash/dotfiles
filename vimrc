@@ -293,6 +293,9 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 nmap <silent><Leader>A :grep <cword><CR>:botright copen<CR>
 
+" uuidgen
+imap <C-J>d <C-r>=substitute(system("uuidgen"), '.$', '', 'g')<CR>
+
 function! NReplConnectFn(port)
   exec "Connect nrepl://localhost:".a:port
 endfunction
