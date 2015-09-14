@@ -60,6 +60,9 @@ Bundle 'tpope/vim-sexp-mappings-for-regular-people'
 Bundle 'amdt/vim-niji'
 Bundle 'guns/vim-clojure-highlight'
 
+" color the vimline same as vimairline
+Bundle 'manicolosi/vim-airline-colornum'
+
 " vim syntax checker
 Bundle 'scrooloose/syntastic'
 " clojure formatting plugin
