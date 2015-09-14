@@ -185,9 +185,6 @@ augroup END
 autocmd BufRead,BufNewFile *.cljx setfiletype clojure
 autocmd BufRead,BufNewFile build.boot setfiletype clojure
 
-" vim-powerline
-"let g:Powerline_symbols = 'fancy'
-" call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " Clojure Commands
 let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop', '^at-media', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'context', 'match']
