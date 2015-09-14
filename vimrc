@@ -181,6 +181,9 @@ augroup myfiletypes
   autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
 augroup END
 
+" filetype on boot and cljx
+autocmd BufRead,BufNewFile *.cljx setfiletype clojure
+autocmd BufRead,BufNewFile build.boot setfiletype clojure
 
 " vim-powerline
 "let g:Powerline_symbols = 'fancy'
