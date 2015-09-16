@@ -301,9 +301,14 @@ function! DockerReplConnectFn(port)
   exec "Connect nrepl://docker.dev:".a:port
 endfunction
 
+function! AclReplConnectFn(port)
+  exec "Connect nrepl://local.aclaimant.com:".a:port
+endfunction
+
 command! -nargs=1 NReplConnect call NReplConnectFn(<q-args>)
 command! -nargs=1 ConnectRepl call NReplConnectFn(<q-args>)
 command! -nargs=1 DConnect call DockerReplConnectFn(<q-args>)
+command! -nargs=1 AConnect call AclReplConnectFn(<q-args>)
 command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
 
 " connect to boot cljs-repl
