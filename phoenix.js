@@ -5,6 +5,7 @@
 lookOfDisapproval="ಠ_ಠ";
 rageOfDongers="ヽ༼ ಠ益ಠ ༽ﾉ";
 whyLook="ლ(ಠ_ಠლ)";
+tableFlip="(╯°□°)╯︵ ┻━┻"
 
 // Adjust window size
 
@@ -34,6 +35,19 @@ function fullScreen() {
   var win = Window.focusedWindow();
   var screenFrame = Window.focusedWindow().screen().frameWithoutDockOrMenu();
   win.setFrame(screenFrame);
+}
+
+function fullHeight() {
+  var win = Window.focusedWindow();
+  var frame = win.frame();
+  var screenFrame = Window.focusedWindow().screen().frameWithoutDockOrMenu();
+  if ((frame.height + 15) >= screenFrame.height) {
+    frame.height = 2 * (screenFrame.height / 3);
+  } else {
+    frame.y = screenFrame.y;
+    frame.height = screenFrame.height;
+  }
+  win.setFrame(frame);
 }
 
 
@@ -123,13 +137,18 @@ App.focusOrStart = function ( title ) {
 };
 
 
-var mash = ['alt', 'cmd', 'ctrl'];
+var mash = ['alt', 'ctrl'];
 api.bind('left', mash, leftOneMonitor);
 api.bind('right', mash, rightOneMonitor);
+
+//var mash = ['alt', 'cmd', 'ctrl'];
+//api.bind('left', mash, leftOneMonitor);
+//api.bind('right', mash, rightOneMonitor);
 
 var altCmd = ['alt', 'cmd'];
 api.bind('left', altCmd, function() { toLeft(1, 2);});
 api.bind('right', altCmd, function() { toRight(1, 2);});
+api.bind('down', altCmd, fullHeight);
 api.bind('f', altCmd, fullScreen);
 
 
@@ -138,12 +157,10 @@ api.bind('t', cmdCtrl, function() {App.focusOrStart('iTerm');});
 //api.bind('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
 //api.bind('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
 api.bind('m', cmdCtrl , function() {App.focusOrStart('Slack');});
-api.bind('r', cmdCtrl , function() {App.focusOrStart('Rdio');});
 api.bind('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
 api.bind('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
-api.bind('a', cmdCtrl , function() {App.focusOrStart('Airmail Beta');});
 api.bind('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});
-api.bind('c', cmdCtrl , function() {App.focusOrStart('Sunrise');});
+api.bind('c', cmdCtrl , function() {App.focusOrStart('Fantastical 2');});
 api.bind('b', cmdCtrl , function() {App.focusOrStart('Mailbox (Beta)');});
 api.bind('f', cmdCtrl , function() {App.focusOrStart('Safari');});
 
