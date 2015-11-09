@@ -77,6 +77,16 @@ filetype plugin indent on
 
 let mapleader = ","                                  " leader
 
+" move the swp files
+set backup
+set swapfile
+set backupdir=~/.vim/swp
+set directory=~/.vim/swp
+
+" undo directory
+set undofile
+set undodir=~/.vim/undo
+
 set background=dark
 let base16colorspace=256
 " colorscheme base16-default
@@ -86,6 +96,10 @@ let g:airline_theme='base16'
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+"let g:airline_section_b = '[%{fnamemodify(getcwd(),":t")}]'
+
+" current direction on statusline
 
 " vim setting
 set softtabstop=2
@@ -192,8 +206,14 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
 nnoremap <silent> cqa :%Eval<CR>
+nnoremap <silent> crr :Require!<CR>:RunTests<CR>:copen<CR>
 nnoremap <silent> <leader>E :%Eval<CR>
 nnoremap <silent> <leader>R :%Eval<CR>:Eval (refresh)<CR>
+
+nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
+nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
+nmap <Leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)``
+nmap <Leader>E :%Eval<CR>
 
 " Slurp right and left
 nmap <silent> <Plug>SlurpRight ml>)%==`l:call repeat#set("\<Plug>SlurpRight", v:count)<CR>
@@ -282,7 +302,7 @@ vmap <Leader>a, :Tabularize /,\zs<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
-" close all the hings
+" close all the things
 nmap <silent> <C-w>a :ccl<CR>:lcl<CR>:pc<CR>
 
 " search Dash for word under cursor
@@ -312,7 +332,7 @@ command! -nargs=1 AConnect call AclReplConnectFn(<q-args>)
 command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
 
 " connect to boot cljs-repl
-nmap <leader>cb :Piggieback (adzerk.boot-cljs-repl/repl-env)<CR><CR>
+nmap <leader>bb :Piggieback (adzerk.boot-cljs-repl/repl-env)<CR><CR>
 
 "command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
@@ -321,3 +341,28 @@ command! Tig !tig -- %
 command! Ann !git annotate %
 command! Diff !git dt -- %
 command! Pbcopy !cat % | pbcopy
+
+" go to paste mode automatically on paste
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+" end go to auto paste mode
