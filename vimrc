@@ -93,7 +93,7 @@ set undodir=~/.vim/undo
 set background=dark
 let base16colorspace=256
 " colorscheme base16-default
-colorscheme base16-chalk
+" colorscheme base16-chalk
 colorscheme base16-monokai
 let g:airline_theme='base16'
 
@@ -202,7 +202,6 @@ augroup END
 autocmd BufRead,BufNewFile *.cljx setfiletype clojure
 autocmd BufRead,BufNewFile build.boot setfiletype clojure
 
-
 " Clojure Commands
 let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop', '^at-media', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'context', 'match']
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -247,10 +246,6 @@ set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
-" solarized color
-syntax enable
-"set background=dark
-"colorscheme solarized
 
 " change localleader
 let maplocalleader = ","
