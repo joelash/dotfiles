@@ -246,6 +246,8 @@ set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
+" Breaks color theme for CtrlP in airline...?
+hi normal ctermbg=none
 
 " change localleader
 let maplocalleader = ","
