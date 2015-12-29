@@ -13,6 +13,9 @@ Bundle 'sheerun/vim-polyglot'
 " Bundle "szw/vim-kompleter"
 " Bundle 'Valloric/YouCompleteMe'
 
+"nvim node-host
+"Bundle 'neovim/node-host'
+
 " Other
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
@@ -56,7 +59,6 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'guns/vim-clojure-static'
 "Bundle 'tpope/vim-fireplace'
 Bundle 'christoph-frick/vim-fireplace'
-"Bundle 'vim-scripts/paredit.vim'
 Bundle 'guns/vim-sexp'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-sexp-mappings-for-regular-people'
@@ -176,7 +178,7 @@ nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 nnoremap <leader>p ya(%a<CR><esc>p
 
 " easy to source / edit this file
-map ,s :source ~/.vimrc<CR>
+map ,S :source ~/.vimrc<CR>
 map ,v :tabedit ~/.vimrc<CR>
 
 " NERDTree
@@ -203,7 +205,7 @@ autocmd BufRead,BufNewFile *.cljx setfiletype clojure
 autocmd BufRead,BufNewFile build.boot setfiletype clojure
 
 " Clojure Commands
-let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop', '^at-media', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'context', 'match']
+let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match']
 let g:ycm_collect_identifiers_from_tags_files = 1
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
@@ -211,6 +213,9 @@ nnoremap <silent> cqa :%Eval<CR>
 nnoremap <silent> crr :Require!<CR>:RunTests<CR>:copen<CR>
 nnoremap <silent> <leader>E :%Eval<CR>
 nnoremap <silent> <leader>R :%Eval<CR>:Eval (refresh)<CR>
+
+" Sort namespaces in (:require)
+nmap <leader>s mzgg/:require<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ`z
 
 nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
 nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
