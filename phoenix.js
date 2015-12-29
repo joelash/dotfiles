@@ -37,6 +37,35 @@ function fullScreen() {
   win.setFrame(screenFrame);
 }
 
+function nearRightEdge() {
+  var win = Window.focusedWindow();
+  var frame = win.frame();
+  var screenFrame = win.screen().frameWithoutDockOrMenu();
+  return (frame.x + frame.width + 15) >= screenFrame.width;
+}
+
+function shrinkRight() {
+  var win = Window.focusedWindow();
+  var frame = win.frame();
+  var screenFrame = win.screen().frameWithoutDockOrMenu();
+  var quarterScreen = (screenFrame.width / 4.0);
+  if (frame.width > quarterScreen) {
+    frame.width = frame.width - quarterScreen;
+    win.setFrame(frame);
+  }
+}
+
+function expandRight() {
+  var win = Window.focusedWindow();
+  var frame = win.frame();
+  var screenFrame = win.screen().frameWithoutDockOrMenu();
+  var quarterScreen = (screenFrame.width / 4.0);
+  if (!nearRightEdge()) {
+    frame.width = frame.width + quarterScreen;
+    win.setFrame(frame);
+  }
+}
+
 function fullHeight() {
   var win = Window.focusedWindow();
   var frame = win.frame();
@@ -141,9 +170,9 @@ var mash = ['alt', 'ctrl'];
 api.bind('left', mash, leftOneMonitor);
 api.bind('right', mash, rightOneMonitor);
 
-//var mash = ['alt', 'cmd', 'ctrl'];
-//api.bind('left', mash, leftOneMonitor);
-//api.bind('right', mash, rightOneMonitor);
+var mash = ['alt', 'cmd', 'ctrl'];
+api.bind('left', mash, shrinkRight);
+api.bind('right', mash, expandRight);
 
 var altCmd = ['alt', 'cmd'];
 api.bind('left', altCmd, function() { toLeft(1, 2);});
