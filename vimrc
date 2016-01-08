@@ -71,6 +71,10 @@ Bundle 'manicolosi/vim-airline-colornum'
 " vim syntax checker
 Bundle 'scrooloose/syntastic'
 
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_always_populate_loc_list = 1
+
 " tab names
 Plugin 'manicolosi/taboo.vim'
 
