@@ -179,7 +179,7 @@ nnoremap <leader>p ya(%a<CR><esc>p
 
 " easy to source / edit this file
 map ,S :source ~/.vimrc<CR>
-map ,v :tabedit ~/.vimrc<CR>
+map <silent> ,v :tabedit ~/.vimrc<CR>:lcd ~/src/github/dotfiles/mine<CR>
 
 " NERDTree
 nmap <silent> <F2> :NERDTreeToggle<CR>                 " Make F2 open NERDTree
