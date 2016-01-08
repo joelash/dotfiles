@@ -70,6 +70,12 @@ Bundle 'manicolosi/vim-airline-colornum'
 
 " vim syntax checker
 Bundle 'scrooloose/syntastic'
+
+" tab names
+Plugin 'manicolosi/taboo.vim'
+
+let g:taboo_tab_format = "%N. %P%m "
+
 " clojure formatting plugin
 Bundle 'venantius/vim-cljfmt'
 "clojure lint
