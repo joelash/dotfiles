@@ -16,7 +16,7 @@ function _find_up() {
   popd 2>&1 > /dev/null
 }
 
-function _make() {
+function _find_up_make() {
   makefile=$(_find_up Makefile)
 
   if [ -z "$makefile" ]; then
@@ -26,5 +26,4 @@ function _make() {
   make -f $makefile "$@"
 }
 
-alias m="_make"
-
+alias m="_find_up_make"
