@@ -230,7 +230,7 @@ nnoremap <silent> <leader>E :%Eval<CR>
 nnoremap <silent> <leader>R :%Eval<CR>:Eval (refresh)<CR>
 
 " Sort namespaces in (:require)
-nmap <leader>s mzgg/:require<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ`z
+nmap <leader>s mzgg/:require<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ:nohl<CR>`z
 
 nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
 nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
