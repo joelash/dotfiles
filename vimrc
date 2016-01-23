@@ -78,7 +78,12 @@ let g:syntastic_always_populate_loc_list = 1
 " tab names
 Plugin 'manicolosi/taboo.vim'
 
-let g:taboo_tab_format = "%N. %P%m "
+let g:taboo_modified_tab_flag = "‡"
+let g:taboo_tab_format = "[%N. %P%m] "
+
+" taboo reset-tab-names
+nmap <silent> <C-J>f :let g:taboo_tab_format="[%N. %f%m] "<CR>:TabooReset<CR>
+nmap <silent> <C-J>d :let g:taboo_tab_format="[%N. %P%m] "<CR>:TabooReset<CR>
 
 " clojure formatting plugin
 Bundle 'venantius/vim-cljfmt'
