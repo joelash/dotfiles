@@ -31,3 +31,5 @@ sketch_assets/
 
 # virtual env folders
 *.virtualenv/
+
+Dockerfile.ignored
