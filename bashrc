@@ -21,7 +21,7 @@ export PATH=$BREW_SBIN:$BREW_HOME:$PATH
 
 export APP_ENV=development
 
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+export EDITOR=vim
 export SVN_EDITOR=/usr/bin/vim
 
 # boot2docker

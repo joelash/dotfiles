@@ -33,7 +33,8 @@ Bundle 'tmhedberg/matchit'
 " Ctrlp extensions
 Bundle 'naquad/ctrlp-digraphs.vim'
 
-Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 
 Bundle 'tpope/vim-fugitive'
 Bundle 'sjl/gundo.vim'

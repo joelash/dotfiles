@@ -3,7 +3,7 @@ alias ls='ls -p'
 alias la='ls -aF'
 alias ll='ls -laFh'
 alias rbash='. ~/.bash_profile'
-alias edit_bashrc='$EDITOR ~/.bashrc; source ~/.bashrc'
+alias edit_bashrc='vim ~/.bashrc; source ~/.bashrc'
 
 alias touche='touch'
 
@@ -27,7 +27,7 @@ alias e='/Applications/Emacs.app/Contents/MacOS/Emacs'
 
 
 # VIM
-alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+#alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
 alias mnerd='mvim -c NERDTree'
 alias nerd='vim -c NERDTree'
 alias clean-swaps='find ./ -type f -name "\.*sw[klmnop]" -delete'
