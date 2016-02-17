@@ -179,8 +179,8 @@ nnoremap <CR> :nohlsearch<CR>
 nnoremap <Leader><Leader> <C-^>
 
 " Remap ctrl+j ctrl+k to insert blank lines without going to insert mode
-"nnoremap <silent> <C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-"nnoremap <silent> <C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <silent> <leader>J :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent> <leader>K :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " move lines
 "nnoremap <silent> <S-Down> :set paste<CR>dd]p :set nopaste<CR>
@@ -230,7 +230,7 @@ nnoremap <silent> <leader>E :%Eval<CR>
 nnoremap <silent> <leader>R :%Eval<CR>:Eval (refresh)<CR>
 
 " Sort namespaces in (:require)
-nmap <leader>s mzgg/:require<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ:nohl<CR>`z
+nmap <leader>s mzgg/:require$<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ:nohl<CR>`z
 
 nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
 nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
