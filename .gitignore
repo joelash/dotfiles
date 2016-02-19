@@ -24,3 +24,6 @@ lein/credentials.clj
 lein/credentials.clj.gpg
 
 lein/repl-history
+
+tmux/resurrect
+tmux/plugins
