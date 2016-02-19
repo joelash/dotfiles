@@ -117,8 +117,20 @@ let g:airline_theme='base16'
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline#extensions#taboo#enabled = 1
 
 "let g:airline_section_b = '[%{fnamemodify(getcwd(),":t")}]'
+function! BranchWithPairs(branch_name)
+  let initials_raw=system("git config --get user.initials")
+  let initials= substitute(initials_raw, '\%x00', '', '')
+  let initials_str = ' [' . initials . ']'
+  if empty(initials)
+    let initials_str = ''
+  end
+  return a:branch_name . initials_str
+endfunction
+let g:airline#extensions#branch#format = 'BranchWithPairs'
+
 
 " current direction on statusline
 
