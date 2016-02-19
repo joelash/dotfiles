@@ -2,17 +2,17 @@
 
 // FUN!
 
-lookOfDisapproval="ಠ_ಠ";
-rageOfDongers="ヽ༼ ಠ益ಠ ༽ﾉ";
-whyLook="ლ(ಠ_ಠლ)";
-tableFlip="(╯°□°)╯︵ ┻━┻"
+var lookOfDisapproval="ಠ_ಠ";
+var rageOfDongers="ヽ༼ ಠ益ಠ ༽ﾉ";
+var whyLook="ლ(ಠ_ಠლ)";
+var tableFlip="(╯°□°)╯︵ ┻━┻";
 
 // Adjust window size
 
 function toLeft(fillCols, maxCols) {
   var win = Window.focusedWindow();
   var frame = win.frame();
-  var screenFrame = win.screen().frameWithoutDockOrMenu();
+  var screenFrame = win.screen().visibleFrameInRectangle();
   frame.y = screenFrame.y;
   frame.x = screenFrame.x;
   frame.height = screenFrame.height;
@@ -23,7 +23,7 @@ function toLeft(fillCols, maxCols) {
 function toRight(fillCols, maxCols) {
   var win = Window.focusedWindow();
   var frame = win.frame();
-  var screenFrame = win.screen().frameWithoutDockOrMenu();
+  var screenFrame = win.screen().visibleFrameInRectangle();
   frame.y = screenFrame.y;
   frame.x = screenFrame.x + screenFrame.width * (fillCols / maxCols);
   frame.height = screenFrame.height;
@@ -33,21 +33,21 @@ function toRight(fillCols, maxCols) {
 
 function fullScreen() {
   var win = Window.focusedWindow();
-  var screenFrame = Window.focusedWindow().screen().frameWithoutDockOrMenu();
+  var screenFrame = Window.focusedWindow().screen().visibleFrameInRectangle();
   win.setFrame(screenFrame);
 }
 
 function nearRightEdge() {
   var win = Window.focusedWindow();
   var frame = win.frame();
-  var screenFrame = win.screen().frameWithoutDockOrMenu();
+  var screenFrame = win.screen().visibleFrameInRectangle();
   return (frame.x + frame.width + 15) >= screenFrame.width;
 }
 
 function shrinkRight() {
   var win = Window.focusedWindow();
   var frame = win.frame();
-  var screenFrame = win.screen().frameWithoutDockOrMenu();
+  var screenFrame = win.screen().visibleFrameInRectangle();
   var quarterScreen = (screenFrame.width / 4.0);
   if (frame.width > quarterScreen) {
     frame.width = frame.width - quarterScreen;
@@ -58,7 +58,7 @@ function shrinkRight() {
 function expandRight() {
   var win = Window.focusedWindow();
   var frame = win.frame();
-  var screenFrame = win.screen().frameWithoutDockOrMenu();
+  var screenFrame = win.screen().visibleFrameInRectangle();
   var quarterScreen = (screenFrame.width / 4.0);
   if (!nearRightEdge()) {
     frame.width = frame.width + quarterScreen;
@@ -69,7 +69,7 @@ function expandRight() {
 function fullHeight() {
   var win = Window.focusedWindow();
   var frame = win.frame();
-  var screenFrame = Window.focusedWindow().screen().frameWithoutDockOrMenu();
+  var screenFrame = Window.focusedWindow().screen().visibleFrameInRectangle();
   if ((frame.height + 15) >= screenFrame.height) {
     frame.height = 2 * (screenFrame.height / 3);
   } else {
@@ -88,8 +88,8 @@ function moveToScreen(win, screen) {
   }
 
   var frame = win.frame();
-  var oldScreenRect = win.screen().frameWithoutDockOrMenu();
-  var newScreenRect = screen.frameWithoutDockOrMenu();
+  var oldScreenRect = win.screen().visibleFrameInRectangle();
+  var newScreenRect = screen.visibleFrameInRectangle();
 
   var xRatio = newScreenRect.width / oldScreenRect.width;
   var yRatio = newScreenRect.height / oldScreenRect.height;
@@ -112,11 +112,11 @@ function rotateMonitors(offset) {
   var win = Window.focusedWindow();
   var currentScreen = win.screen();
   var screens = [currentScreen];
-  for (var x = currentScreen.previousScreen(); x != win.screen(); x = x.previousScreen()) {
+  for (var x = currentScreen.previous(); x != win.screen(); x = x.previous()) {
     screens.push(x);
   }
 
-  screens = _(screens).sortBy(function(s) { return s.frameWithoutDockOrMenu().x; });
+  screens = _(screens).sortBy(function(s) { return s.visibleFrameInRectangle().x; });
   var currentIndex = _(screens).indexOf(currentScreen);
   moveToScreen(win, circularLookup(screens, currentIndex + offset));
 }
@@ -133,7 +133,7 @@ function rightOneMonitor() {
 // Start/select apps
 App.allWithTitle = function( title ) {
   return _(this.runningApps()).filter( function( app ) {
-    if (app.title() === title) {
+    if (app.name() === title) {
       return true;
     }
   });
@@ -143,53 +143,72 @@ App.allWithTitle = function( title ) {
 App.focusOrStart = function ( title ) {
   var apps = App.allWithTitle( title );
   if (_.isEmpty(apps)) {
-    api.alert(rageOfDongers + " Starting " + title);
-    api.launch(title)
+    Phoenix.notify(rageOfDongers + " Starting " + title);
+    App.launch(title)
     return;
   }
 
   var windows = _.chain(apps)
-    .map(function(x) { return x.allWindows(); })
+    .map(function(x) { return x.windows(); })
     .flatten()
     .value();
 
-  activeWindows = _(windows).reject(function(win) { return win.isWindowMinimized();});
+  activeWindows = _(windows).reject(function(win) { return win.isMinimized();});
   if (_.isEmpty(activeWindows)) {
-    api.alert(whyLook + " All windows minimized for " + title);
-    api.launch(title)
+    Phoenix.notify(whyLook + " All windows minimized for " + title);
+    App.launch(title)
     return;
   }
 
   activeWindows.forEach(function(win) {
-    win.focusWindow();
+    win.focus();
   });
 };
 
+function showCenteredModal(message, offset) {
+  var m = new Modal();
+  m.duration = 2;
+  m.message = message;
+
+  var sFrame = Screen.mainScreen().visibleFrameInRectangle();
+  var mFrame = m.frame();
+
+  var mX = Math.round((sFrame.width / 2) - (mFrame.width / 2));
+  var mY = Math.round((sFrame.height / 2) - (mFrame.height / 2));
+  if (!offset) {
+    offset = {x: 0, y: 0};
+  }
+
+  m.origin = {x: sFrame.x + mX + offset.x, y: sFrame.y + mY + offset.y};
+  m.show();
+}
+
 
 var mash = ['alt', 'ctrl'];
-api.bind('left', mash, leftOneMonitor);
-api.bind('right', mash, rightOneMonitor);
+var leftOneMonitorHandler = Phoenix.bind('left', mash, leftOneMonitor);
+var rightOneMonitorHandler = Phoenix.bind('right', mash, rightOneMonitor);
 
 var mash = ['alt', 'cmd', 'ctrl'];
-api.bind('left', mash, shrinkRight);
-api.bind('right', mash, expandRight);
+var shrinkRightHandler = Phoenix.bind('left', mash, shrinkRight);
+var expandRightHandler = Phoenix.bind('right', mash, expandRight);
 
 var altCmd = ['alt', 'cmd'];
-api.bind('left', altCmd, function() { toLeft(1, 2);});
-api.bind('right', altCmd, function() { toRight(1, 2);});
-api.bind('down', altCmd, fullHeight);
-api.bind('f', altCmd, fullScreen);
+var toLeftHandler = Phoenix.bind('left', altCmd, function() { toLeft(1, 2);});
+var toRightHandler = Phoenix.bind('right', altCmd, function() { toRight(1, 2);});
+var fullHeightHandler = Phoenix.bind('down', altCmd, fullHeight);
+var fullScreenHandler = Phoenix.bind('f', altCmd, fullScreen);
 
 
 var cmdCtrl = ['ctrl', 'cmd'];
-api.bind('t', cmdCtrl, function() {App.focusOrStart('iTerm');});
-//api.bind('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
-//api.bind('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
-api.bind('m', cmdCtrl , function() {App.focusOrStart('Slack');});
-api.bind('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
-api.bind('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
-api.bind('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});
-api.bind('c', cmdCtrl , function() {App.focusOrStart('Fantastical 2');});
-api.bind('b', cmdCtrl , function() {App.focusOrStart('Mailbox (Beta)');});
-api.bind('f', cmdCtrl , function() {App.focusOrStart('Safari');});
+var iTermHander = Phoenix.bind('t', cmdCtrl, function() {App.focusOrStart('iTerm');});
+//Phoenix.bind('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
+//Phoenix.bind('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
+var showZoomHandler = Phoenix.bind('m', cmdCtrl , function() {App.focusOrStart('Slack');});
+//Phoenix.bind('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
+//Phoenix.bind('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
+//Phoenix.bind('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});
+//Phoenix.bind('c', cmdCtrl , function() {App.focusOrStart('Fantastical 2');});
+//Phoenix.bind('b', cmdCtrl , function() {App.focusOrStart('Mailbox (Beta)');});
+//Phoenix.bind('f', cmdCtrl , function() {App.focusOrStart('Safari');});
 
+showCenteredModal("Phoenix Config Reloaded");
