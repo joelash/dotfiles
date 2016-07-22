@@ -3,8 +3,11 @@ for file in ~/.bash/*.sh; do
   source $file
 done
 source ~/.bash/aliases
-source ~/src/github/base16-shell/base16-chalk.dark.sh
-source ~/src/github/base16-shell/base16-monokai.dark.sh
+#source ~/src/github/base16-shell/base16-chalk.dark.sh
+#source ~/src/github/base16-shell/base16-monokai.dark.sh
+#source ~/src/github/base16-shell/base16-ashes.dark.sh
+source ~/src/github/base16-shell/base16-flat.light.sh
+
 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion

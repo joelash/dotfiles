@@ -29,6 +29,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'muz/vim-gemfile'
 Bundle 'tmhedberg/matchit'
+"Bundle 'vim-scripts/YankRing.vim'
 
 " Ctrlp extensions
 Bundle 'naquad/ctrlp-digraphs.vim'
@@ -63,7 +64,7 @@ Bundle 'christoph-frick/vim-fireplace'
 Bundle 'guns/vim-sexp'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-sexp-mappings-for-regular-people'
-Bundle 'amdt/vim-niji'
+Bundle 'losingkeys/vim-niji'
 Bundle 'guns/vim-clojure-highlight'
 
 " color the vimline same as vimairline
@@ -108,11 +109,13 @@ set directory=~/.vim/swp
 set undofile
 set undodir=~/.vim/undo
 
-set background=dark
+set background=light
 let base16colorspace=256
 " colorscheme base16-default
 " colorscheme base16-chalk
-colorscheme base16-monokai
+"colorscheme base16-monokai
+"colorscheme base16-ashes
+colorscheme base16-flat
 let g:airline_theme='base16'
 
 let g:airline_left_sep=''
@@ -141,6 +144,11 @@ set shiftwidth=2
 set expandtab
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
+
+" shiftwidth and tabstop for files
+au FileType java setl sw=4 ts=4
+au FileType groovy setl sw=4 ts=4
+au FileType coffee setl sw=2 ts=2
 
 "set gfn=Inconsolata                                 " set default font
 set gfn=Hack                                        " set default font
@@ -203,7 +211,8 @@ nnoremap <silent> <leader>K :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 
 " magic from @manicolosi
-nnoremap <leader>p ya(%a<CR><esc>p
+"nnoremap <leader>p ya(%a<CR><esc>p
+nmap <leader>p (y%%a<CR><esc>p==
 
 " easy to source / edit this file
 map ,S :source ~/.vimrc<CR>

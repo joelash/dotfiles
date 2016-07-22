@@ -6,6 +6,25 @@ var lookOfDisapproval="ಠ_ಠ";
 var rageOfDongers="ヽ༼ ಠ益ಠ ༽ﾉ";
 var whyLook="ლ(ಠ_ಠლ)";
 var tableFlip="(╯°□°)╯︵ ┻━┻";
+var fuDude="╭∩╮（︶︿︶）╭∩╮";
+
+function showCenteredModal(message, offset) {
+  var m = new Modal();
+  m.duration = 2;
+  m.message = message;
+
+  var sFrame = Screen.mainScreen().visibleFrameInRectangle();
+  var mFrame = m.frame();
+
+  var mX = Math.round((sFrame.width / 2) - (mFrame.width / 2));
+  var mY = Math.round((sFrame.height / 2) - (mFrame.height / 2));
+  if (!offset) {
+    offset = {x: 0, y: 0};
+  }
+
+  m.origin = {x: sFrame.x + mX + offset.x, y: sFrame.y + mY + offset.y};
+  m.show();
+}
 
 // Adjust window size
 
@@ -155,7 +174,7 @@ App.focusOrStart = function ( title ) {
 
   activeWindows = _(windows).reject(function(win) { return win.isMinimized();});
   if (_.isEmpty(activeWindows)) {
-    Phoenix.notify(whyLook + " All windows minimized for " + title);
+    showCenteredModal(whyLook + " All windows minimized for " + title);
     App.launch(title)
     return;
   }
@@ -164,25 +183,6 @@ App.focusOrStart = function ( title ) {
     win.focus();
   });
 };
-
-function showCenteredModal(message, offset) {
-  var m = new Modal();
-  m.duration = 2;
-  m.message = message;
-
-  var sFrame = Screen.mainScreen().visibleFrameInRectangle();
-  var mFrame = m.frame();
-
-  var mX = Math.round((sFrame.width / 2) - (mFrame.width / 2));
-  var mY = Math.round((sFrame.height / 2) - (mFrame.height / 2));
-  if (!offset) {
-    offset = {x: 0, y: 0};
-  }
-
-  m.origin = {x: sFrame.x + mX + offset.x, y: sFrame.y + mY + offset.y};
-  m.show();
-}
-
 
 var mash = ['alt', 'ctrl'];
 var leftOneMonitorHandler = Phoenix.bind('left', mash, leftOneMonitor);

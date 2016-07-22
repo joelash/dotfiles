@@ -32,4 +32,5 @@ sketch_assets/
 # virtual env folders
 *.virtualenv/
 
-Dockerfile.ignored
+Dockerfile*.ignored
+yaks.ignored.md
