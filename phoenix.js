@@ -13,7 +13,7 @@ function showCenteredModal(message, offset) {
   m.duration = 2;
   m.message = message;
 
-  var sFrame = Screen.mainScreen().visibleFrameInRectangle();
+  var sFrame = Screen.main().visibleFrameInRectangle();
   var mFrame = m.frame();
 
   var mX = Math.round((sFrame.width / 2) - (mFrame.width / 2));
@@ -29,7 +29,7 @@ function showCenteredModal(message, offset) {
 // Adjust window size
 
 function toLeft(fillCols, maxCols) {
-  var win = Window.focusedWindow();
+  var win = Window.focused();
   var frame = win.frame();
   var screenFrame = win.screen().visibleFrameInRectangle();
   frame.y = screenFrame.y;
@@ -40,7 +40,7 @@ function toLeft(fillCols, maxCols) {
 }
 
 function toRight(fillCols, maxCols) {
-  var win = Window.focusedWindow();
+  var win = Window.focused();
   var frame = win.frame();
   var screenFrame = win.screen().visibleFrameInRectangle();
   frame.y = screenFrame.y;
@@ -51,20 +51,20 @@ function toRight(fillCols, maxCols) {
 }
 
 function fullScreen() {
-  var win = Window.focusedWindow();
-  var screenFrame = Window.focusedWindow().screen().visibleFrameInRectangle();
+  var win = Window.focused();
+  var screenFrame = Window.focused().screen().visibleFrameInRectangle();
   win.setFrame(screenFrame);
 }
 
 function nearRightEdge() {
-  var win = Window.focusedWindow();
+  var win = Window.focused();
   var frame = win.frame();
   var screenFrame = win.screen().visibleFrameInRectangle();
   return (frame.x + frame.width + 15) >= screenFrame.width;
 }
 
 function shrinkRight() {
-  var win = Window.focusedWindow();
+  var win = Window.focused();
   var frame = win.frame();
   var screenFrame = win.screen().visibleFrameInRectangle();
   var quarterScreen = (screenFrame.width / 4.0);
@@ -75,7 +75,7 @@ function shrinkRight() {
 }
 
 function expandRight() {
-  var win = Window.focusedWindow();
+  var win = Window.focused();
   var frame = win.frame();
   var screenFrame = win.screen().visibleFrameInRectangle();
   var quarterScreen = (screenFrame.width / 4.0);
@@ -86,9 +86,9 @@ function expandRight() {
 }
 
 function fullHeight() {
-  var win = Window.focusedWindow();
+  var win = Window.focused();
   var frame = win.frame();
-  var screenFrame = Window.focusedWindow().screen().visibleFrameInRectangle();
+  var screenFrame = Window.focused().screen().visibleFrameInRectangle();
   if ((frame.height + 15) >= screenFrame.height) {
     frame.height = 2 * (screenFrame.height / 3);
   } else {
@@ -128,7 +128,7 @@ function circularLookup(array, index) {
 }
 
 function rotateMonitors(offset) {
-  var win = Window.focusedWindow();
+  var win = Window.focused();
   var currentScreen = win.screen();
   var screens = [currentScreen];
   for (var x = currentScreen.previous(); x != win.screen(); x = x.previous()) {
@@ -151,7 +151,7 @@ function rightOneMonitor() {
 
 // Start/select apps
 App.allWithTitle = function( title ) {
-  return _(this.runningApps()).filter( function( app ) {
+  return _(this.all()).filter( function( app ) {
     if (app.name() === title) {
       return true;
     }
@@ -185,30 +185,30 @@ App.focusOrStart = function ( title ) {
 };
 
 var mash = ['alt', 'ctrl'];
-var leftOneMonitorHandler = Phoenix.bind('left', mash, leftOneMonitor);
-var rightOneMonitorHandler = Phoenix.bind('right', mash, rightOneMonitor);
+var leftOneMonitorHandler = new Key('left', mash, leftOneMonitor);
+var rightOneMonitorHandler = new Key('right', mash, rightOneMonitor);
 
 var mash = ['alt', 'cmd', 'ctrl'];
-var shrinkRightHandler = Phoenix.bind('left', mash, shrinkRight);
-var expandRightHandler = Phoenix.bind('right', mash, expandRight);
+var shrinkRightHandler = new Key('left', mash, shrinkRight);
+var expandRightHandler = new Key('right', mash, expandRight);
 
 var altCmd = ['alt', 'cmd'];
-var toLeftHandler = Phoenix.bind('left', altCmd, function() { toLeft(1, 2);});
-var toRightHandler = Phoenix.bind('right', altCmd, function() { toRight(1, 2);});
-var fullHeightHandler = Phoenix.bind('down', altCmd, fullHeight);
-var fullScreenHandler = Phoenix.bind('f', altCmd, fullScreen);
+var toLeftHandler = new Key('left', altCmd, function() { toLeft(1, 2);});
+var toRightHandler = new Key('right', altCmd, function() { toRight(1, 2);});
+var fullHeightHandler = new Key('down', altCmd, fullHeight);
+var fullScreenHandler = new Key('f', altCmd, fullScreen);
 
 
 var cmdCtrl = ['ctrl', 'cmd'];
-var iTermHander = Phoenix.bind('t', cmdCtrl, function() {App.focusOrStart('iTerm');});
-//Phoenix.bind('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
-//Phoenix.bind('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
-var showZoomHandler = Phoenix.bind('m', cmdCtrl , function() {App.focusOrStart('Slack');});
-//Phoenix.bind('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
-//Phoenix.bind('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
-//Phoenix.bind('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});
-//Phoenix.bind('c', cmdCtrl , function() {App.focusOrStart('Fantastical 2');});
-//Phoenix.bind('b', cmdCtrl , function() {App.focusOrStart('Mailbox (Beta)');});
-//Phoenix.bind('f', cmdCtrl , function() {App.focusOrStart('Safari');});
+var iTermHander = new Key('t', cmdCtrl, function() {App.focusOrStart('iTerm');});
+//new Key('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
+//new Key('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
+var showZoomHandler = new Key('m', cmdCtrl , function() {App.focusOrStart('Slack');});
+//new Key('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
+//new Key('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
+//new Key('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});
+//new Key('c', cmdCtrl , function() {App.focusOrStart('Fantastical 2');});
+//new Key('b', cmdCtrl , function() {App.focusOrStart('Mailbox (Beta)');});
+//new Key('f', cmdCtrl , function() {App.focusOrStart('Safari');});
 
 showCenteredModal("Phoenix Config Reloaded");
