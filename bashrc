@@ -6,7 +6,7 @@ source ~/.bash/aliases
 #source ~/src/github/base16-shell/base16-chalk.dark.sh
 #source ~/src/github/base16-shell/base16-monokai.dark.sh
 #source ~/src/github/base16-shell/base16-ashes.dark.sh
-source ~/src/github/base16-shell/base16-flat.light.sh
+#source ~/src/github/base16-shell/base16-flat.light.sh
 
 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -58,6 +58,10 @@ function git_initials {
 }
 
 export PS1="\$(git_initials)\$(truncated_pwd 3)\$(parse_git_branch) -> "
+
+BASE16_SHELL=$HOME/src/github/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+base16_harmonic16-light
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

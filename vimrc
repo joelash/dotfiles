@@ -110,12 +110,17 @@ set undofile
 set undodir=~/.vim/undo
 
 set background=light
-let base16colorspace=256
+"let base16colorspace=256
 " colorscheme base16-default
 " colorscheme base16-chalk
 "colorscheme base16-monokai
 "colorscheme base16-ashes
-colorscheme base16-flat
+"colorscheme base16-flat
+"colorscheme base16-solarized
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 let g:airline_theme='base16'
 
 let g:airline_left_sep=''
