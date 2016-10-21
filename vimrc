@@ -362,6 +362,17 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 nmap <silent><Leader>A :grep <cword><CR>:botright copen<CR>
 
+" tab editing in a new dir
+function! TabLcdFn(dir)
+  tabnew
+  exec "lcd " . a:dir
+endfunction
+
+command! -nargs=1 -complete=dir TabLcd call TabLcdFn(<q-args>)
+cabbrev tablcd TabLcd
+cabbrev tlcd TabLcd
+cabbrev td TabLcd
+
 " uuidgen
 imap <C-J>u <C-r>=substitute(system("uuidgen"), '.$', '', 'g')<CR>
 
