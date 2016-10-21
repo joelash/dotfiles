@@ -84,8 +84,8 @@ let g:taboo_modified_tab_flag = "‡"
 let g:taboo_tab_format = "[%N. %P%m] "
 
 " taboo reset-tab-names
-nmap <silent> <C-J>f :let g:taboo_tab_format="[%N. %f%m] "<CR>:TabooReset<CR>
-nmap <silent> <C-J>d :let g:taboo_tab_format="[%N. %P%m] "<CR>:TabooReset<CR>
+nmap <silent> <C-G>f :let g:taboo_tab_format="[%N. %f%m] "<CR>:TabooReset<CR>
+nmap <silent> <C-G>d :let g:taboo_tab_format="[%N. %P%m] "<CR>:TabooReset<CR>
 
 " clojure formatting plugin
 Bundle 'venantius/vim-cljfmt'
@@ -93,7 +93,7 @@ Bundle 'venantius/vim-cljfmt'
 "Bundle 'venantius/vim-eastwood'
 
 " Show colors
-Bundle "gorodinskiy/vim-coloresque"
+"Bundle "gorodinskiy/vim-coloresque"
 
 filetype plugin indent on
 
@@ -142,13 +142,18 @@ let g:airline#extensions#branch#format = 'BranchWithPairs'
 
 " current direction on statusline
 
+" statusline stuffs
+set nocompatible   " Disable vi-compatibility
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
+
 " vim setting
 set softtabstop=2
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
+set listchars=tab:→\ ,trail:␣,extends:↩,nbsp:.
 
 " shiftwidth and tabstop for files
 au FileType java setl sw=4 ts=4
@@ -181,7 +186,7 @@ set wildignore+=*/target/*,*/out/*,.DS_Store
 set showcmd                                         " show commands as they are types
 set visualbell                                      " turn off auditory bell
 set autowrite                                       " auto-save current buffer when switching
-set nosplitright                                    " split to the left, not right
+set splitright                                      " split to the right, not left
 set nosplitbelow                                    " split to top, not bottom
 
 set smartindent   " try to be smart about indentation
@@ -196,6 +201,11 @@ syntax on
 filetype on
 filetype indent on
 filetype plugin on
+
+" Spelling
+set spelllang=en_us
+set spellfile=$HOME/Dropbox/Apps/vim/spell/en-utf-8.add
+set spell
 
 " *** MAPPINGS ***
 nnoremap j gj
@@ -288,11 +298,6 @@ command! SimpleBrepl Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :p
 " Gundo
 nnoremap <F5> :GundoToggle<CR>
 
-" statusline stuffs
-set nocompatible   " Disable vi-compatibility
-set laststatus=2   " Always show the statusline
-set encoding=utf-8 " Necessary to show Unicode glyphs
-
 " Breaks color theme for CtrlP in airline...?
 hi normal ctermbg=none
 
@@ -303,7 +308,7 @@ let maplocalleader = ","
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 "let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_working_path_mode=0
-let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|\.bundle)$'
+let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|\.bundle|\.cljs_rhino_repl)$'
 let g:ctrlp_show_hidden = 1                                                       " show hidden files
 let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes', 'digraphs']
 "let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
