@@ -1,0 +1,7 @@
+#! /usr/bin/env bash -e
+EXTENSION="${1:-clj}"
+export SLF=`mktemp -t cljsloc`
+find src test -name "*.${EXTENSION}" | xargs egrep  -v "(^[[:space:]]*$|^[[:space:]]*;)" | cut -d: -f1 > $SLF && echo "Files"
+uniq -c $SLF | sort -n
+echo "Total" `cat $SLF | wc -l`
+rm $SLF
