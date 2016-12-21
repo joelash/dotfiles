@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+FORBIDDEN = [
+  /\bass\b/i,
+  /\basshole\b/i,
+  /\bbitch\b/i,
+  /\bdamn\b/i,
+  /\bdammit\b/i,
+  /\bdick\b/i,
+  /\bdouche\b/i,
+  /\bfuck/i,
+  /\bhell\b/i,
+  /\bshit\b/i,
+  /\bsucks\b/i,
+  /\bwhore\b/i,
+  /\bwtf\b/i,
+
+  /\bhack\b/i,
+  /\bdo not commit\b/i,
+  /\bspy\b/i,
+]
+
+full_diff = `git diff --cached --`
+
+full_diff.scan(%r{^\+\+\+ b/(.+)\n@@.*\n([\s\S]*?)(?:^diff|\z)}).each do |file, diff|
+  added = diff.split("\n").select { |x| x.start_with?("+") }.join("\n")
+  if FORBIDDEN.any? { |re| added.match(re) }
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    puts %{WHAT ARE YOU THINKING YOU ASSHOLE! You cannnot commit "#{$1 || $&}" to #{file}}
+    puts "To commit anyway, use --no-verify (which you fucking shouldn't do!)"
+    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    exit 1
+  end
+end
