@@ -32,6 +32,7 @@
 [core]
 	excludesfile = /Users/joelash/.gitignore
   safecrlf = true
+	hooksPath = /Users/joelash/.git/hooks
 [push]
   default = tracking
 [apply]
