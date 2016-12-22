@@ -19,7 +19,8 @@ Bundle 'sheerun/vim-polyglot'
 " Other
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
-Bundle 'rizzatti/greper.vim'
+"Bundle 'rizzatti/greper.vim'
+Bundle 'mhinz/vim-grepper'
 Bundle 'ihacklog/tabular'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
@@ -372,6 +373,10 @@ command! -nargs=1 -complete=dir TabLcd call TabLcdFn(<q-args>)
 cabbrev tablcd TabLcd
 cabbrev tlcd TabLcd
 cabbrev td TabLcd
+
+" ag
+cabbrev Ag GrepperAg
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " uuidgen
 imap <C-J>u <C-r>=substitute(system("uuidgen"), '.$', '', 'g')<CR>
