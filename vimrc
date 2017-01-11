@@ -68,9 +68,6 @@ Bundle 'tpope/vim-sexp-mappings-for-regular-people'
 Bundle 'losingkeys/vim-niji'
 Bundle 'guns/vim-clojure-highlight'
 
-" color the vimline same as vimairline
-Bundle 'manicolosi/vim-airline-colornum'
-
 " vim syntax checker
 Bundle 'scrooloose/syntastic'
 
@@ -139,6 +136,23 @@ function! BranchWithPairs(branch_name)
   return a:branch_name . initials_str
 endfunction
 let g:airline#extensions#branch#format = 'BranchWithPairs'
+
+function! WindowNumber()
+  let str=tabpagewinnr(tabpagenr())
+  return str
+endfunction
+
+let g:airline#extensions#ycm#enabled = 0 "Disabled ycm plugin
+"let spc = g:airline_symbols.space
+"let g:airline_section_z = airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v', 'Win: %{WindowNumber()}'])
+let g:airline_section_z = airline#section#create(['%3p%%'.airline_symbols.space, 'linenr',  ':%3v', ':'.airline_symbols.space.'#%{WindowNumber()}'])
+
+" Define Ctrl-w + num to go to vim window
+let i = 1
+while i <= 9
+   execute 'nnoremap <C-w>' . i . ' :' . i . 'wincmd w<CR>'
+   let i = i + 1
+endwhile
 
 
 " current direction on statusline
