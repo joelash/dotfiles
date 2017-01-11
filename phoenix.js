@@ -135,8 +135,8 @@ function rotateMonitors(offset) {
     screens.push(x);
   }
 
-  screens = _(screens).sortBy(function(s) { return s.visibleFrameInRectangle().x; });
-  var currentIndex = _(screens).indexOf(currentScreen);
+  screens = _.sortBy(screens, function(s) { return s.visibleFrameInRectangle().x; });
+  var currentIndex = _.indexOf(screens, currentScreen);
   moveToScreen(win, circularLookup(screens, currentIndex + offset));
 }
 
@@ -172,10 +172,10 @@ App.focusOrStart = function ( title ) {
     .flatten()
     .value();
 
-  activeWindows = _(windows).reject(function(win) { return win.isMinimized();});
+  activeWindows = _.reject(windows, function(win) { return win.isMinimized();});
   if (_.isEmpty(activeWindows)) {
     showCenteredModal(whyLook + " All windows minimized for " + title);
-    App.launch(title)
+    App.launch(title);
     return;
   }
 
