@@ -4,6 +4,7 @@ FORBIDDEN = [
   /\bass\b/i,
   /\basshole\b/i,
   /\bbitch\b/i,
+  /\bbitches\b/i,
   /\bdamn\b/i,
   /\bdammit\b/i,
   /\bdick\b/i,
