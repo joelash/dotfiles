@@ -238,7 +238,7 @@ nmap <silent> <F2> :NERDTreeToggle<CR>                 " Make F2 open NERDTree
 nmap <silent> <LocalLeader>l :NERDTreeFind<CR>         " Locate current file in NERDTree
 
 " TAGS
-map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --fields=+l<CR>  " rebuild ctags
+map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --fields=+l<CR>
 
 " map capital W and Q to lowecase
 nmap :W :w
@@ -364,7 +364,7 @@ cabbrev td TabLcd
 
 " ag
 cabbrev Agq GrepperAg
-" Let's  enter open from quicklist
+" Lets enter open from quicklist
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " uuidgen
@@ -391,7 +391,6 @@ command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwhee
 " connect to boot cljs-repl
 nmap <leader>bb :Piggieback (adzerk.boot-cljs-repl/repl-env)<CR><CR>
 
-"command! -nargs=+ Grep :silent grep! <args> | botright copen
 command! Ctw %s/\s\+$//g
 command! Ftabs %s/<C-I>/  /g
 command! Tig !tig -- %
