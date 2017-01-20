@@ -238,7 +238,7 @@ nmap <silent> <F2> :NERDTreeToggle<CR>                 " Make F2 open NERDTree
 nmap <silent> <LocalLeader>l :NERDTreeFind<CR>         " Locate current file in NERDTree
 
 " TAGS
-map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f --fields=+l<CR>
+map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude="@/Users/joelash/.ctagsignore" --extra=+f --fields=+l<CR>
 
 " map capital W and Q to lowecase
 nmap :W :w
@@ -255,6 +255,8 @@ augroup END
 " filetype on boot and cljx
 autocmd BufRead,BufNewFile *.cljx setfiletype clojure
 autocmd BufRead,BufNewFile build.boot setfiletype clojure
+" in Clojure / isn't part of key (word over, stops at /, but can tag into)
+autocmd FileType clojure setl iskeyword-=/
 
 " Clojure Commands
 let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match']
