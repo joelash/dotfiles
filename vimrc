@@ -283,7 +283,19 @@ nnoremap <silent> <leader>E :%Eval<CR>
 nnoremap <silent> <leader>R :%Eval<CR>:Eval (refresh)<CR>
 
 " Sort namespaces in (:require)
-nmap <leader>s mzgg/:require$<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ:nohl<CR>`z
+function! CljSortRequireFn()
+  exe "keepjumps normal mz"
+  exec "keepjumps normal gg"
+  keepjumps /:require$
+  exe "keepjumps normal jV"
+  exe "keepjumps normal )b"
+  exe "'<,'>sort"
+  call feedkeys("\<ESC>")
+  exe "keepjumps normal `z"
+endfunction
+
+command! CljSortRequire call CljSortRequireFn()
+nmap <silent> <leader>s :CljSortRequire<CR>
 
 nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
 nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
