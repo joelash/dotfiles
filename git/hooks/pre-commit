@@ -27,9 +27,11 @@ full_diff.scan(%r{^\+\+\+ b/(.+)\n@@.*\n([\s\S]*?)(?:^diff|\z)}).each do |file, 
   added = diff.split("\n").select { |x| x.start_with?("+") }.join("\n")
   if FORBIDDEN.any? { |re| added.match(re) }
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts %{WHAT ARE YOU THINKING YOU ASSHOLE! You cannnot commit "#{$1 || $&}" to #{file}}
+    puts %{WHAT ARE YOU THINKING YOU ASSHAT! You cannnot commit "#{$1 || $&}" to #{file}}
     puts "To commit anyway, use --no-verify (which you fucking shouldn't do!)"
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    `say WHAT ARE YOU THINKING YOU ASS HAT! You cannnot commit #{$1 || $&} to #{file}`
+    `say "To commit anyway, use dash dash no dash verify, which you fucking shouldn't do!"`
     exit 1
   end
 end
