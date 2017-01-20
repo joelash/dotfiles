@@ -283,19 +283,27 @@ nnoremap <silent> <leader>E :%Eval<CR>
 nnoremap <silent> <leader>R :%Eval<CR>:Eval (refresh)<CR>
 
 " Sort namespaces in (:require)
-function! CljSortRequireFn()
-  exe "keepjumps normal mz"
+function! CljSortRequireFn(find)
+  let l:initialLine = line(".")
+  let l:initialCol = col(".")
   exec "keepjumps normal gg"
-  keepjumps /:require$
-  exe "keepjumps normal jV"
-  exe "keepjumps normal )b"
-  exe "'<,'>sort"
-  call feedkeys("\<ESC>")
-  exe "keepjumps normal `z"
+  exe "keepjumps /". a:find ."$"
+  let l:startLine = line(".") + 1
+  if l:startLine != 2
+    exe "keepjumps normal ^%"
+    keepjumps let l:endLine = line(".")
+    exe "keepjumps normal i\<CR>\<ESC>"
+    let l:closingLine = l:endLine + 1
+    exe l:startLine.",".l:endLine."sort"
+    exe "keepjumps normal ".l:closingLine."gg"
+    exe "keepjumps normal kJ"
+  endif
+  call cursor(l:initialLine, l:initialCol)
 endfunction
 
-command! CljSortRequire call CljSortRequireFn()
-nmap <silent> <leader>s :CljSortRequire<CR>
+command! -nargs=1 CljSortRequire call CljSortRequireFn(<q-args>)
+nmap <silent> <leader>s :CljSortRequire :require<CR>
+nmap <silent> <leader>m :CljSortRequire :require-macros<CR>
 
 nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
 nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
