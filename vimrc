@@ -388,6 +388,30 @@ command! -nargs=1 DConnect call DockerReplConnectFn(<q-args>)
 command! -nargs=1 AConnect call AclReplConnectFn(<q-args>)
 command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
 
+" ------------------------------------------
+"       Auto namespace for new files
+" ------------------------------------------
+
+function! InsertNamespace()
+  let s:dir_regex        = 'test\/\|src\/'
+  let s:first_line_empty = getbufline('%', 1, 1) == ['']
+  let s:file_path        = expand('%')
+  if match(s:file_path, s:dir_regex) > -1 && s:first_line_empty
+      let s:relevant_path   = substitute(s:file_path, s:dir_regex, '', '')
+      let s:dasherized_path = substitute(s:relevant_path, '_', '-', 'g')
+      let s:dotted_path     = substitute(s:dasherized_path, '\/', '\.', 'g')
+      let s:namespace       = substitute(s:dotted_path, '\.clj[s]*$', '', '')
+      call setline(1, '(ns ' . s:namespace . ')')
+  endif
+endfunction
+
+augroup filetype_clojure
+    autocmd!
+    autocmd FileType clojure call InsertNamespace()
+augroup END
+
+" ------------ END auto ns -------------------
+
 " connect to boot cljs-repl
 nmap <leader>bb :Piggieback (adzerk.boot-cljs-repl/repl-env)<CR><CR>
 
