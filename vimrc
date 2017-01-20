@@ -304,13 +304,6 @@ nmap <Leader>< <Plug>BarfRight
 nmap <silent> <Plug>BarfLeft ml>(`l:call repeat#set("\<Plug>BarfLeft", v:count)<CR>
 nmap <Leader>> <Plug>BarfLeft
 
-" Clojure Android Commands
-command! DroidConnect Connect nrepl://localhost:9999
-nnoremap <leader>dc :DroidConnect<CR><CR>
-
-command! FrodoConnect Connect nrepl://localhost:9002
-command! SimpleBrepl Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :port 9001)
-
 " Gundo
 nnoremap <F5> :GundoToggle<CR>
 
@@ -327,10 +320,7 @@ let g:ctrlp_working_path_mode=0
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|\.bundle|\.cljs_rhino_repl)$'
 let g:ctrlp_show_hidden = 1                                                       " show hidden files
 let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes', 'digraphs']
-"let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
-                        "\ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 nmap <silent> <Leader><space> :CtrlP<CR>
-"nmap <silent> <c-n> :CtrlP<CR>
 
 " Clojure fmt autosave off
 let g:clj_fmt_autosave = 0
@@ -368,11 +358,11 @@ endfunction
 
 command! -nargs=1 -complete=dir TabLcd call TabLcdFn(<q-args>)
 cabbrev tablcd TabLcd
-cabbrev tlcd TabLcd
 cabbrev td TabLcd
 
 " ag
 cabbrev Ag GrepperAg
+" Let's  enter open from quicklist
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " uuidgen
