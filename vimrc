@@ -1,83 +1,83 @@
-" bundles
-set nocompatible               " be iMproved
-filetype off                   " required!
+" ----------------------------------------------------
+"                       Plug
+" ----------------------------------------------------
+" Install vim-plug if we don't already have it
+if empty(glob("~/.vim/autoload/plug.vim"))
+    " Ensure all needed directories exist  (Thanks @kapadiamush)
+    execute 'mkdir -p ~/.vim/plugged'
+    execute 'mkdir -p ~/.vim/autoload'
+    " Download the actual plugin manager
+    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
 
-set rtp+=~/.vim/bundle/vundle/
-"set rtp+=/usr/local/opt/fzf
-call vundle#rc()
-Bundle 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
 
-Bundle 'junegunn/fzf.vim'
-"Bundle '/usr/local/opt/fzf'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 
 " syntax files
-Bundle 'sheerun/vim-polyglot'
-
-" completion
-" Bundle "szw/vim-kompleter"
-" Bundle 'Valloric/YouCompleteMe'
-
-"nvim node-host
-"Bundle 'neovim/node-host'
+Plug 'sheerun/vim-polyglot'
 
 " Other
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
-"Bundle 'rizzatti/greper.vim'
-Bundle 'mhinz/vim-grepper'
-Bundle 'ihacklog/tabular'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'scrooloose/nerdtree'
-"Bundle 'scrooloose/nerdcommenter'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'muz/vim-gemfile'
-Bundle 'tmhedberg/matchit'
-"Bundle 'vim-scripts/YankRing.vim'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'tpope/vim-fugitive'
-Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
+Plug 'rizzatti/funcoo.vim'
+Plug 'rizzatti/dash.vim'
+Plug 'mhinz/vim-grepper'
+Plug 'ihacklog/tabular'
+Plug 'kchmck/vim-coffee-script'
+Plug 'scrooloose/nerdtree'
+Plug 'tomtom/tcomment_vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'muz/vim-gemfile', {'for': 'ruby'}
+Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+
+" Only show cursorline in the current window
+Plug 'vim-scripts/CursorLineCurrentWindow'
+
+" Completion
+Plug 'mattn/emmet-vim', { 'for': 'html' }
 
 " Ctrlp extensions
-Bundle 'naquad/ctrlp-digraphs.vim'
+Plug 'naquad/ctrlp-digraphs.vim'
 
 " Angular
-Bundle 'burnettk/vim-angular'
+Plug 'burnettk/vim-angular'
 
 " ReactJs & JSX
-Bundle 'pangloss/vim-javascript'
-Bundle 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " enabled JSX highlighting for .js files too
 
 " Themes
-Bundle 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 
 " Tmux Nav
-Bundle 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Clojure in Vim
-Bundle 'guns/vim-clojure-static'
-"Bundle 'tpope/vim-fireplace'
-Bundle 'christoph-frick/vim-fireplace'
-Bundle 'guns/vim-sexp'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-sexp-mappings-for-regular-people'
-Bundle 'losingkeys/vim-niji'
-Bundle 'guns/vim-clojure-highlight'
+Plug 'guns/vim-clojure-static'
+Plug 'christoph-frick/vim-fireplace', { 'for': 'clojure' }
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'losingkeys/vim-niji'
+Plug 'guns/vim-clojure-highlight'
+Plug 'venantius/vim-cljfmt'
 
 " vim syntax checker
-Bundle 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_always_populate_loc_list = 1
 
 " tab names
-Plugin 'manicolosi/taboo.vim'
+Plug 'manicolosi/taboo.vim'
 
 let g:taboo_modified_tab_flag = "‡"
 let g:taboo_tab_format = "[%N. %P%m] "
@@ -86,15 +86,13 @@ let g:taboo_tab_format = "[%N. %P%m] "
 nmap <silent> <C-G>f :let g:taboo_tab_format="[%N. %f%m] "<CR>:TabooReset<CR>
 nmap <silent> <C-G>d :let g:taboo_tab_format="[%N. %P%m] "<CR>:TabooReset<CR>
 
-" clojure formatting plugin
-Bundle 'venantius/vim-cljfmt'
-"clojure lint
-"Bundle 'venantius/vim-eastwood'
+filetype plugin indent on                   " required!
+call plug#end()
 
-" Show colors
-"Bundle "gorodinskiy/vim-coloresque"
+" ---------------------------------------------------------
+"                       End Plug
+" ---------------------------------------------------------
 
-filetype plugin indent on
 
 let mapleader = ","                                  " leader
 

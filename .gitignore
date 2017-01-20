@@ -14,6 +14,7 @@ vim/colors/*
 vim/view/*
 vim/swp/*
 vim/undo/*
+vim/plugged/*
 !vim/undo/.gitkeep
 
 bash/private
