@@ -363,7 +363,7 @@ cabbrev tablcd TabLcd
 cabbrev td TabLcd
 
 " ag
-cabbrev Ag GrepperAg
+cabbrev Agq GrepperAg
 " Let's  enter open from quicklist
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
