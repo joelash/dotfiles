@@ -109,24 +109,16 @@ set undofile
 set undodir=~/.vim/undo
 
 set background=light
-"let base16colorspace=256
-" colorscheme base16-default
-" colorscheme base16-chalk
-"colorscheme base16-monokai
-"colorscheme base16-ashes
-"colorscheme base16-flat
-"colorscheme base16-solarized
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-let g:airline_theme='base16'
 
+let g:airline_theme='base16'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#taboo#enabled = 1
 
-"let g:airline_section_b = '[%{fnamemodify(getcwd(),":t")}]'
 function! BranchWithPairs(branch_name)
   let initials_raw=system("git config --get user.initials")
   let initials= substitute(initials_raw, '\%x00', '', '')
@@ -143,9 +135,6 @@ function! WindowNumber()
   return str
 endfunction
 
-let g:airline#extensions#ycm#enabled = 0 "Disabled ycm plugin
-"let spc = g:airline_symbols.space
-"let g:airline_section_z = airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v', 'Win: %{WindowNumber()}'])
 let g:airline_section_z = airline#section#create(['%3p%%'.airline_symbols.space, 'linenr',  ':%3v', ':'.airline_symbols.space.'#%{WindowNumber()}'])
 
 " Define Ctrl-w + num to go to vim window
@@ -234,15 +223,10 @@ nnoremap <Leader><Leader> <C-^>
 nnoremap <silent> <leader>J :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent> <leader>K :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
-" move lines
-"nnoremap <silent> <S-Down> :set paste<CR>dd]p :set nopaste<CR>
-"nnoremap <silent> <S-Up> :set paste<CR>ddk]P :set nopaste<CR>
-
 " split line at cursor without moving cursor
 nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 
 " magic from @manicolosi
-"nnoremap <leader>p ya(%a<CR><esc>p
 nmap <leader>p (y%%a<CR><esc>p==
 
 " easy to source / edit this file
@@ -274,7 +258,6 @@ autocmd BufRead,BufNewFile build.boot setfiletype clojure
 
 " Clojure Commands
 let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match']
-let g:ycm_collect_identifiers_from_tags_files = 1
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
 nnoremap <silent> cqa :%Eval<CR>
@@ -335,7 +318,6 @@ let maplocalleader = ","
 
 " ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-"let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|\.bundle|\.cljs_rhino_repl)$'
 let g:ctrlp_show_hidden = 1                                                       " show hidden files
