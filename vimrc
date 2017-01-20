@@ -3,8 +3,12 @@ set nocompatible               " be iMproved
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/vundle/
+"set rtp+=/usr/local/opt/fzf
 call vundle#rc()
 Bundle 'gmarik/vundle'
+
+Bundle 'junegunn/fzf.vim'
+"Bundle '/usr/local/opt/fzf'
 
 " syntax files
 Bundle 'sheerun/vim-polyglot'
@@ -26,31 +30,28 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 "Bundle 'scrooloose/nerdcommenter'
 Bundle 'tomtom/tcomment_vim'
-Bundle 'kien/ctrlp.vim'
+Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'muz/vim-gemfile'
 Bundle 'tmhedberg/matchit'
 "Bundle 'vim-scripts/YankRing.vim'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
+Bundle 'tpope/vim-fugitive'
+Bundle 'sjl/gundo.vim'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
 
 " Ctrlp extensions
 Bundle 'naquad/ctrlp-digraphs.vim'
 
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-
-Bundle 'tpope/vim-fugitive'
-Bundle 'sjl/gundo.vim'
-
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
+" Angular
+Bundle 'burnettk/vim-angular'
 
 " ReactJs & JSX
 Bundle 'pangloss/vim-javascript'
 Bundle 'mxw/vim-jsx'
-Bundle 'mtscout6/vim-cjsx'
-
-" Angular
-Bundle 'burnettk/vim-angular'
+let g:jsx_ext_required = 0 " enabled JSX highlighting for .js files too
 
 " Themes
 Bundle 'chriskempson/base16-vim'
