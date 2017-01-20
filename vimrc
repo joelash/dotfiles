@@ -21,7 +21,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'rizzatti/funcoo.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'mhinz/vim-grepper'
-Plug 'ihacklog/tabular'
 Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/nerdtree'
 Plug 'tomtom/tcomment_vim'
@@ -35,6 +34,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+
+" Easy Alignment
+Plug 'junegunn/vim-easy-align'
 
 " Only show cursorline in the current window
 Plug 'vim-scripts/CursorLineCurrentWindow'
@@ -344,29 +346,11 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 nmap <silent> <Leader>y :SyntasticToggleMode<CR>
 
-
-" quicklist navigation
-"nnoremap [q :cp<CR>
-"nnoremap ]q :cn<CR>
-
-" Tabularize
-nmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
-vmap <silent> <Leader>a= :Tabularize /=\(>\)\@!<CR>
-nmap <silent> <Leader>a. :Tabularize /=><CR>
-vmap <silent> <Leader>a. :Tabularize /=><CR>
-nmap <silent> <Leader>a: :Tabularize /:<CR>
-vmap <silent> <Leader>a: :Tabularize /:<CR>
-nmap <silent> <Leader>a{ :Tabularize /{<CR>
-vmap <silent> <Leader>a{ :Tabularize /{<CR>
-nmap <silent> <Leader>a} :Tabularize /}<CR>
-vmap <silent> <Leader>a} :Tabularize /}<CR>
-
-nmap <Leader>a; :Tabularize /:\zs<CR>
-vmap <Leader>a; :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,\zs<CR>
-vmap <Leader>a, :Tabularize /,\zs<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+" Easy alignment
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " close all the things
 nmap <silent> <C-w>a :ccl<CR>:lcl<CR>:pc<CR>
