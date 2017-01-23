@@ -119,23 +119,27 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#taboo#enabled = 1
 
-function! BranchWithPairs(branch_name)
-  let initials_raw=system("git config --get user.initials")
-  let initials= substitute(initials_raw, '\%x00', '', '')
-  let initials_str = ' [' . initials . ']'
-  if empty(initials)
-    let initials_str = ''
+function! BranchWithPairs()
+  let l:branch_name_raw=system("git branch --no-color | grep '*' | cut -d' ' -f2")
+  let l:initials_raw=system("git config --get user.initials")
+  let l:branch_name= substitute(l:branch_name_raw, '\%x00', '', '')
+  let l:initials= substitute(l:initials_raw, '\%x00', '', '')
+  let l:initials_str = ' [' . l:initials . ']'
+  if empty(l:initials)
+    let l:initials_str = ''
   end
-  return a:branch_name . initials_str
+  return l:branch_name . l:initials_str
 endfunction
-let g:airline#extensions#branch#format = 'BranchWithPairs'
+"let g:airline#extensions#branch#format = 'BranchWithPairs'
+let g:airline_section_b = airline#section#create(['%{BranchWithPairs()}'])
 
 function! WindowNumber()
-  let str=tabpagewinnr(tabpagenr())
-  return str
+  let l:str=tabpagewinnr(tabpagenr())
+  return l:str
 endfunction
 
 let g:airline_section_z = airline#section#create(['%3p%%'.airline_symbols.space, 'linenr',  ':%3v', ':'.airline_symbols.space.'#%{WindowNumber()}'])
+
 
 " Define Ctrl-w + num to go to vim window
 let i = 1
@@ -365,7 +369,7 @@ cabbrev tablcd TabLcd
 cabbrev td TabLcd
 
 " ag
-cabbrev Agq GrepperAg
+cabbrev Agg GrepperAg
 " Lets enter open from quicklist
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
