@@ -28,8 +28,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'muz/vim-gemfile', {'for': 'ruby'}
 Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-surround'
@@ -114,33 +113,6 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
-let g:airline_theme='base16'
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline#extensions#taboo#enabled = 1
-
-function! BranchWithPairs()
-  let l:branch_name_raw=system("git branch --no-color | grep '*' | cut -d' ' -f2")
-  let l:initials_raw=system("git config --get user.initials")
-  let l:branch_name= substitute(l:branch_name_raw, '\%x00', '', '')
-  let l:initials= substitute(l:initials_raw, '\%x00', '', '')
-  let l:initials_str = ' [' . l:initials . ']'
-  if empty(l:initials)
-    let l:initials_str = ''
-  end
-  return l:branch_name . l:initials_str
-endfunction
-"let g:airline#extensions#branch#format = 'BranchWithPairs'
-let g:airline_section_b = airline#section#create(['%{BranchWithPairs()}'])
-
-function! WindowNumber()
-  let l:str=tabpagewinnr(tabpagenr())
-  return l:str
-endfunction
-
-let g:airline_section_z = airline#section#create(['%3p%%'.airline_symbols.space, 'linenr',  ':%3v', ':'.airline_symbols.space.'#%{WindowNumber()}'])
-
-
 " Define Ctrl-w + num to go to vim window
 let i = 1
 while i <= 9
@@ -155,6 +127,7 @@ endwhile
 set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
+scriptencoding utf-8
 
 " vim setting
 set softtabstop=2
@@ -316,9 +289,6 @@ nmap <Leader>> <Plug>BarfLeft
 " Gundo
 nnoremap <F5> :GundoToggle<CR>
 
-" Breaks color theme for CtrlP in airline...?
-hi normal ctermbg=none
-
 " change localleader
 let maplocalleader = ","
 
@@ -333,16 +303,123 @@ nmap <silent> <Leader><space> :CtrlP<CR>
 " Clojure fmt autosave off
 let g:clj_fmt_autosave = 0
 
-" Syntastic Settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" ------------- lightline ------------------
+function! GitPairs()
+  let l:initials_raw=system("git config --get user.initials")
+  let l:initials= substitute(l:initials_raw, '\%x00', '', '')
+  let l:initials_str = '[' . l:initials . ']'
+  return empty(l:initials) ? '' : l:initials_str
+endfunction
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
+function! WindowNumber()
+  let l:str=tabpagewinnr(tabpagenr())
+  return l:str
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'pairs' ],
+      \             [ 'filename' ],
+      \             [ 'ctrlpmark' ] ],
+      \   'right': [ [ 'syntastic', 'lineinfo' ], ['windownum'], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'inactive': {
+      \   'left' : [ [ 'filename' ] ],
+      \   'right': [ [ 'lineinfo' ], ['windownum'], ['percent'] ]
+      \ },
+      \ 'component_function': {
+      \   'pairs': 'GitPairs',
+      \   'fugitive': 'LightlineFugitive',
+      \   'windownum': 'WindowNumber',
+      \   'filename': 'LightlineFilename',
+      \   'ctrlpmark': 'CtrlPMark'
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag'
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error'
+      \ },
+      \ 'component_visible_condition': {
+      \   'windownum': '1'
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '|' }
+    \ }
+
+function! LightlineReadonly()
+    if &filetype == "help"
+    return ""
+  elseif &readonly
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! LightlineModified()
+  return &modifiable && &modified ? '+' : ''
+endfunction
+
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ ('' != expand('%:t') ? expand('%') : '[No Name]') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ' '  " edit here for cool mark
+      let branch = fugitive#head()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlPStatusFunc_1',
+  \ 'prog': 'CtrlPStatusFunc_2',
+  \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost * call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
+" ------------- end lightline ------------------
+
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-nmap <silent> <Leader>y :SyntasticToggleMode<CR>
 
 " Easy alignment
 " Start interactive EasyAlign in visual mode (e.g. vipga)
