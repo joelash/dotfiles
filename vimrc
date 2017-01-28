@@ -336,7 +336,10 @@ let g:lightline = {
       \             [ 'fugitive', 'pairs' ],
       \             [ 'filename' ],
       \             [ 'ctrlpmark' ] ],
-      \   'right': [ [ 'syntastic', 'lineinfo' ], ['windownum'], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   'right': [ [ 'syntastic', 'lineinfo' ],
+      \              ['windownum'],
+      \              ['percent'],
+      \              [ 'filetype', 'fileformat', 'fileencoding' ] ]
       \ },
       \ 'inactive': {
       \   'left' : [ [ 'filename' ] ],
