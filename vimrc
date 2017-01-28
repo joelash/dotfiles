@@ -203,6 +203,9 @@ nnoremap <silent> <leader>K :set paste<CR>m`O<Esc>``:set nopaste<CR>
 " split line at cursor without moving cursor
 nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 
+" FZF binding
+nnoremap <silent> <C-x><C-p> :GFiles<CR>
+
 " magic from @manicolosi
 nmap <leader>p (y%%a<CR><esc>p==
 
