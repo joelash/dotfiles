@@ -375,13 +375,13 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineModified()
-  return &modifiable && &modified ? '+' : ''
+  return &modifiable && &modified ? '[+]' : ''
 endfunction
 
 function! LightlineFilename()
   return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
         \ ('' != expand('%:t') ? expand('%') : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+        \ ('' != LightlineModified() ? '' . LightlineModified() : '')
 endfunction
 
 function! LightlineFugitive()
