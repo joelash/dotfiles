@@ -1,6 +1,7 @@
 .git
 .svn
 .cljs_rhino_repl/**
+target/**
 tmp
 log
 db
