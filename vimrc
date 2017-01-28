@@ -236,7 +236,17 @@ augroup END
 autocmd BufRead,BufNewFile *.cljx setfiletype clojure
 autocmd BufRead,BufNewFile build.boot setfiletype clojure
 " in Clojure / isn't part of key (word over, stops at /, but can tag into)
-autocmd FileType clojure setl iskeyword-=/
+
+function! MyTagJump(tagcmd)
+  let s:originalOpts=&iskeyword
+  execute "setl iskeyword-=/"
+  let s:keyword=expand("<cword>")
+  execute "setl iskeyword=" . s:originalOpts
+  execute a:tagcmd . " " . s:keyword
+endfunction
+
+nmap <silent> <C-]> :call MyTagJump("tag")<CR>
+nmap <silent> g] :call MyTagJump("tselect")<CR>
 
 " Clojure Commands
 let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match']
