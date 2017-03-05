@@ -11,7 +11,9 @@
 --regex-clojure=/\([ \t]*defmacro[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/m,macro/
 --regex-clojure=/\([ \t]*definline[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/i,inline/
 --regex-clojure=/\([ \t]*defmulti[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/a,multimethod definition/
+--regex-clojure=/\([ \t]*defmulti \^:private[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/a,multimethod definition/
 --regex-clojure=/\([ \t]*defmethod[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/b,multimethod instance/
+--regex-clojure=/\([ \t]*defmethod \^:private[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/b,multimethod instance/
 --regex-clojure=/\([ \t]*defonce[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/c,definition (once)/
 --regex-clojure=/\([ \t]*defonce \^:private[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/c,private definition (once)/
 --regex-clojure=/\([ \t]*defstruct[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/s,struct/
