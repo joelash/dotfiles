@@ -21,10 +21,11 @@
   who = shortlog -s --
   grep = grep --color
   diff = diff --color
+  staged = diff --cached
   dic = diff --cached
   dt = difftool
-  dictool = difftool --cached
   dtc = difftool --cached
+  stagedtool = difftool --cached
   grep = grep -n --color
   pushh = push origin HEAD
 [branch]
