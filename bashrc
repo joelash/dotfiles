@@ -50,20 +50,20 @@ function git_initials {
   fi
 }
 
-export PS1="\$(git_initials)\$(truncated_pwd 3)\$(__parse_git_branch__) -> "
+if [ -n "$PS1" ]; then
+  export PS1="\$(git_initials)\$(truncated_pwd 3)\$(__parse_git_branch__) -> "
 
-BASE16_SHELL=$HOME/src/github/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-#base16_harmonic16-light
+  BASE16_SHELL=$HOME/src/github/base16-shell/
+  [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+  _t
+  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-_t
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 eval "$(scmpuff init -s)"
 
