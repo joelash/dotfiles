@@ -75,7 +75,10 @@ function parse_git_branch {
 }
 
 function __parse_git_branch__ {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
+  local branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/")
+  if [[ -n "${branch}" ]]; then
+    echo " ${branch}"
+  fi
 }
 
 function __current_git_branch_easy__ {
