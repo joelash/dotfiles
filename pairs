@@ -1,3 +1,7 @@
 pairs:
-  jf: Joel Friedman
-  mn: Mark Nicolosi
+  jf: Joel Friedman; joel
+  mn: Mark Nicolosi; mark
+  cn: Case Nelson; case
+email:
+  prefix: devs
+  domain: aclaimant.com
