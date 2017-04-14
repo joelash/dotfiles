@@ -3,35 +3,28 @@ for file in ~/.bash/*.sh; do
   source $file
 done
 source ~/.bash/aliases
-#source ~/src/github/base16-shell/base16-chalk.dark.sh
-#source ~/src/github/base16-shell/base16-monokai.dark.sh
-#source ~/src/github/base16-shell/base16-ashes.dark.sh
-#source ~/src/github/base16-shell/base16-flat.light.sh
-
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
-fi
 
 if [ -f ~/.bash/private ]; then
   . ~/.bash/private
 fi
 
-# homebreq
+# homebrew
 export BREW_HOME=/usr/local/bin
 export BREW_SBIN=/usr/local/sbin
 export PATH=$BREW_SBIN:$BREW_HOME:$PATH
 export PATH=$HOME/.bin:$PATH
 
-export APP_ENV=development
-
 export EDITOR=vim
 export SVN_EDITOR=/usr/bin/vim
 
-# boot2docker
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/joelash/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
+
+# # boot2docker
+# export DOCKER_HOST=tcp://192.168.59.103:2376
+# export DOCKER_CERT_PATH=/Users/joelash/.boot2docker/certs/boot2docker-vm
+# export DOCKER_TLS_VERIFY=1
 
 # prompt
 export YELLOW='\[\033[1;33m\]' # Yellow
@@ -46,7 +39,6 @@ alias realias='$EDITOR ~/.bash/aliases; source ~/.bash/aliases'
 # RVM (ruby version management)
 if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
 
-
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 PATH=$PATH:/usr/local/share/npm/bin # Add node to path
@@ -58,7 +50,7 @@ function git_initials {
   fi
 }
 
-export PS1="\$(git_initials)\$(truncated_pwd 3)\$(parse_git_branch) -> "
+export PS1="\$(git_initials)\$(truncated_pwd 3)\$(__parse_git_branch__) -> "
 
 BASE16_SHELL=$HOME/src/github/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
@@ -72,3 +64,5 @@ _t
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+eval "$(scmpuff init -s)"
