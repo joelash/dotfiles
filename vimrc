@@ -28,7 +28,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'muz/vim-gemfile', {'for': 'ruby'}
 Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-surround'
@@ -204,7 +204,9 @@ nnoremap <silent> <leader>K :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 
 " FZF binding
-nnoremap <silent> <C-x><C-p> :GFiles<CR>
+nnoremap <silent> <C-l><C-p> :GFiles<CR>
+nnoremap <silent> <C-l><C-t> :Tags<CR>
+nnoremap <silent> <C-l><C-b> :BTags<CR>
 
 " magic from @manicolosi
 nmap <leader>p (y%%a<CR><esc>p==
@@ -256,6 +258,10 @@ nnoremap <silent> cqa :%Eval<CR>
 nnoremap <silent> crr :Require!<CR>:RunTests<CR>:copen<CR>
 nnoremap <silent> <leader>E :%Eval<CR>
 nnoremap <silent> <leader>R :%Eval<CR>:Eval (refresh)<CR>
+nmap <S-Right> <Plug>(sexp_capture_next_element)<Plug>(sexp_indent_top)
+nmap <S-Left> <Plug>(sexp_emit_tail_element)<Plug>(sexp_indent_top)
+imap <S-Right> <C-O><Plug>(sexp_capture_next_element)<Plug>(sexp_indent_top)
+imap <S-Left> <C-O><Plug>(sexp_emit_tail_element)<Plug>(sexp_indent_top)
 
 " Sort namespaces in (:require)
 function! CljSortRequireFn(find)
@@ -396,14 +402,14 @@ function! LightlineFugitive()
   return ''
 endfunction
 
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost * call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
+" augroup AutoSyntastic
+"   autocmd!
+"   autocmd BufWritePost * call s:syntastic()
+" augroup END
+" function! s:syntastic()
+"   SyntasticCheck
+"   call lightline#update()
+" endfunction
 " ------------- end lightline ------------------
 
 let g:syntastic_check_on_open = 1
