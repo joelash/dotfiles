@@ -38,9 +38,7 @@ alias vimf='vim $(fzf)'
 alias up='git pull'
 alias log='git log --oneline'
 alias glg='git log --pretty=oneline'
-
-alias gst='git st'
-alias gb='git branch'
+alias gdc='git diff --staged'
 
 # python simple server
 alias simple-server='python -m SimpleHTTPServer 8000'
