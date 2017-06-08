@@ -52,6 +52,7 @@ function git_initials {
 
 if [ -n "$PS1" ]; then
   export PS1="\$(git_initials)\$(truncated_pwd 3)\$(__parse_git_branch__) -> "
+  export PS2='> '
 
   BASE16_SHELL=$HOME/src/github/base16-shell/
   [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
