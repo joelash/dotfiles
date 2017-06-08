@@ -33,6 +33,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'airblade/vim-gitgutter'
 
 " Easy Alignment
 Plug 'junegunn/vim-easy-align'
@@ -69,6 +70,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'losingkeys/vim-niji'
 Plug 'guns/vim-clojure-highlight'
 Plug 'venantius/vim-cljfmt'
+Plug 'aclaimant/syntastic-joker'
 
 " vim syntax checker
 Plug 'scrooloose/syntastic'
@@ -76,6 +78,7 @@ Plug 'scrooloose/syntastic'
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_clojure_checkers = ['joker']
 
 " tab names
 Plug 'manicolosi/taboo.vim'
@@ -204,9 +207,9 @@ nnoremap <silent> <leader>K :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 
 " FZF binding
-nnoremap <silent> <C-l><C-p> :GFiles<CR>
-nnoremap <silent> <C-l><C-t> :Tags<CR>
-nnoremap <silent> <C-l><C-b> :BTags<CR>
+nnoremap <silent> <C-n><C-p> :GFiles<CR>
+nnoremap <silent> <C-n><C-t> :Tags<CR>
+nnoremap <silent> <C-n><C-b> :BTags<CR>
 
 " magic from @manicolosi
 nmap <leader>p (y%%a<CR><esc>p==
@@ -251,7 +254,7 @@ nmap <silent> <C-]> :call MyTagJump("tag")<CR>
 nmap <silent> g] :call MyTagJump("tselect")<CR>
 
 " Clojure Commands
-let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match']
+let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match', 'fdef']
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
 nnoremap <silent> cqa :%Eval<CR>
