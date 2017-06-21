@@ -28,7 +28,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'muz/vim-gemfile', {'for': 'ruby'}
 Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
-" Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-surround'
@@ -327,12 +327,20 @@ nmap <silent> <Leader><space> :CtrlP<CR>
 let g:clj_fmt_autosave = 0
 
 " ------------- lightline ------------------
-function! GitPairs()
+function! GitPairs_detect()
   let l:initials_raw=system("git config --get user.initials")
-  let l:initials= substitute(l:initials_raw, '\%x00', '', '')
-  let l:initials_str = '[' . l:initials . ']'
-  return empty(l:initials) ? '' : l:initials_str
+  let g:lightline_git_pairs= substitute(l:initials_raw, '\%x00', '', '')
+  " let g:lightline_git_pairs='[jf mn]'
 endfunction
+
+function! GitPairs_initials()
+  return empty(g:lightline_git_pairs) ? '' : '[' . g:lightline_git_pairs . ']'
+endfunction
+
+augroup GitPair
+  autocmd!
+  autocmd BufNewFile,BufReadPost,BufEnter * call GitPairs_detect()
+augroup END
 
 function! WindowNumber()
   let l:str=tabpagewinnr(tabpagenr())
@@ -356,7 +364,7 @@ let g:lightline = {
       \   'right': [ [ 'lineinfo' ], ['windownum'], ['percent'] ]
       \ },
       \ 'component_function': {
-      \   'pairs': 'GitPairs',
+      \   'pairs': 'GitPairs_initials',
       \   'fugitive': 'LightlineFugitive',
       \   'windownum': 'WindowNumber',
       \   'filename': 'LightlineFilename',
