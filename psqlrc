@@ -1,4 +1,4 @@
-SET search_path TO public,xpt,svc;
+SET search_path TO public,xpt,clm,svc;
 \set PROMPT1 '%M> %/%R%#%x '
 \pset null '(null)'
 \x auto
