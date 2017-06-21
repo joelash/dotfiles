@@ -255,6 +255,7 @@ nmap <silent> g] :call MyTagJump("tselect")<CR>
 
 " Clojure Commands
 let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match', 'fdef']
+let g:clojure_align_multiline_strings = 1
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
 nnoremap <silent> cqa :%Eval<CR>
