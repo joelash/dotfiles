@@ -79,6 +79,9 @@ let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_clojure_checkers = ['joker']
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { "mode": "passive" }
 
 " tab names
 Plug 'manicolosi/taboo.vim'
@@ -423,9 +426,6 @@ function! s:syntastic()
   call lightline#update()
 endfunction
 " ------------- end lightline ------------------
-
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 " Easy alignment
 " Start interactive EasyAlign in visual mode (e.g. vipga)
