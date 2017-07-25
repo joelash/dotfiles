@@ -414,14 +414,14 @@ function! LightlineFugitive()
   return ''
 endfunction
 
-" augroup AutoSyntastic
-"   autocmd!
-"   autocmd BufWritePost * call s:syntastic()
-" augroup END
-" function! s:syntastic()
-"   SyntasticCheck
-"   call lightline#update()
-" endfunction
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost * call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
 " ------------- end lightline ------------------
 
 let g:syntastic_check_on_open = 1
