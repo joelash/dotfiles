@@ -28,12 +28,16 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'muz/vim-gemfile', {'for': 'ruby'}
 Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
-Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter'
+
+" Look and Feel
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'manicolosi/vim-airline-colornum'
 
 " Easy Alignment
 Plug 'junegunn/vim-easy-align'
@@ -329,103 +333,10 @@ nmap <silent> <Leader><space> :CtrlP<CR>
 " Clojure fmt autosave off
 let g:clj_fmt_autosave = 0
 
-" ------------- lightline ------------------
-function! GitPairs_detect()
-  let l:initials_raw=system("git config --get user.initials")
-  let g:lightline_git_pairs= substitute(l:initials_raw, '\%x00', '', '')
-  " let g:lightline_git_pairs='[jf mn]'
-endfunction
-
-function! GitPairs_initials()
-  return empty(g:lightline_git_pairs) ? '' : '[' . g:lightline_git_pairs . ']'
-endfunction
-
-augroup GitPair
-  autocmd!
-  autocmd BufNewFile,BufReadPost,BufEnter * call GitPairs_detect()
-augroup END
-
-function! WindowNumber()
-  let l:str=tabpagewinnr(tabpagenr())
-  return l:str
-endfunction
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'pairs' ],
-      \             [ 'filename' ],
-      \             [ 'ctrlpmark' ] ],
-      \   'right': [ [ 'syntastic', 'lineinfo' ],
-      \              ['windownum'],
-      \              ['percent'],
-      \              [ 'filetype', 'fileformat', 'fileencoding' ] ]
-      \ },
-      \ 'inactive': {
-      \   'left' : [ [ 'filename' ] ],
-      \   'right': [ [ 'lineinfo' ], ['windownum'], ['percent'] ]
-      \ },
-      \ 'component_function': {
-      \   'pairs': 'GitPairs_initials',
-      \   'fugitive': 'LightlineFugitive',
-      \   'windownum': 'WindowNumber',
-      \   'filename': 'LightlineFilename',
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag'
-      \ },
-      \ 'component_type': {
-      \   'syntastic': 'error'
-      \ },
-      \ 'component_visible_condition': {
-      \   'windownum': '1'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '|' }
-    \ }
-
-function! LightlineReadonly()
-    if &filetype == "help"
-    return ""
-  elseif &readonly
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! LightlineModified()
-  return &modifiable && &modified ? '[+]' : ''
-endfunction
-
-function! LightlineFilename()
-  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ ('' != expand('%:t') ? expand('%') : '[No Name]') .
-        \ ('' != LightlineModified() ? '' . LightlineModified() : '')
-endfunction
-
-function! LightlineFugitive()
-  try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = ' '  " edit here for cool mark
-      let branch = fugitive#head()
-      return branch !=# '' ? mark.branch : ''
-    endif
-  catch
-  endtry
-  return ''
-endfunction
-
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost * call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
-" ------------- end lightline ------------------
+" Airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='base16color'
 
 " Easy alignment
 " Start interactive EasyAlign in visual mode (e.g. vipga)
