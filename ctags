@@ -20,3 +20,21 @@
 --regex-clojure=/\([ \t]*defroutes[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/f,routes definition/
 --regex-clojure=/\([ \t]*intern[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/v,intern/
 --regex-clojure=/\([ \t]*ns[ \t]+([-<>[:alnum:]*+!_:\/.?]+)/\1/n,namespace/
+
+--langdef=Json
+--langmap=Json:.json
+--regex-Json=/^[ \t]*"([^"]+)"[ \t]*\:/\1/f,function/
+
+--exclude=.git
+--exclude=.svn
+--exclude=.cljs_rhino_repl
+--exclude=target
+--exclude=tmp
+--exclude=log
+--exclude=db
+--exclude=out
+--exclude=pkg
+--exclude=app.out
+--extra=+f
+--fields=+l
+
