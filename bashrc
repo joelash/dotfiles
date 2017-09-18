@@ -80,3 +80,7 @@ eval "$(scmpuff init -s)"
 
 export PROMPT_COMMAND="history -a ~/.bash_history.global"
 bind -x '"\C-r": "~/.swap_history_reverse.sh"'
+
+# if [ -f /usr/local/share/liquidprompt ]; then
+#   . /usr/local/share/liquidprompt
+# fi

@@ -2,6 +2,7 @@
 *.swo
 tags
 TAGS
+.tags_swp
 
 # iOS
 *.xcuserstate

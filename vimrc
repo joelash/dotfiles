@@ -14,6 +14,9 @@ call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 
+" Nvim shit
+Plug 'floobits/floobits-neovim'
+
 " syntax files
 Plug 'sheerun/vim-polyglot'
 
@@ -23,6 +26,7 @@ Plug 'rizzatti/dash.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tomtom/tcomment_vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'altercation/vim-colors-solarized'
@@ -216,6 +220,8 @@ nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 nnoremap <silent> <C-n><C-p> :GFiles<CR>
 nnoremap <silent> <C-n><C-t> :Tags<CR>
 nnoremap <silent> <C-n><C-b> :BTags<CR>
+nnoremap <silent> <C-n><C-k> :Lines<CR>
+nnoremap <silent> <C-n><C-l> :BLines<CR>
 
 " magic from @manicolosi
 nmap <leader>p (y%%a<CR><esc>p==
@@ -260,7 +266,7 @@ nmap <silent> <C-]> :call MyTagJump("tag")<CR>
 nmap <silent> g] :call MyTagJump("tselect")<CR>
 
 " Clojure Commands
-let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match', 'fdef']
+let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match', 'fdef', '^reg-']
 let g:clojure_align_multiline_strings = 1
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
@@ -300,6 +306,7 @@ nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
 nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
 nmap <Leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)``
 nmap <Leader>E :%Eval<CR>
+nmap <Leader>z zfaF<CR>
 
 " Slurp right and left
 nmap <silent> <Plug>SlurpRight ml>)%==`l:call repeat#set("\<Plug>SlurpRight", v:count)<CR>
@@ -336,6 +343,9 @@ let g:clj_fmt_autosave = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_theme='base16color'
+let g:airline_powerline_fonts = 1
+let g:airline_detect_spell = 0
+let g:airline_detect_spelllang = 0
 
 " Easy alignment
 " Start interactive EasyAlign in visual mode (e.g. vipga)

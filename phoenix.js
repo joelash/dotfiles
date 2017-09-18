@@ -195,7 +195,7 @@ var expandRightHandler = new Key('right', mash, expandRight);
 var altCmd = ['alt', 'cmd'];
 var toLeftHandler = new Key('left', altCmd, function() { toLeft(1, 2);});
 var toRightHandler = new Key('right', altCmd, function() { toRight(1, 2);});
-var fullHeightHandler = new Key('down', altCmd, fullHeight);
+// var fullHeightHandler = new Key('down', altCmd, fullHeight);
 var fullScreenHandler = new Key('f', altCmd, fullScreen);
 
 
