@@ -37,6 +37,14 @@ Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter'
+Plug 'terryma/vim-multiple-cursors'
+
+" Language server
+" Plug 'natebosch/vim-lsc'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/vim-lsp'
 
 " Look and Feel
 Plug 'bling/vim-airline'
@@ -94,7 +102,8 @@ let g:syntastic_check_on_wq = 0
 Plug 'manicolosi/taboo.vim'
 
 let g:taboo_modified_tab_flag = "‡"
-let g:taboo_tab_format = "[%N. %P%m] "
+" let g:taboo_tab_format = "[%N. %P%m] "
+let g:taboo_tab_format = "[%N. %f%m] "
 
 " taboo reset-tab-names
 nmap <silent> <C-G>f :let g:taboo_tab_format="[%N. %f%m] "<CR>:TabooReset<CR>
@@ -121,6 +130,8 @@ set undofile
 set undodir=~/.vim/undo
 
 set background=light
+" let base16colorspace=256
+" colorscheme base16-onedark
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
@@ -150,10 +161,14 @@ set expandtab
 set list
 set listchars=tab:→\ ,trail:␣,extends:↩,nbsp:.
 
+" scss keywords
+au FileType scss setl iskeyword+=-
+
 " shiftwidth and tabstop for files
 au FileType java setl sw=4 ts=4
 au FileType groovy setl sw=4 ts=4
 au FileType coffee setl sw=2 ts=2
+autocmd BufRead,BufNewFile *.block setl nofixendofline
 
 "set gfn=Inconsolata                                 " set default font
 set gfn=Hack                                        " set default font
@@ -217,11 +232,13 @@ nnoremap <silent> <leader>K :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <LocalLeader>s :set paste<CR>m`i<CR><Esc>``:set nopaste<CR>
 
 " FZF binding
+nnoremap <silent> <C-n><C-o> :Files<CR>
 nnoremap <silent> <C-n><C-p> :GFiles<CR>
 nnoremap <silent> <C-n><C-t> :Tags<CR>
 nnoremap <silent> <C-n><C-b> :BTags<CR>
 nnoremap <silent> <C-n><C-k> :Lines<CR>
 nnoremap <silent> <C-n><C-l> :BLines<CR>
+nnoremap <silent> <C-n><C-f> :Buffers<CR>
 
 " magic from @manicolosi
 nmap <leader>p (y%%a<CR><esc>p==
@@ -278,6 +295,17 @@ nmap <S-Right> <Plug>(sexp_capture_next_element)<Plug>(sexp_indent_top)
 nmap <S-Left> <Plug>(sexp_emit_tail_element)<Plug>(sexp_indent_top)
 imap <S-Right> <C-O><Plug>(sexp_capture_next_element)<Plug>(sexp_indent_top)
 imap <S-Left> <C-O><Plug>(sexp_emit_tail_element)<Plug>(sexp_indent_top)
+
+function! MagicPprint()
+  exec "normal yaf)"
+  exec "normal a\<CR>(with-out-str (clojure.pprint/pprint\<CR>\<ESC>"
+  exec "normal =P((c!!"
+  exec "normal x^x"
+  s#\\\"#\"#g
+  s#\\n#\r#g
+endfunction
+command! MagicPprint call MagicPprint()
+nmap <silent> cp! :MagicPprint<CR>
 
 " Sort namespaces in (:require)
 function! CljSortRequireFn(find)
@@ -473,3 +501,21 @@ vnoremap <silent> <leader>` :exe "tabn ".g:lasttab<CR>
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 " end go to auto paste mode
+
+" Language server
+" let g:lsc_server_commands = {'text': 'clojure_language_server'}
+" let g:lsc_auto_map = v:true
+" let g:lsc_trace_level = 'verbose'
+" let g:lsc_enable_autocomplete = v:true
+
+au User lsp_setup call lsp#register_server({
+         \ 'name': 'clj',
+         \ 'cmd': {server_info->['node', '/Users/joelash/.bin/clojure_language_server.js']},
+         \ 'whitelist': ['text'],
+         \ })
+
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('/tmp/lsp.log')
+let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')

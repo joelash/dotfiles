@@ -1,4 +1,4 @@
-{:user {:plugins [[cider/cider-nrepl "0.8.0-SNAPSHOT"]
+{:user {:plugins [[cider/cider-nrepl "0.15.1"]
                   [lein-autoexpect "1.0"]
                   ;[jonase/eastwood "0.2.1"]
                   [lein-exec "0.3.1"]

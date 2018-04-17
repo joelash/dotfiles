@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
 FORBIDDEN = [
   /\bass\b/i,
   /\basshole\b/i,
@@ -18,6 +21,8 @@ FORBIDDEN = [
 
   /\bhack\b/i,
   /\bdo not commit\b/i,
+  /\bno\s*commit\b/i,
+  /\bdon'?t commit\b/i,
   /\bspy\b/i,
 ]
 
@@ -27,11 +32,10 @@ full_diff.scan(%r{^\+\+\+ b/(.+)\n@@.*\n([\s\S]*?)(?:^diff|\z)}).each do |file, 
   added = diff.split("\n").select { |x| x.start_with?("+") }.join("\n")
   if FORBIDDEN.any? { |re| added.match(re) }
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    puts %{WHAT ARE YOU THINKING YOU ASSHAT! You cannnot commit "#{$1 || $&}" to #{file}}
+    puts %{WHAT ARE YOU THINKING YOU ASS MONKEY! You cannnot commit "#{$1 || $&}" to #{file}}
     puts "To commit anyway, use --no-verify (which you fucking shouldn't do!)"
     puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-    `say WHAT ARE YOU THINKING YOU ASS HAT! You cannnot commit #{$1 || $&} to #{file}`
-    `say "To commit anyway, use dash dash no dash verify, which you fucking shouldn't do!"`
+    `say WHAT ARE YOU THINKING YOU ASS MONKEY! You cannnot commit #{$1 || $&} to #{file}`
     exit 1
   end
 end

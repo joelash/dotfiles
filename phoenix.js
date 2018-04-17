@@ -203,7 +203,11 @@ var cmdCtrl = ['ctrl', 'cmd'];
 var iTermHander = new Key('t', cmdCtrl, function() {App.focusOrStart('iTerm');});
 //new Key('e', cmdCtrl, function() {App.focusOrStart('Emacs');});
 //new Key('b', cmdCtrl , function() {App.focusOrStart('Google Chrome');});
-var showZoomHandler = new Key('m', cmdCtrl , function() {App.focusOrStart('Slack');});
+var showSlackHandler = new Key('m', cmdCtrl , function() {App.focusOrStart('Slack');});
+var showRNRunHandler = new Key('x', cmdCtrl , function() {
+  App.focusOrStart('Expo XDE');
+  App.focusOrStart('Simulator');
+});
 //new Key('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
 //new Key('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
 //new Key('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});

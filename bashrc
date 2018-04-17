@@ -66,6 +66,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+export PATH="/Applications/Genymotion.app/Contents/MacOS/tools:$PATH" # Add GenyMotion tools
+
 eval "$(scmpuff init -s)"
 
 ### HH History

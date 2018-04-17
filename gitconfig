@@ -33,11 +33,14 @@
 [core]
 	excludesfile = /Users/joelash/.gitignore
   safecrlf = true
-	hooksPath = /Users/joelash/.git/hooks
+	# hooksPath = /Users/joelash/.git/hooks
+	pager = less -r
 [push]
   default = tracking
 [apply]
   ignore-whitespace = nowarn
+[pull]
+	rebase = true
 [github]
 	user = joelash
 [difftool "Kaleidoscope"]
@@ -54,12 +57,11 @@
 	keepBackup = true
 [merge]
 	tool = Kaleidoscope
-[pull]
-	rebase = true
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
