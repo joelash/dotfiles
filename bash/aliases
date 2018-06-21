@@ -35,7 +35,7 @@ alias clean-swaps='find ./ -type f -name "\.*sw[klmnop]" -delete'
 alias vimf='vim $(fzf)'
 
 # fun git commands
-alias up='git pull'
+# alias up='git pull'
 alias log='git log --oneline'
 alias glg='git log --pretty=oneline'
 alias gdc='git diff --staged'

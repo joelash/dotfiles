@@ -29,7 +29,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tomtom/tcomment_vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'altercation/vim-colors-solarized'
 Plug 'muz/vim-gemfile', {'for': 'ruby'}
 Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
 Plug 'tpope/vim-fugitive'
@@ -37,14 +36,20 @@ Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter'
+
+" Colorschemes
+Plug 'connorholyday/vim-snazzy'
+Plug 'altercation/vim-colors-solarized'
+
+" Multiple cursors
 Plug 'terryma/vim-multiple-cursors'
+let g:multi_cursor_exit_from_insert_mode=0
 
 " Language server
-" Plug 'natebosch/vim-lsc'
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " Look and Feel
 Plug 'bling/vim-airline'
@@ -125,17 +130,24 @@ set swapfile
 set backupdir=~/.vim/swp
 set directory=~/.vim/swp
 
+" set mouse=n                                         " normal mode for mouse
+
 " undo directory
 set undofile
 set undodir=~/.vim/undo
 
 set background=light
-" let base16colorspace=256
-" colorscheme base16-onedark
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+
+" Love for hyper
+set termguicolors
+let base16colorspace=256
+colorscheme base16-material
+
+" Love for base16 shell
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
 
 " Define Ctrl-w + num to go to vim window
 let i = 1
@@ -248,7 +260,7 @@ map ,S :source ~/.vimrc<CR>
 map <silent> ,v :tabedit ~/.vimrc<CR>:lcd ~/src/github/dotfiles/mine<CR>
 
 " NERDTree
-nmap <silent> <F2> :NERDTreeToggle<CR>                 " Make F2 open NERDTree
+nmap <silent> <LocalLeader>tt :NERDTreeToggle<CR>                 " Make F2 open NERDTree
 nmap <silent> <LocalLeader>l :NERDTreeFind<CR>         " Locate current file in NERDTree
 
 " TAGS
@@ -507,15 +519,44 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 " let g:lsc_auto_map = v:true
 " let g:lsc_trace_level = 'verbose'
 " let g:lsc_enable_autocomplete = v:true
+"
+" au User lsp_setup call lsp#register_server({
+"          \ 'name': 'clj',
+"          \ 'cmd': {server_info->['bash', '-c', 'cd /Users/joelash/src/github/lsp/clojure-lsp && lein run']},
+"          \ 'whitelist': ['clojure'],
+"          \ })
+"
+" let g:lsp_signs_enabled = 1         " enable signs
+" let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('/tmp/lsp.log')
+" let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
 
-au User lsp_setup call lsp#register_server({
-         \ 'name': 'clj',
-         \ 'cmd': {server_info->['node', '/Users/joelash/.bin/clojure_language_server.js']},
-         \ 'whitelist': ['text'],
-         \ })
+" LanguageClient neovim setup
+" Required for operations modifying multiple buffers like rename.
+set hidden
+set signcolumn=yes
+let g:LanguageClient_diagnosticsList="Disabled"
 
-let g:lsp_signs_enabled = 1         " enable signs
-let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('/tmp/lsp.log')
-let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
+let g:LanguageClient_serverCommands = {
+    \ 'clojure': ['bash', '-c', 'cd /Users/joelash/src/github/lsp/clojure-lsp && lein rrun'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> <Leader>u :call LanguageClient_textDocument_references()<CR>
+
+function! Expand(exp) abort
+    let l:result = expand(a:exp)
+    return l:result ==# '' ? '' : "file://" . l:result
+endfunction
+
+nnoremap <silent> crcc :call LanguageClient#workspace_executeCommand('cycle-coll', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+nnoremap <silent> crth :call LanguageClient#workspace_executeCommand('thread-first', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+nnoremap <silent> crtt :call LanguageClient#workspace_executeCommand('thread-last', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+nnoremap <silent> crtf :call LanguageClient#workspace_executeCommand('thread-first-all', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+nnoremap <silent> crtl :call LanguageClient#workspace_executeCommand('thread-last-all', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+nnoremap <silent> crml :call LanguageClient#workspace_executeCommand('move-to-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
+nnoremap <silent> cril :call LanguageClient#workspace_executeCommand('introduce-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
+nnoremap <silent> crel :call LanguageClient#workspace_executeCommand('expand-let', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>

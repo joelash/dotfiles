@@ -3,6 +3,7 @@ for file in ~/.bash/*.sh; do
   source $file
 done
 source ~/.bash/aliases
+source ~/.bash_completions/alacritty-completions.bash
 
 if [ -f ~/.bash/private ]; then
   . ~/.bash/private
@@ -80,9 +81,17 @@ eval "$(scmpuff init -s)"
 # # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
 # if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
 
+export HH_CONFIG=hicolor
 export PROMPT_COMMAND="history -a ~/.bash_history.global"
 bind -x '"\C-r": "~/.swap_history_reverse.sh"'
 
 # if [ -f /usr/local/share/liquidprompt ]; then
 #   . /usr/local/share/liquidprompt
 # fi
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /Users/joelash/.config/yarn/global/node_modules/tabtab/.completions/serverless.bash ] && . /Users/joelash/.config/yarn/global/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /Users/joelash/.config/yarn/global/node_modules/tabtab/.completions/sls.bash ] && . /Users/joelash/.config/yarn/global/node_modules/tabtab/.completions/sls.bash

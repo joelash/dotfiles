@@ -13,9 +13,12 @@
                  {require [[:block 0]]
                   ns [[:block 0]]}}
         :dependencies [[slamhound "1.5.5"]
+                       [pjstadig/humane-test-output "0.8.3"]
                       ;_[jonase/eastwood "0.2.1" :exclusions [org.clojure/clojure]]
                       ;_[cljfmt "0.1.6"]
                       ]
+        :injections [(require 'pjstadig.humane-test-output)
+                     (pjstadig.humane-test-output/activate!)]
         :aliases {"slamhound" ["run" "-m" "slam.hound"]}
         :jvm-opts ["-XX:+CMSClassUnloadingEnabled" "-XX:MaxPermSize=256M"]}
 
