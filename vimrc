@@ -38,8 +38,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter'
 
 " Colorschemes
-Plug 'connorholyday/vim-snazzy'
 Plug 'altercation/vim-colors-solarized'
+Plug 'tyrannicaltoucan/vim-quantum'
 
 " Multiple cursors
 Plug 'terryma/vim-multiple-cursors'
@@ -136,11 +136,13 @@ set directory=~/.vim/swp
 set undofile
 set undodir=~/.vim/undo
 
-set background=light
+set background=dark
 
 " Love for hyper
 set termguicolors
-let base16colorspace=256
+" let base16colorspace=256
+set t_ut=
+" colorscheme base16-material
 colorscheme base16-material
 
 " Love for base16 shell

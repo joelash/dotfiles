@@ -111,7 +111,43 @@ module.exports = {
 
     // Material Box
     materialBox: {
-      scheme: 'material',
+      user: {
+       colors: {
+          black: '#263238',
+          red: '#FF5370',
+          green: '#C3E88D',
+          yellow: '#FFCB6B',
+          blue: '#82AAFF',
+          magenta: '#F07178',
+          cyan: '#89DDFF',
+          white: '#EEFFFF',
+          lightBlack: '#546E7A',
+          lightRed: '#FF5370',
+          lightGreen: '#C3E88D',
+          lightYellow: '#FFCB6B',
+          lightBlue: '#82AAFF',
+          lightMagenta: '#F07178',
+          lightCyan: '#89DDFF',
+          lightWhite: '#EEFFFF',
+        },
+
+        // Default
+        backgroundColor: '#263238',
+        foregroundColor: '#FFFFFF',
+        cursorColor: '#EEFFFF',
+        borderColor: 'transparent',
+
+        // Accent color
+        accentColor: '#80CBC4',
+
+        // Other (optional, it will be override by foregroundColor)
+        tabTitleColor: 'rgba(255, 255, 255, 0.2)',
+        selectedTabTitleColor: '#EEFFFF',
+
+        // css (optional)
+        css: '',
+        termCSS: '',
+      }
     }
   },
 
