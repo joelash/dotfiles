@@ -30,6 +30,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tomtom/tcomment_vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'muz/vim-gemfile', {'for': 'ruby'}
+" Plug 'chrisbra/csv.vim'
 Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
 Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
@@ -46,10 +47,10 @@ Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_exit_from_insert_mode=0
 
 " Language server
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
 " Look and Feel
 Plug 'bling/vim-airline'
@@ -216,6 +217,7 @@ set nosplitbelow                                    " split to top, not bottom
 set smartindent   " try to be smart about indentation
 set autoindent    " ditto
 set smarttab      " smarter tabbing
+set scrolloff=5 " add some context when scrolling
 
 set grepprg=git\ grep\ -n\ $*
 
@@ -536,29 +538,29 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 " LanguageClient neovim setup
 " Required for operations modifying multiple buffers like rename.
-set hidden
-set signcolumn=yes
-let g:LanguageClient_diagnosticsList="Disabled"
+" set hidden
+" set signcolumn=yes
+" let g:LanguageClient_diagnosticsList="Disabled"
+"
+" let g:LanguageClient_serverCommands = {
+"     \ 'clojure': ['bash', '-c', 'cd /Users/joelash/src/github/lsp/clojure-lsp && lein rrun'],
+"     \ }
 
-let g:LanguageClient_serverCommands = {
-    \ 'clojure': ['bash', '-c', 'cd /Users/joelash/src/github/lsp/clojure-lsp && lein rrun'],
-    \ }
-
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <Leader>u :call LanguageClient_textDocument_references()<CR>
-
-function! Expand(exp) abort
-    let l:result = expand(a:exp)
-    return l:result ==# '' ? '' : "file://" . l:result
-endfunction
-
-nnoremap <silent> crcc :call LanguageClient#workspace_executeCommand('cycle-coll', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
-nnoremap <silent> crth :call LanguageClient#workspace_executeCommand('thread-first', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
-nnoremap <silent> crtt :call LanguageClient#workspace_executeCommand('thread-last', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
-nnoremap <silent> crtf :call LanguageClient#workspace_executeCommand('thread-first-all', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
-nnoremap <silent> crtl :call LanguageClient#workspace_executeCommand('thread-last-all', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
-nnoremap <silent> crml :call LanguageClient#workspace_executeCommand('move-to-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
-nnoremap <silent> cril :call LanguageClient#workspace_executeCommand('introduce-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
-nnoremap <silent> crel :call LanguageClient#workspace_executeCommand('expand-let', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+" nnoremap <silent> <Leader>u :call LanguageClient_textDocument_references()<CR>
+"
+" function! Expand(exp) abort
+"     let l:result = expand(a:exp)
+"     return l:result ==# '' ? '' : "file://" . l:result
+" endfunction
+"
+" nnoremap <silent> crcc :call LanguageClient#workspace_executeCommand('cycle-coll', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+" nnoremap <silent> crth :call LanguageClient#workspace_executeCommand('thread-first', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+" nnoremap <silent> crtt :call LanguageClient#workspace_executeCommand('thread-last', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+" nnoremap <silent> crtf :call LanguageClient#workspace_executeCommand('thread-first-all', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+" nnoremap <silent> crtl :call LanguageClient#workspace_executeCommand('thread-last-all', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+" nnoremap <silent> crml :call LanguageClient#workspace_executeCommand('move-to-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
+" nnoremap <silent> cril :call LanguageClient#workspace_executeCommand('introduce-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
+" nnoremap <silent> crel :call LanguageClient#workspace_executeCommand('expand-let', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>

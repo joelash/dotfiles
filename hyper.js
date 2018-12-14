@@ -6,7 +6,7 @@ module.exports = {
   config: {
     // Choose either "stable" for receiving highly polished,
     // or "canary" for less polished but more frequent updates
-    updateChannel: 'stable',
+    updateChannel: 'canary',
 
     // default font size in pixels for all tabs
     fontSize: 14,
@@ -49,6 +49,9 @@ module.exports = {
 
     // custom padding (css format, i.e.: `top right bottom left`)
     padding: '12px 14px',
+
+    // Make alt be meta
+    modifierKeys: { altIsMeta: true },
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -162,7 +165,8 @@ module.exports = {
     "hyper-search",
     "hypercwd",
     "hyper-material-box",
-    "hyperterm-1password"
+    "hyperterm-1password",
+    "hyper-quit"
   ],
 
   // in development, you can create a directory under

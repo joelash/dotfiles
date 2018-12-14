@@ -14,6 +14,7 @@ export BREW_HOME=/usr/local/bin
 export BREW_SBIN=/usr/local/sbin
 export PATH=$BREW_SBIN:$BREW_HOME:$PATH
 export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/Library/Python/2.7/bin:$PATH
 
 export EDITOR=vim
 export SVN_EDITOR=/usr/bin/vim
@@ -86,6 +87,8 @@ eval "$(scmpuff init -s)"
 export HH_CONFIG=hicolor
 export PROMPT_COMMAND="history -a ~/.bash_history.global"
 bind -x '"\C-r": "~/.swap_history_reverse.sh"'
+
+bind -x '"\C-g": "vim $(fzf-tmux)"'
 
 # if [ -f /usr/local/share/liquidprompt ]; then
 #   . /usr/local/share/liquidprompt

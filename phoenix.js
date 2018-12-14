@@ -52,7 +52,17 @@ function toRight(fillCols, maxCols) {
 
 function fullScreen() {
   var win = Window.focused();
+  var appName = win.app().name();
   var screenFrame = Window.focused().screen().visibleFrameInRectangle();
+  if (appName == 'iTerm2') {
+    screenFrame.width = screenFrame.width - 20;
+    screenFrame.x = screenFrame.x + 10;
+    screenFrame.height = screenFrame.height - 5;
+  } else {
+    screenFrame.width = screenFrame.width;
+    screenFrame.x = screenFrame.x;
+    screenFrame.height = screenFrame.height;
+  }
   win.setFrame(screenFrame);
 }
 
@@ -191,12 +201,12 @@ var rightOneMonitorHandler = new Key('right', mash, rightOneMonitor);
 var mash = ['alt', 'cmd', 'ctrl'];
 var shrinkRightHandler = new Key('left', mash, shrinkRight);
 var expandRightHandler = new Key('right', mash, expandRight);
+var fullScreenHandler = new Key('f', mash, fullScreen);
 
 var altCmd = ['alt', 'cmd'];
 var toLeftHandler = new Key('left', altCmd, function() { toLeft(1, 2);});
 var toRightHandler = new Key('right', altCmd, function() { toRight(1, 2);});
 // var fullHeightHandler = new Key('down', altCmd, fullHeight);
-var fullScreenHandler = new Key('f', altCmd, fullScreen);
 
 
 var cmdCtrl = ['ctrl', 'cmd'];
@@ -208,6 +218,7 @@ var showRNRunHandler = new Key('x', cmdCtrl , function() {
   App.focusOrStart('Expo XDE');
   App.focusOrStart('Simulator');
 });
+var showSimulator = new Key('s', cmdCtrl , function() { App.focusOrStart('Simulator'); });
 //new Key('x', cmdCtrl , function() {App.focusOrStart('Xcode');});
 //new Key('p', cmdCtrl , function() {App.focusOrStart('Path Finder');});
 //new Key('z', cmdCtrl , function() {App.focusOrStart('Zoom.us');});

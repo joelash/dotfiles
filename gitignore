@@ -1,6 +1,7 @@
 *.swp
 *.swo
 tags
+.tags
 TAGS
 .tags_swp
 
@@ -9,6 +10,9 @@ TAGS
 project.xcworkspace/
 xcuserdata/
 .DS_Store
+
+# VS Code
+*.code-workspace
 
 # this is for bundler
 .bundle/

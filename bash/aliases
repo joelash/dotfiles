@@ -12,6 +12,7 @@ alias grep='grep --color'
 # local ip
 alias hostip='ifconfig | grep broadcast | head -1 | cut -d'\'' '\'' -f2'
 
+alias cljfmt='/usr/local/bin/cljfmt --edn=/Users/joelash/.lein/cljfmt-options.edn'
 
 # hub/git
 alias git='hub'

@@ -11,7 +11,9 @@
         :ultra  {:color-scheme :solarized_dark}
         :cljfmt {:indents
                  {require [[:block 0]]
-                  ns [[:block 0]]}}
+                  ns [[:block 0]]
+                  defproject [[:inner 1]]
+                  }}
         :dependencies [[slamhound "1.5.5"]
                        [pjstadig/humane-test-output "0.8.3"]
                       ;_[jonase/eastwood "0.2.1" :exclusions [org.clojure/clojure]]
