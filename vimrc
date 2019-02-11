@@ -186,7 +186,7 @@ au FileType coffee setl sw=2 ts=2
 autocmd BufRead,BufNewFile *.block setl nofixendofline
 
 "set gfn=Inconsolata                                 " set default font
-set gfn=Hack                                        " set default font
+set gfn="Menlo for Powerline"                                        " set default font
 set incsearch                                       " show search as typing
 set hlsearch                                        " highlight search results
 set ignorecase                                      " case insensitive search

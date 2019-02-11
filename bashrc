@@ -44,6 +44,7 @@ if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 PATH=$PATH:/usr/local/share/npm/bin # Add node to path
+PATH=$PATH:$HOME/src/flutter/bin  # Add Flutter to path
 
 function git_initials {
   local initials=$(git config --get user.initials)
