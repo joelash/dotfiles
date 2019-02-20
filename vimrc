@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 
 " Nvim shit
-Plug 'floobits/floobits-neovim'
+" Plug 'floobits/floobits-neovim'
 
 " syntax files
 Plug 'sheerun/vim-polyglot'
@@ -55,7 +55,6 @@ let g:multi_cursor_exit_from_insert_mode=0
 " Look and Feel
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'manicolosi/vim-airline-colornum'
 
 " Easy Alignment
 Plug 'junegunn/vim-easy-align'
@@ -79,6 +78,7 @@ let g:jsx_ext_required = 0 " enabled JSX highlighting for .js files too
 
 " Themes
 Plug 'chriskempson/base16-vim'
+Plug 'joshdick/onedark.vim'
 
 " Tmux Nav
 Plug 'christoomey/vim-tmux-navigator'
@@ -140,11 +140,19 @@ set undodir=~/.vim/undo
 set background=dark
 
 " Love for hyper
-set termguicolors
 " let base16colorspace=256
-set t_ut=
+" set t_ut=
 " colorscheme base16-material
-colorscheme base16-material
+" colorscheme base16-material
+"
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+colorscheme onedark
 
 " Love for base16 shell
 " if filereadable(expand("~/.vimrc_background"))
@@ -266,6 +274,7 @@ map <silent> ,v :tabedit ~/.vimrc<CR>:lcd ~/src/github/dotfiles/mine<CR>
 " NERDTree
 nmap <silent> <LocalLeader>tt :NERDTreeToggle<CR>                 " Make F2 open NERDTree
 nmap <silent> <LocalLeader>l :NERDTreeFind<CR>         " Locate current file in NERDTree
+" let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " TAGS
 map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude="@/Users/joelash/.ctagsignore" --extra=+f --fields=+l<CR>
@@ -386,8 +395,9 @@ let g:clj_fmt_autosave = 0
 " Airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_theme='base16color'
-let g:airline_powerline_fonts = 1
+" let g:airline_theme='base16color'
+let g:airline_theme='onedark'
+" let g:airline_powerline_fonts = 1
 let g:airline_detect_spell = 0
 let g:airline_detect_spelllang = 0
 
