@@ -53,7 +53,7 @@ let g:multi_cursor_exit_from_insert_mode=0
 "     \ }
 
 " Look and Feel
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Easy Alignment
@@ -105,15 +105,15 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " tab names
-Plug 'manicolosi/taboo.vim'
+" Plug 'manicolosi/taboo.vim'
 
-let g:taboo_modified_tab_flag = "‡"
+" let g:taboo_modified_tab_flag = "‡"
 " let g:taboo_tab_format = "[%N. %P%m] "
-let g:taboo_tab_format = "[%N. %f%m] "
+" let g:taboo_tab_format = "[%N. %f%m] "
 
 " taboo reset-tab-names
-nmap <silent> <C-G>f :let g:taboo_tab_format="[%N. %f%m] "<CR>:TabooReset<CR>
-nmap <silent> <C-G>d :let g:taboo_tab_format="[%N. %P%m] "<CR>:TabooReset<CR>
+" nmap <silent> <C-G>f :let g:taboo_tab_format="[%N. %f%m] "<CR>:TabooReset<CR>
+" nmap <silent> <C-G>d :let g:taboo_tab_format="[%N. %P%m] "<CR>:TabooReset<CR>
 
 filetype plugin indent on                   " required!
 call plug#end()
@@ -274,7 +274,6 @@ map <silent> ,v :tabedit ~/.vimrc<CR>:lcd ~/src/github/dotfiles/mine<CR>
 " NERDTree
 nmap <silent> <LocalLeader>tt :NERDTreeToggle<CR>                 " Make F2 open NERDTree
 nmap <silent> <LocalLeader>l :NERDTreeFind<CR>         " Locate current file in NERDTree
-" let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " TAGS
 map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude="@/Users/joelash/.ctagsignore" --extra=+f --fields=+l<CR>
@@ -400,6 +399,14 @@ let g:airline_theme='onedark'
 " let g:airline_powerline_fonts = 1
 let g:airline_detect_spell = 0
 let g:airline_detect_spelllang = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+nnoremap <silent> <C-b><C-n> :bnext<CR>
+nnoremap <silent> <C-b><C-p> :bprevious<CR>
+nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> <S-Tab> :bprevious<CR>
+nnoremap <silent> <C-x> :bdelete<CR>
 
 " Easy alignment
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -508,15 +515,15 @@ function! XTermPasteBegin()
 endfunction
 
 " Tab swtiching
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
+noremap <leader>1 b1
+noremap <leader>2 b2
+noremap <leader>3 b3
+noremap <leader>4 b4
+noremap <leader>5 b5
+noremap <leader>6 b6
+noremap <leader>7 b7
+noremap <leader>8 b8
+noremap <leader>9 b9
 noremap <leader>0 :tablast<CR>
 
 au TabLeave * let g:lasttab = tabpagenr()

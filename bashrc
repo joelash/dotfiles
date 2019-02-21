@@ -15,6 +15,7 @@ export BREW_SBIN=/usr/local/sbin
 export PATH=$BREW_SBIN:$BREW_HOME:$PATH
 export PATH=$HOME/.bin:$PATH
 export PATH=$HOME/Library/Python/2.7/bin:$PATH
+export HOMEBREW_FORCE_BREWED_CURL=1
 
 export EDITOR=vim
 export SVN_EDITOR=/usr/bin/vim
