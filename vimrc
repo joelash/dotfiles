@@ -20,6 +20,11 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 " syntax files
 Plug 'sheerun/vim-polyglot'
 
+" Terraform
+Plug 'hashivim/vim-terraform'
+" let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
 " Other
 Plug 'rizzatti/funcoo.vim'
 Plug 'rizzatti/dash.vim'
@@ -105,11 +110,11 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " tab names
-" Plug 'manicolosi/taboo.vim'
+Plug 'gcmt/taboo.vim'
 
-" let g:taboo_modified_tab_flag = "‡"
+let g:taboo_modified_tab_flag = "‡"
 " let g:taboo_tab_format = "[%N. %P%m] "
-" let g:taboo_tab_format = "[%N. %f%m] "
+let g:taboo_tab_format = "[%N. %f%m] "
 
 " taboo reset-tab-names
 " nmap <silent> <C-G>f :let g:taboo_tab_format="[%N. %f%m] "<CR>:TabooReset<CR>
@@ -399,14 +404,14 @@ let g:airline_theme='onedark'
 " let g:airline_powerline_fonts = 1
 let g:airline_detect_spell = 0
 let g:airline_detect_spelllang = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 nnoremap <silent> <C-b><C-n> :bnext<CR>
 nnoremap <silent> <C-b><C-p> :bprevious<CR>
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprevious<CR>
-nnoremap <silent> <C-x> :bdelete<CR>
+nnoremap <silent> <C-b><C-x> :bdelete<CR>
 
 " Easy alignment
 " Start interactive EasyAlign in visual mode (e.g. vipga)

@@ -81,3 +81,6 @@ alias dev-chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
 
 alias start_pair='ssh -R1337:localhost:22 ubuntu@pair.joelafriedman.com'
 
+
+# Terraform / terragrunt
+alias tg='terragrunt'
