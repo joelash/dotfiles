@@ -20,10 +20,8 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 " syntax files
 Plug 'sheerun/vim-polyglot'
 
-" Terraform
-Plug 'hashivim/vim-terraform'
-" let g:terraform_align=1
-let g:terraform_fmt_on_save=1
+" Coc
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " Other
 Plug 'rizzatti/funcoo.vim'
@@ -108,6 +106,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_clojure_checkers = ['joker']
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Terraform
+Plug 'hashivim/vim-terraform'
+" let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " tab names
 Plug 'gcmt/taboo.vim'
@@ -409,8 +412,8 @@ let g:airline_detect_spelllang = 0
 
 nnoremap <silent> <C-b><C-n> :bnext<CR>
 nnoremap <silent> <C-b><C-p> :bprevious<CR>
-nnoremap <silent> <Tab> :bnext<CR>
-nnoremap <silent> <S-Tab> :bprevious<CR>
+" nnoremap <silent> <Tab> :bnext<CR>
+" nnoremap <silent> <S-Tab> :bprevious<CR>
 nnoremap <silent> <C-b><C-x> :bdelete<CR>
 
 " Easy alignment
