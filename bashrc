@@ -29,6 +29,11 @@ fi
 # export DOCKER_CERT_PATH=/Users/joelash/.boot2docker/certs/boot2docker-vm
 # export DOCKER_TLS_VERIFY=1
 
+# Boot CLJ
+BOOT_CLOJURE_NAME=org.clojure/clojure
+BOOT_VERSION=2.8.3
+BOOT_CLOJURE_VERSION=1.8.0
+
 # prompt
 export YELLOW='\[\033[1;33m\]' # Yellow
 export WHITE='\[\033[1;37m\]' # White
@@ -48,14 +53,14 @@ PATH=$PATH:/usr/local/share/npm/bin # Add node to path
 PATH=$PATH:$HOME/src/flutter/bin  # Add Flutter to path
 
 function git_initials {
-  local initials=$(git config --get user.initials)
+  local initials=$(git mob-print --initials)
   if [[ -n "${initials}" ]]; then
-    echo "[${initials}] "
+    echo " [${initials}]"
   fi
 }
 
 if [ -n "$PS1" ]; then
-  export PS1="\$(git_initials)\$(truncated_pwd 3)\$(__parse_git_branch__) -> "
+  export PS1="\$(truncated_pwd 3)\$(git_initials)\$(__parse_git_branch__) -> "
   export PS2='> '
 
   if [ "$TERM_PROGRAM" != "Hyper" ]; then
