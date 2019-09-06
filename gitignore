@@ -28,6 +28,7 @@ sketch_assets/
 \#*\#
 
 .nrepl-port
+.nrepl-history
 .agignore
 
 .slender
