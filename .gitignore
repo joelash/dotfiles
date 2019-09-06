@@ -6,6 +6,7 @@ emacs.d/elpa/*
 emacs.d/eshell/*
 emacs.d/tmp/*
 
+config/
 gem/
 bundle/
 
