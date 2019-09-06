@@ -17,9 +17,6 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 " Nvim shit
 " Plug 'floobits/floobits-neovim'
 
-" syntax files
-Plug 'sheerun/vim-polyglot'
-
 " Coc
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
@@ -79,6 +76,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0 " enabled JSX highlighting for .js files too
 
+" syntax files
+Plug 'sheerun/vim-polyglot'
+let g:polyglot_disabled = ['csv']
+
 " Themes
 Plug 'chriskempson/base16-vim'
 Plug 'joshdick/onedark.vim'
@@ -88,7 +89,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Clojure in Vim
 Plug 'guns/vim-clojure-static'
-Plug 'christoph-frick/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
@@ -96,6 +97,10 @@ Plug 'losingkeys/vim-niji'
 Plug 'guns/vim-clojure-highlight'
 Plug 'venantius/vim-cljfmt'
 Plug 'aclaimant/syntastic-joker'
+
+" Rainbox parens
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
 " vim syntax checker
 Plug 'scrooloose/syntastic'
@@ -271,6 +276,7 @@ nnoremap <silent> <C-n><C-b> :BTags<CR>
 nnoremap <silent> <C-n><C-k> :Lines<CR>
 nnoremap <silent> <C-n><C-l> :BLines<CR>
 nnoremap <silent> <C-n><C-f> :Buffers<CR>
+nnoremap <silent> <C-n><C-m> :Marks<CR>
 
 " magic from @manicolosi
 nmap <leader>p (y%%a<CR><esc>p==
@@ -315,7 +321,7 @@ nmap <silent> <C-]> :call MyTagJump("tag")<CR>
 nmap <silent> g] :call MyTagJump("tselect")<CR>
 
 " Clojure Commands
-let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match', 'fdef', '^reg-']
+let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', 'let$', 'go-loop', 'GET', 'POST', 'PUT', 'ANY', 'DELETE', 'PATCH', '^context', 'match', 'fdef', '^reg-']
 let g:clojure_align_multiline_strings = 1
 nnoremap <silent> cq; :Eval<CR>
 nnoremap <silent> cq: cpp<CR>
@@ -327,6 +333,12 @@ nmap <S-Right> <Plug>(sexp_capture_next_element)<Plug>(sexp_indent_top)
 nmap <S-Left> <Plug>(sexp_emit_tail_element)<Plug>(sexp_indent_top)
 imap <S-Right> <C-O><Plug>(sexp_capture_next_element)<Plug>(sexp_indent_top)
 imap <S-Left> <C-O><Plug>(sexp_emit_tail_element)<Plug>(sexp_indent_top)
+
+" Clojure fmt autosave off
+let g:clj_fmt_autosave = 0
+
+" Clojure Syntax Hightling
+autocmd VimEnter * RainbowToggle
 
 function! MagicPprint()
   exec "normal yaf)"
@@ -396,9 +408,6 @@ let g:ctrlp_show_hidden = 1                                                     
 let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes', 'digraphs']
 nmap <silent> <Leader><space> :CtrlP<CR>
 
-" Clojure fmt autosave off
-let g:clj_fmt_autosave = 0
-
 " Airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -465,7 +474,9 @@ command! -nargs=1 ConnectRepl call NReplConnectFn(<q-args>)
 command! -nargs=1 DConnect call DockerReplConnectFn(<q-args>)
 command! -nargs=1 AConnect call AclReplConnectFn(<q-args>)
 " command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
-command! Figwheel :Piggieback (figwheel-sidecar.repl-api/repl-env)
+" command! Figwheel :Piggieback (figwheel-sidecar.repl-api/repl-env)
+command! Figwheel :CljEval (cider.piggieback/cljs-repl (figwheel-sidecar.repl-api/repl-env))
+command! FigwheelMain :Piggieback (figwheel.main.api/repl-env "dev")
 
 " ------------------------------------------
 "       Auto namespace for new files
@@ -484,10 +495,10 @@ function! InsertNamespace()
   endif
 endfunction
 
-augroup filetype_clojure
-    autocmd!
-    autocmd FileType clojure call InsertNamespace()
-augroup END
+" augroup filetype_clojure
+"     autocmd!
+"     autocmd FileType clojure call InsertNamespace()
+" augroup END
 
 " ------------ END auto ns -------------------
 
@@ -589,3 +600,7 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 " nnoremap <silent> crml :call LanguageClient#workspace_executeCommand('move-to-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
 " nnoremap <silent> cril :call LanguageClient#workspace_executeCommand('introduce-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
 " nnoremap <silent> crel :call LanguageClient#workspace_executeCommand('expand-let', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+
+command! -range=% Interleave execute 'keeppatterns'
+            \ (<line2>-<line1>+1)/2+<line1> ',' <line2>
+            \ 'g/^/<line1> move -1'
