@@ -29,11 +29,12 @@ alias e='/Applications/Emacs.app/Contents/MacOS/Emacs'
 
 # VIM
 #alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+alias vim='nvim'
 alias mnerd='mvim -c NERDTree'
-alias nerd='vim -c NERDTree'
+alias nerd='nvim -c NERDTree'
 alias clean-swaps='find ./ -type f -name "\.*sw[klmnop]" -delete'
 # vim with fzf
-alias vimf='vim $(fzf)'
+alias vimf='nvim $(fzf)'
 
 # fun git commands
 # alias up='git pull'
