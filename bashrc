@@ -52,6 +52,8 @@ if [[ -f ./.rvmrc ]] ; then source ./.rvmrc ; fi
 PATH=$PATH:/usr/local/share/npm/bin # Add node to path
 PATH=$PATH:$HOME/src/flutter/bin  # Add Flutter to path
 
+export GEM_HOME=~/.gem
+
 function git_initials {
   local initials=$(git mob-print --initials)
   if [[ -n "${initials}" ]]; then
@@ -97,9 +99,10 @@ bind -x '"\C-r": "~/.swap_history_reverse.sh"'
 
 bind -x '"\C-g": "vim $(fzf-tmux)"'
 
-# if [ -f /usr/local/share/liquidprompt ]; then
-#   . /usr/local/share/liquidprompt
-# fi
+bind '"\e[Z":menu-complete'
+
+# Display the list of matches when no further completion is possible
+set show-all-if-unmodified on
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -107,3 +110,7 @@ bind -x '"\C-g": "vim $(fzf-tmux)"'
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /Users/joelash/.config/yarn/global/node_modules/tabtab/.completions/sls.bash ] && . /Users/joelash/.config/yarn/global/node_modules/tabtab/.completions/sls.bash
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /Users/joelash/src/github/dotfiles/mine/config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /Users/joelash/src/github/dotfiles/mine/config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
