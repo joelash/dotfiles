@@ -17,8 +17,12 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 " Nvim shit
 " Plug 'floobits/floobits-neovim'
 
+" Conjure for clojure
+" Plug 'Olical/conjure', { 'tag': 'v2.1.2', 'do': 'bin/compile' }
+
 " Coc
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Other
 Plug 'rizzatti/funcoo.vim'
@@ -90,8 +94,8 @@ Plug 'christoomey/vim-tmux-navigator'
 " Clojure in Vim
 Plug 'guns/vim-clojure-static'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'guns/vim-sexp'
 Plug 'tpope/vim-repeat'
+Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'losingkeys/vim-niji'
 Plug 'guns/vim-clojure-highlight'

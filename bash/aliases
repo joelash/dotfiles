@@ -1,4 +1,5 @@
 # Bash
+alias snowsql='/Applications/SnowSQL.app/Contents/MacOS/snowsql'
 alias ls='ls -p'
 alias la='ls -aF'
 alias ll='ls -laFh'

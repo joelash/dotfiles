@@ -84,18 +84,19 @@ export PATH="/Applications/Genymotion.app/Contents/MacOS/tools:$PATH" # Add Geny
 eval "$(scmpuff init -s)"
 
 ### HH History
-# export HH_CONFIG=hicolor         # get more colors
-# shopt -s histappend              # append new history items to .bash_history
-# export HISTCONTROL=ignorespace   # leading space hides commands from history
-# export HISTFILESIZE=10000        # increase history file size (default is 500)
-# export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
-# export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
-# # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
-# if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
-
-export HH_CONFIG=hicolor
-export PROMPT_COMMAND="history -a ~/.bash_history.global"
-bind -x '"\C-r": "~/.swap_history_reverse.sh"'
+# HSTR configuration - add this to ~/.bashrc
+alias hh=hstr                    # hh to be alias for hstr
+export HSTR_CONFIG=hicolor       # get more colors
+shopt -s histappend              # append new history items to .bash_history
+export HISTCONTROL=ignorespace   # leading space hides commands from history
+export HISTFILESIZE=10000        # increase history file size (default is 500)
+export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
+# ensure synchronization between Bash memory and history file
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+# if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
+if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
+# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
+if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
 bind -x '"\C-g": "vim $(fzf-tmux)"'
 
@@ -114,3 +115,8 @@ set show-all-if-unmodified on
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /Users/joelash/src/github/dotfiles/mine/config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /Users/joelash/src/github/dotfiles/mine/config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
+
+### Python
+### End Python
+
+ export PATH="/usr/local/opt/node@12/bin:$PATH"
