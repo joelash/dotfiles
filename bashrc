@@ -116,7 +116,12 @@ set show-all-if-unmodified on
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /Users/joelash/src/github/dotfiles/mine/config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /Users/joelash/src/github/dotfiles/mine/config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
 
+# AWS
+export AWS_SDK_LOAD_CONFIG=1
+
 ### Python
 ### End Python
 
  export PATH="/usr/local/opt/node@12/bin:$PATH"
+
+ eval "$(direnv hook bash)"

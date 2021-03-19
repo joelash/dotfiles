@@ -86,3 +86,6 @@ alias start_pair='ssh -R1337:localhost:22 ubuntu@pair.joelafriedman.com'
 
 # Terraform / terragrunt
 alias tg='terragrunt'
+
+# NB notes with Typora.app
+alias nbt='nb --editor /Applications/Typora.app/Contents/MacOS/Typora'

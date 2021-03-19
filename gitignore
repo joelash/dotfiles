@@ -40,3 +40,6 @@ sketch_assets/
 
 Dockerfile*.ignored
 yaks.ignored.md
+
+# Direnv
+.envrc

@@ -8,3 +8,4 @@ function acl-env {
 }
 
 alias acl='acl-env'
+alias cacl='cd ~/src/aclaimant/acl && acl'

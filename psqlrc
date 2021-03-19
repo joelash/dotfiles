@@ -1,4 +1,4 @@
-SET search_path TO public,xpt,svc,clm,rpt;
+SET search_path TO public,svc,common;
 \pset null '(null)'
 \x auto
 \set ON_ERROR_ROLLBACK interactive

@@ -1,5 +1,5 @@
 [user]
-	email = asher.friedman@gmail.com
+	email = joel@aclaimant.com
 	name = Joel Friedman
 [color]
   branch = auto
@@ -70,3 +70,5 @@
 	trustExitCode = true
 [hub]
 	protocol = ssh
+[init]
+	defaultBranch = master

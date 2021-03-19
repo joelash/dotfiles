@@ -211,7 +211,8 @@ au FileType coffee setl sw=2 ts=2
 autocmd BufRead,BufNewFile *.block setl nofixendofline
 
 "set gfn=Inconsolata                                 " set default font
-set gfn="Menlo for Powerline"                                        " set default font
+"set gfn="Menlo for Powerline"                                        " set default font
+set gfn="JetBrains Mono"                                        " set default font
 set incsearch                                       " show search as typing
 set hlsearch                                        " highlight search results
 set ignorecase                                      " case insensitive search
@@ -292,6 +293,7 @@ map <silent> ,v :tabedit ~/.vimrc<CR>:lcd ~/src/github/dotfiles/mine<CR>
 " NERDTree
 nmap <silent> <LocalLeader>tt :NERDTreeToggle<CR>                 " Make F2 open NERDTree
 nmap <silent> <LocalLeader>l :NERDTreeFind<CR>         " Locate current file in NERDTree
+let NERDTreeShowHidden=1
 
 " TAGS
 map <silent> <LocalLeader>rt :!/usr/local/bin/ctags -R --exclude="@/Users/joelash/.ctagsignore" --extra=+f --fields=+l<CR>
